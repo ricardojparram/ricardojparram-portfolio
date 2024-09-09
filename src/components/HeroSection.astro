@@ -1,0 +1,55 @@
+---
+import Button from "../components/Button.astro";
+import Email from "../components/icons/Email.astro";
+import Github from "../components/icons/Github.astro";
+import Linkedin from "../components/icons/Linkedin.astro";
+const contacts = [
+  { icon: Email, title: "Contáctame", link: "mailto:ricardo.prxr16@gmail.com" },
+  { icon: Github, title: "Github", link: "https://github.com/ricardojparram" },
+  {
+    icon: Linkedin,
+    title: "LinkedIn",
+    link: "https://linkedin.com/in/ricardojparram/",
+  },
+];
+---
+
+<!-- <Section></Section> -->
+<section class="flex flex-col gap-5">
+  <div class="flex gap-5">
+    <div class="bg-gray-200 w-fit rounded-full">
+      <img src="/profile.svg" alt="" class="w-24 h-24 min-w-24 min-h-24" />
+    </div>
+    <div class="flex flex-col justify-center">
+      <h1 class="font-bold text-2xl flex flex-col">
+        Ricardo Parra
+        <span class="text-slate-300 font-medium text-xl">Desarrollador WEB</span
+        >
+      </h1>
+      <span class="text-slate-300"> 🇻🇪 Barquisimeto, Lara. Venezuela </span>
+    </div>
+  </div>
+  <div class="flex flex-col px-1">
+    <ul class="flex gap-2 flex-wrap text-slate-300">
+      {
+        contacts.map((i) => (
+          <li>
+            <Button link={i.link} title={i.title}>
+              <i.icon class="w-6 h-6" />
+              {i.title}
+            </Button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="max-w-[600px]">
+    <p class="text-xl text-pretty">
+      +3 años de Experiencia.
+      <strong class="text-[#98f28c]">
+        Desarrollador de WEB Full-Stack especializado en Front-End.
+      </strong>
+      Perfeccionista y apasionado a la hora de sobrepasar las espectativas del cliente.
+    </p>
+  </div>
+</section>
