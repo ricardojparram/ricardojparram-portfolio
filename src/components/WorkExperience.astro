@@ -1,0 +1,50 @@
+---
+import Section from "../components/Section.astro";
+import Briefcase from "../components/icons/Briefcase.astro";
+const jobs = [
+  {
+    role: "Desarrollador Full-Stack",
+    company: "Alcaldía de Iribarren",
+    date: "2024 - Actualmente",
+    info: [
+      "Lideré el desarrollo front-end de una aplicación multiplataforma para la gestión de bienes, la cual automatiza la administraición de los bienes ahorrando un 70% de tiempo a comparación del proceso anterior, al igual que se ayuda a ahorrar un 40% de papel utilizado en el proceso. En esta aplicación utilicé las tecnologías: NuxtJS, Pinia, Tauri y Tailwind.",
+      "Participé en la refactorización del back-end de la aplicción para la gestión de bienes. Así como también en la creación de endpoints. Hice uso de las tecnologías: PostgreSQL, NestJS, TypeORM, JWT y Typescript.",
+      "Capacité a pasantes del Instituto Universitario “Jesús Obrero”. Instruyéndolos sobre el desarrollo web con tecnologías como: Javascript, NuxtJS y Tailwind.",
+    ],
+  },
+  {
+    role: "Desarrollador Full-Stack",
+    company: "Fundación Centro Médico Wesley",
+    date: "2023 - 2024",
+    info: [
+      "Desarrollé una aplicación web para la gestión de inventario de la fundación. Analizando los requerimientos de la empresa, realicé junto a mi equipo una aplicación para la gestión de inventario médico entre sedes.  Gracias a esta aplicación se logró mejorar la organización del inventario en un 60%, al igual que optimizar el proceso de movimiento en un 80%. Este proyecto se realizó con: PHP, MySQL, Bootstrap, JQuery, MVC.",
+      "Lideré el desarrollo de una aplicación móvil que tiene como función principal el consultar el inventario de todas las sedes y todos sus movimientos, así como administrar el perfil del usuario. En esta aplicación utilicé las siguientes tecnologías: React Native, Expo, Tailwind(Nativewind), Zustand y JWT.",
+    ],
+  },
+];
+---
+
+<Section>
+  <Briefcase class="w-7 h-7" slot="icon" />
+  <span slot="title">Experiencia laboral</span>
+  <ol class="flex flex-col gap-14">
+    {
+      jobs.map((job) => (
+        <li class="grid grid-cols-1 md:grid-cols-6 gap-3">
+          <div class="col-span-2">
+            <h3 class="text-[#71f161] font-extrabold text-lg">{job.role}</h3>
+            <h4 class="font-bold text-slate-100 text-base">{job.company}</h4>
+            <time class="text-base text-slate-300">{job.date}</time>
+          </div>
+          <div class="col-span-4">
+            <ul class="text-base flex flex-col gap-2">
+              {job.info.map((info) => (
+                <li>{info}</li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</Section>
