@@ -1,18 +1,154 @@
 ---
+import CVIcon from "../components/icons/CVIcon.astro";
+import Email from "../components/icons/Email.astro";
+import Github from "../components/icons/Github.astro";
+import Linkedin from "../components/icons/Linkedin.astro";
 import Layout from "../layouts/Layout.astro";
+const contacts = [
+  { icon: Email, title: "Contáctame", link: "#" },
+  { icon: Github, title: "Github", link: "#" },
+  { icon: Linkedin, title: "LinkedIn", link: "#" },
+  { icon: CVIcon, title: "Curriculum VITAE", link: "#" },
+];
 ---
 
 <Layout title="Ricardo Parra - @ricardojparram Desarrollador WEB">
-  <main class="z-10 max-w-[800px] w-full h-full">
-    <h1>Hola</h1>
+  <main
+    class="z-10 max-w-[800px] w-full h-full flex flex-col gap-10 px-6 lg:px-0"
+  >
+    <header>
+      <nav class="fixed inset-x-0 bottom-0 z-20 mb-5 flex">
+        <ul
+          class="relative mx-auto flex gap-4 rounded-lg bg-gradient-to-b from-slate-700/90 to-slate-900/80 backdrop-blur-sm px-6 py-2 text-white font-bold shadow-md"
+        >
+          <li>
+            <a href="#" class="text-slate-200 hover:text-slate-100">
+              Experiencia
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-slate-200 hover:text-slate-100">
+              Proyectos
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-slate-200 hover:text-slate-100">
+              Sobre mí
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section class="flex flex-col gap-5 pt-10 md:pt-20">
+      <div class="flex gap-5">
+        <div class="bg-gray-200 w-fit rounded-full">
+          <img src="/profile.svg" alt="" class="w-[72px] h-[72px]" />
+        </div>
+        <div class="flex flex-col justify-center">
+          <h1 class="font-bold text-xl">Ricardo Parra</h1>
+          <h2 class="text-slate-300 text-md">Desarrolladro WEB</h2>
+        </div>
+      </div>
+      <div class="flex flex-col px-1">
+        <ul class="flex gap-2 text-slate-300">
+          {
+            contacts.map((i) => (
+              <li
+                title={i.title}
+                class="group bg-gradient-to-b from-slate-700 shadow-sm to-slate-800 hover:text-slate-200 transition-none duration-300 hover:scale-105 rounded-lg p-[5px]"
+              >
+                <a
+                  href={i.link}
+                  class="flex items-center h-full opacity-70 group-hover:opacity-100"
+                  target="_blank"
+                >
+                  <i.icon class="w-6 h-6" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+    <section class="flex flex-col gap-10 text-xl">
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+      <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas
+        perferendis, nihil unde aliquam qui quo obcaecati doloribus rem
+        blanditiis, aperiam hic quod praesentium fugiat, necessitatibus nam
+        maiores sit sunt error?
+      </article>
+    </section>
   </main>
-  <nav class="fixed inset-x-0 bottom-0 z-20 mb-4 flex">
-    <ul
-      class="relative mx-auto flex gap-4 rounded-full border border-slate-800/80 bg-gradient-to-b from-slate-700/30 to-transparent backdrop-blur-2xl px-6 py-2 text-white font-bold shadow-md"
-    >
-      <li><a href="">Experiencia</a></li>
-      <li><a href="">Proyectos</a></li>
-      <li><a href="">Sobre mí</a></li>
-    </ul>
-  </nav>
 </Layout>
