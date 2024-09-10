@@ -1,21 +1,37 @@
+---
+interface Props {
+  link?: string;
+  class?: string;
+  id?: string;
+  title?: string;
+}
+const { title, id, link, class: className } = Astro.props;
+---
+
 {
-  Astro.props.link ? (
+  link ? (
     <a
-      {...Astro.props}
-      href={Astro.props.link}
+      id={id}
+      href={link}
+      title={title}
       target="_blank"
-      class="flex group bg-gradient-to-b from-slate-700 shadow-sm to-slate-800 text-slate-100 font-bold transition-all duration-200 hover:scale-105 rounded-lg p-[5px]"
+      class="flex group bg-gradient-to-b from-slate-700 shadow-sm to-slate-800 w-fit text-slate-100 font-bold transition-all duration-200 hover:scale-105 rounded-lg p-[5px]"
     >
-      <span class="flex gap-2 items-center h-full opacity-70 group-hover:opacity-100 pr-2 pl-1">
+      <span
+        class={`${className ? className : ""} flex gap-2 items-center w-fit h-full opacity-70 group-hover:opacity-100 pr-2 pl-1`}
+      >
         <slot />
       </span>
     </a>
   ) : (
     <button
+      id={id}
+      title={title}
       class="group bg-gradient-to-b from-slate-700 shadow-sm to-slate-800 text-slate-100 font-bold transition-all duration-200 hover:scale-105 rounded-lg p-[5px]"
-      {...Astro.props}
     >
-      <span class="flex gap-2 items-center h-full opacity-70 group-hover:opacity-100 px-2">
+      <span
+        class={`${className ? className : ""} flex gap-2 items-center h-full opacity-70 group-hover:opacity-100 px-2`}
+      >
         <slot />
       </span>
     </button>
