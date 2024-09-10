@@ -1,4 +1,7 @@
 ---
+import type { ACTION_ERROR_CODES } from "astro:actions";
+import Button from "./Button.astro";
+
 const jobs = [
   {
     role: "Desarrollador Full-Stack",
@@ -30,23 +33,47 @@ const jobs = [
 ];
 ---
 
-<ol class="flex flex-col gap-14">
-  {
-    jobs.map((job) => (
-      <li class="grid grid-cols-1 md:grid-cols-6 gap-3">
-        <div class="col-span-2">
-          <h3 class="text-lg text-[#50cf61] font-extrabold ">{job.role}</h3>
-          <h4 class="text-base font-bold text-slate-100 ">{job.company}</h4>
-          <time class="text-sm text-slate-300">{job.date}</time>
-        </div>
-        <div class="col-span-4">
-          <ul class="flex flex-col gap-2 text-base">
-            {job.info.map((info) => (
-              <li>{info}</li>
-            ))}
-          </ul>
-        </div>
-      </li>
-    ))
+<div
+  class="relative w-full h-full max-h-[650px] md:max-h-[420px] overflow-y-hidden"
+  id="experience-container"
+>
+  <ol class="flex flex-col gap-8">
+    {
+      jobs.map((job) => (
+        <li class="grid grid-cols-1 md:grid-cols-6 gap-3">
+          <div class="col-span-2">
+            <h3 class="text-lg text-[#50cf61] font-extrabold ">{job.role}</h3>
+            <h4 class="text-base font-bold text-slate-100 ">{job.company}</h4>
+            <time class="text-sm text-slate-300">{job.date}</time>
+          </div>
+          <div class="col-span-4">
+            <ul class="flex flex-col gap-2 text-base">
+              {job.info.map((info) => (
+                <li>{info}</li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+  <div
+    class="absolute flex items-end justify-center text-base bottom-0 w-full h-[150px] md:h-[120px] bg-gradient-to-b from-transparent via-[#0d1521b7] to-[#0d1521]"
+  >
+    <Button class="px-5" id="more-experience">Ver más...</Button>
+  </div>
+</div>
+
+<script is:inline>
+  const $more_experience = document.querySelector("#more-experience");
+  const $experience_container = document.querySelector("#experience-container");
+  if ($more_experience) {
+    $more_experience.addEventListener("click", function () {
+      $experience_container.classList.remove(
+        "max-h-[650px]",
+        "md:max-h-[420px]"
+      );
+      $more_experience.parentElement.classList.add("hidden");
+    });
   }
-</ol>
+</script>
