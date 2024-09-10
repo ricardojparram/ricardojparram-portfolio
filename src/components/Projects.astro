@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import rjpmui_img from "../assets/rjpm-ui.webp";
+import netest_img from "../assets/netest.webp";
+import Link from "./icons/Link.astro";
+import Button from "./Button.astro";
+import Github from "./icons/Github.astro";
+import TechnhologiesBadge from "./TechnhologiesBadge.astro";
+const projects = [
+  {
+    title: "RJPM.UI",
+    subtitle: "Easy-to-Use Tailwind CSS Agnostic Components",
+    description:
+      "Es una librería de componentes hechos con TailwindCSS. Posee versiones de los componentes tanto para React como Astro.",
+    link: "https://rjpm-ui.vercel.app/",
+    github: "https://github.com/ricardojparram/rjpm-ui-components",
+    img: rjpmui_img,
+    video: "/assets/rjpm-ui.webm",
+    alt: "Personal project rjpm.ui",
+    technologies: ["Astro", "React", "Tailwind"],
+  },
+  {
+    title: "NETEST",
+    subtitle: "Check Your Internet Speed in Seconds",
+    description:
+      "Es una prueba de velocidad de internet inspirada en la simplicidad de fast.com. Al igual que tiene la funcionalidad de mostrar tu ip e informacion del ASN.",
+    link: "https://netest-three.vercel.app/",
+    github: "https://github.com/ricardojparram/network-test-app",
+    img: netest_img,
+    video: "/assets/netest.webm",
+    alt: "Personal project NETEST",
+    technologies: ["Astro", "React", "Tailwind"],
+  },
+];
+---
+
+<div class="flex flex-col gap-16">
+  {
+    projects.map((project) => (
+      <article class="grid grid-cols-2 gap-4 text-pretty group/project relative">
+        <div class="col-span-2 md:col-span-1 aspect-video rounded-lg border-2 border-slate-700 overflow-hidden w-full md:w-[380px] relative [&_img]:transition-opacity [&_img]:duration-300  shadow-[rgba(59,_59,_81,_0.25)_0px_50px_80px_-20px,_rgba(81,_81,_89,_0.3)_0px_30px_30px_-30px,_rgba(0,_0,_0,_0.35)_0px_-2px_6px_0px_inset]">
+          <a href={project.link} target="_blank">
+            <Image
+              src={project.img}
+              alt={project.alt + " image"}
+              class={`object-cover w-full absolute ${project.video ? "opacity-100 group-hover/project:opacity-0" : ""}`}
+            />
+
+            {project.video && (
+              <video
+                width="640"
+                height="360"
+                autoplay
+                loop
+                class="object-cover w-full opacity-0 absolute group-hover/project:opacity-100 group-hover/project:relative"
+              >
+                <source src={project.video} type="video/webm" />
+              </video>
+            )}
+          </a>
+        </div>
+        <div class="col-span-2 md:col-span-1 flex flex-col gap-y-3 py-2">
+          <a href={project.link} target="_blank">
+            <h3 class="text-secondary font-extrabold text-xl group-hover/project:text-primary hover:underline group/title">
+              <strong class="">{project.title}</strong> - {project.subtitle}
+            </h3>
+          </a>
+
+          <p class="text-base">{project.description}</p>
+          <div class="flex gap-8">
+            <span class="flex gap-2 items-center">
+              <Button link={project.github} class="text-base w-fit">
+                <Github class="w-5 h-5" />
+                Código
+              </Button>
+              <Button link={project.github} class="text-base w-fit">
+                <Link class="w-4 h-4" />
+                Visitar
+              </Button>
+            </span>
+            <TechnhologiesBadge icons={project.technologies} class="w-5 h-5" />
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>
