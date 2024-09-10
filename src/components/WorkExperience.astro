@@ -34,7 +34,7 @@ const jobs = [
 ---
 
 <div
-  class="relative w-full h-full max-h-[650px] md:max-h-[420px] overflow-y-hidden"
+  class="relative w-full h-full max-h-[500px] md:max-h-[350px] overflow-y-hidden"
   id="experience-container"
 >
   <ol class="flex flex-col gap-8">
@@ -70,8 +70,8 @@ const jobs = [
   if ($more_experience) {
     $more_experience.addEventListener("click", function () {
       $experience_container.classList.remove(
-        "max-h-[650px]",
-        "md:max-h-[420px]"
+        "max-h-[500px]",
+        "md:max-h-[350px]"
       );
       $more_experience.parentElement.classList.add("hidden");
     });
