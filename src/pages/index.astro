@@ -4,7 +4,8 @@ import Briefcase from "../components/icons/Briefcase.astro";
 import HeroSection from "../components/HeroSection.astro";
 import WorkExperience from "../components/WorkExperience.astro";
 import Layout from "../layouts/Layout.astro";
-import Programer from "../components/icons/Programer.astro";
+import Code from "../components/icons/Code.astro";
+import Projects from "../components/Projects.astro";
 ---
 
 <Layout title="Ricardo Parra - @ricardojparram Desarrollador WEB">
@@ -18,8 +19,9 @@ import Programer from "../components/icons/Programer.astro";
       <WorkExperience />
     </Section>
     <Section id="projects">
-      <Programer class="w-8 h-8" slot="icon" />
+      <Code class="w-8 h-8" slot="icon" />
       <span slot="title">Proyectos</span>
+      <Projects />
     </Section>
   </main>
 </Layout>
