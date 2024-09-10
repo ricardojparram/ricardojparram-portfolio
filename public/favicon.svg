@@ -1,15 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 15 15">
-    <path fill="none" stroke="currentColor"
+    <path fill="#272727" stroke="#ffffff"
         d="m3.5 4.5l3 3l-3 3m4.5 0h4m-10.5-9h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1Z" />
-    <style>
-        path {
-            fill: #222222;
-        }
 
-        @media (prefers-color-scheme: dark) {
-            path {
-                fill: #e6e6e6;
-            }
-        }
-    </style>
 </svg>
