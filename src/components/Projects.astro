@@ -42,14 +42,14 @@ const projects = [
               loading="lazy"
               src={project.img}
               alt={project.alt + " image"}
-              class={`object-cover w-full absolute transition-opacity duration-300 ${project.video ? "opacity-100 group-hover/project:opacity-0" : ""}`}
+              class={`object-cover w-full absolute transition-opacity duration-300 ${project.video ? "opacity-0 md:opacity-100 md:group-hover/project:opacity-0" : ""}`}
             />
 
             {project.video && (
               <video
                 autoplay
                 loop
-                class="object-cover w-full opacity-0 absolute transition-opacity duration-300 group-hover/project:opacity-100 group-hover/project:relative"
+                class="object-cover w-full absolute transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover/project:opacity-100 md:group-hover/project:relative"
               >
                 <source src={project.video} type="video/webm" />
               </video>
