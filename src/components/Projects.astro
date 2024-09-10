@@ -31,10 +31,10 @@ const projects = [
 ];
 ---
 
-<div class="flex flex-col gap-16">
+<div class="flex flex-col gap-y-16">
   {
     projects.map((project) => (
-      <article class="grid grid-cols-2 gap-4 text-pretty group/project relative">
+      <article class="grid grid-cols-2 text-pretty group/project relative">
         <div class="col-span-2 md:col-span-1 aspect-video rounded-lg border-2 border-slate-700 overflow-hidden w-full md:w-[380px] relative shadow-[rgba(59,_59,_81,_0.25)_0px_50px_80px_-20px,_rgba(81,_81,_89,_0.3)_0px_30px_30px_-30px,_rgba(0,_0,_0,_0.35)_0px_-2px_6px_0px_inset]">
           <a href={project.link} target="_blank">
             <img
@@ -64,8 +64,8 @@ const projects = [
           </a>
 
           <p class="text-base">{project.description}</p>
-          <div class="flex gap-8">
-            <span class="flex gap-2 items-center">
+          <div class="grid grid-cols-3">
+            <span class="col-span-2 flex gap-2 items-center">
               <Button link={project.github} class="text-base w-fit">
                 <Github class="w-5 h-5" />
                 Código
@@ -75,7 +75,12 @@ const projects = [
                 Visitar
               </Button>
             </span>
-            <TechnhologiesBadge icons={project.technologies} class="w-5 h-5" />
+            <span class="col-span-1 flex gap-3 items-center">
+              <TechnhologiesBadge
+                icons={project.technologies}
+                class="w-5 h-5"
+              />
+            </span>
           </div>
         </div>
       </article>

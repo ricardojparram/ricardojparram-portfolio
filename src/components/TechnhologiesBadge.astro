@@ -25,12 +25,9 @@ interface Props {
 const { icons, class: className } = Astro.props;
 ---
 
-<span class="flex gap-3 items-center">
-  {
-    icons.map((icon) => {
-      console.log(options[icon]);
-      const Component = options[icon].icon;
-      return <Component class={className} />;
-    })
-  }
-</span>
+{
+  icons.map((icon) => {
+    const Component = options[icon].icon;
+    return <Component class={className} />;
+  })
+}
