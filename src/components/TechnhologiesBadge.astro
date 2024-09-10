@@ -1,0 +1,36 @@
+---
+import AstroIcon from "./icons/Astro.astro";
+import PHP from "./icons/PHP.astro";
+import React from "./icons/React.astro";
+import Tailwind from "./icons/Tailwind.astro";
+
+const options = {
+  Tailwind: {
+    icon: Tailwind,
+  },
+  Astro: {
+    icon: AstroIcon,
+  },
+  PHP: {
+    icon: PHP,
+  },
+  React: {
+    icon: React,
+  },
+};
+interface Props {
+  icons: Array<string>;
+  class: string;
+}
+const { icons, class: className } = Astro.props;
+---
+
+<span class="flex gap-3 items-center">
+  {
+    icons.map((icon) => {
+      console.log(options[icon]);
+      const Component = options[icon].icon;
+      return <Component class={className} />;
+    })
+  }
+</span>
