@@ -42,7 +42,7 @@ const projects = [
               loading="lazy"
               src={project.img}
               alt={project.alt + " image"}
-              class={`object-cover w-full absolute transition-opacity duration-300 ${project.video ? "opacity-0 md:opacity-100 md:group-hover/project:opacity-0" : ""}`}
+              class={`object-cover w-full absolute transition-opacity duration-300 ${project.video ? "hidden md:block md:opacity-100 md:group-hover/project:opacity-0" : ""}`}
             />
 
             {project.video && (
