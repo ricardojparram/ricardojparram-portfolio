@@ -1,27 +1,7 @@
 ---
-import Email from "../components/icons/Email.astro";
-import Github from "../components/icons/Github.astro";
-import Linkedin from "../components/icons/Linkedin.astro";
-import Instagram from "../components/icons/Instagram.astro";
-const contacts = [
-  { icon: Email, title: "Gmail", link: "mailto:ricardo.prxr16@gmail.com" },
-  { icon: Github, title: "Github", link: "https://github.com/ricardojparram" },
-  {
-    icon: Linkedin,
-    title: "LinkedIn",
-    link: "https://linkedin.com/in/ricardojparram/",
-  },
-  {
-    icon: Instagram,
-    title: "Instagram",
-    link: "https://instagram.com/ricardojparram/",
-  },
-];
-const nav = [
-  { title: "Experiencia", link: "/#work-experience" },
-  { title: "Proyectos", link: "/#projects" },
-  { title: "Sobre mí", link: "/#about-me" },
-];
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
 interface Props {
   title: string;
 }
@@ -46,48 +26,10 @@ const { title } = Astro.props;
       class="absolute top-0 -z-10 h-[25vh] w-full bg-gradient-to-b from-[#202d47b5] via-transparent to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
     >
     </div>
-    <header>
-      <nav class="fixed inset-x-0 bottom-0 z-20 mb-5 flex">
-        <ul
-          class="relative mx-auto flex gap-4 rounded-lg bg-gradient-to-b from-slate-700/90 to-slate-800/70 backdrop-blur-sm px-6 py-2 text-white font-bold shadow-md"
-        >
-          {
-            nav.map((i) => (
-              <li class="transition-transform duration-150 hover:scale-105">
-                <a href={i.link} class="text-slate-300 hover:text-slate-100">
-                  {i.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-    </header>
+    <Header />
     <div class="max-w-[800px]">
       <slot />
-      <footer class="my-20 w-full flex flex-col gap-10 px-5">
-        <div class="grid grid-cols-4">
-          <span class="font-bold text-xl w-full col-span-4 mb-4">Contacto:</span
-          >
-          {
-            contacts.map((i) => (
-              <a
-                href={i.link}
-                target="_blank"
-                title={i.title}
-                class="underline flex gap-2 items-center font-bold hover:text-white hover:decoration-2"
-              >
-                {" "}
-                <i.icon class="w-5 h-5" />
-                {i.title}
-              </a>
-            ))
-          }
-        </div>
-        <span class="m-auto font-bold text-slate-300 text-lg">
-          2024 - @ricardojparram
-        </span>
-      </footer>
+      <Footer />
     </div>
     <div
       class="absolute bottom-0 -z-10 h-[20vh] w-full bg-gradient-to-t from-[#202d47b5] via-transparent to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,transparent,black)]"

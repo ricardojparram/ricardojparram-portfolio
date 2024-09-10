@@ -1,0 +1,25 @@
+---
+const nav = [
+  { title: "Experiencia", link: "/#work-experience" },
+  { title: "Proyectos", link: "/#projects" },
+  { title: "Sobre mí", link: "/#about-me" },
+];
+---
+
+<header>
+  <nav class="fixed inset-x-0 bottom-0 z-20 mb-5 flex">
+    <ul
+      class="relative mx-auto flex gap-5 rounded-lg bg-gradient-to-b from-slate-700/90 to-slate-800/70 backdrop-blur-sm px-6 py-2 text-white font-bold shadow-md"
+    >
+      {
+        nav.map((i) => (
+          <li class="transition-transform duration-150 hover:scale-105 h-[30px] flex items-center">
+            <a href={i.link} class="text-slate-300 hover:text-slate-100">
+              {i.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
