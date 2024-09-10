@@ -3,12 +3,17 @@ interface Props {
   id: string;
 }
 const { id } = Astro.props;
+const { title } = Astro.slots;
 ---
 
 <section class="flex flex-col gap-8 text-xl" id={id}>
-  <h2 class="text-3xl font-bold flex gap-3 items-center">
-    <slot name="icon" />
-    <slot name="title" />
-  </h2>
+  {
+    title && (
+      <h2 class="text-3xl font-bold flex gap-3 items-center">
+        <slot name="icon" />
+        <slot name="title" />
+      </h2>
+    )
+  }
   <slot />
 </section>
