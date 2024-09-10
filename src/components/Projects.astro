@@ -1,7 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import rjpmui_img from "../assets/rjpm-ui.webp";
-import netest_img from "../assets/netest.webp";
 import Link from "./icons/Link.astro";
 import Button from "./Button.astro";
 import Github from "./icons/Github.astro";
@@ -14,7 +11,7 @@ const projects = [
       "Es una librería de componentes hechos con TailwindCSS. Posee versiones de los componentes tanto para React como Astro.",
     link: "https://rjpm-ui.vercel.app/",
     github: "https://github.com/ricardojparram/rjpm-ui-components",
-    img: rjpmui_img,
+    img: "/assets/rjpm-ui.webp",
     video: "/assets/rjpm-ui.webm",
     alt: "Personal project rjpm.ui",
     technologies: ["Astro", "React", "Tailwind"],
@@ -26,7 +23,7 @@ const projects = [
       "Es una prueba de velocidad de internet inspirada en la simplicidad de fast.com. Al igual que tiene la funcionalidad de mostrar tu ip e informacion del ASN.",
     link: "https://netest-three.vercel.app/",
     github: "https://github.com/ricardojparram/network-test-app",
-    img: netest_img,
+    img: "/assets/netest.webp",
     video: "/assets/netest.webm",
     alt: "Personal project NETEST",
     technologies: ["Astro", "React", "Tailwind"],
@@ -40,7 +37,12 @@ const projects = [
       <article class="grid grid-cols-2 gap-4 text-pretty group/project relative">
         <div class="col-span-2 md:col-span-1 aspect-video rounded-lg border-2 border-slate-700 overflow-hidden w-full md:w-[380px] relative [&_img]:transition-opacity [&_img]:duration-300  shadow-[rgba(59,_59,_81,_0.25)_0px_50px_80px_-20px,_rgba(81,_81,_89,_0.3)_0px_30px_30px_-30px,_rgba(0,_0,_0,_0.35)_0px_-2px_6px_0px_inset]">
           <a href={project.link} target="_blank">
-            <Image
+            <img
+              src="/assets/rjpm-ui.webp"
+              width="1600"
+              height="900"
+              decoding="async"
+              loading="lazy"
               src={project.img}
               alt={project.alt + " image"}
               class={`object-cover w-full absolute ${project.video ? "opacity-100 group-hover/project:opacity-0" : ""}`}
