@@ -3,7 +3,8 @@ import AstroIcon from "./icons/Astro.astro";
 import PHP from "./icons/PHP.astro";
 import React from "./icons/React.astro";
 import Tailwind from "./icons/Tailwind.astro";
-
+import MySQL from "./icons/MySQL.astro";
+import Bootstrap from "./icons/Bootstrap.astro";
 const options = {
   Tailwind: {
     icon: Tailwind,
@@ -17,6 +18,12 @@ const options = {
   React: {
     icon: React,
   },
+  Mysql: {
+    icon: MySQL,
+  },
+  Bootstrap: {
+    icon: Bootstrap,
+  },
 };
 interface Props {
   icons: Array<string>;
@@ -28,6 +35,6 @@ const { icons, class: className } = Astro.props;
 {
   icons.map((icon) => {
     const Component = options[icon].icon;
-    return <Component class={className} />;
+    return <Component class={className} title={icon} />;
   })
 }
