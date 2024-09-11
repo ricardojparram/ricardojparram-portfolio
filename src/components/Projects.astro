@@ -44,9 +44,13 @@ const projects = [
 <div class="flex flex-col gap-y-16">
   {
     projects.map((project) => (
-      <article class="grid grid-cols-2 text-pretty group/project relative">
-        <div class="col-span-2 md:col-span-1 aspect-video rounded-lg border-2 border-slate-700 overflow-hidden w-full md:w-[380px] relative shadow-[rgba(59,_59,_81,_0.25)_0px_50px_80px_-20px,_rgba(81,_81,_89,_0.3)_0px_30px_30px_-30px,_rgba(0,_0,_0,_0.35)_0px_-2px_6px_0px_inset]">
-          <a href={project.link} target="_blank">
+      <article class="grid grid-cols-2 text-pretty group/project hover:scale-105 transition-transform duration-300 relative">
+        <div class="col-span-2 md:col-span-1  aspect-video rounded-lg border-2 border-slate-700 overflow-hidden w-full md:w-[380px] relative shadow-[rgba(59,_59,_81,_0.25)_0px_50px_80px_-20px,_rgba(81,_81,_89,_0.3)_0px_30px_30px_-30px,_rgba(0,_0,_0,_0.35)_0px_-2px_6px_0px_inset]">
+          <a
+            href={project.link || "#"}
+            target="_blank"
+            aria-label={"Visita la web del proyecto" + project.title}
+          >
             <img
               decoding="async"
               loading="lazy"
@@ -68,11 +72,9 @@ const projects = [
           </a>
         </div>
         <div class="col-span-2 md:col-span-1 flex flex-col gap-y-3 py-2">
-          <a href={project.link} target="_blank">
-            <h3 class="text-secondary font-extrabold text-xl group-hover/project:text-primary hover:underline group/title">
-              <strong class="">{project.title}</strong> - {project.subtitle}
-            </h3>
-          </a>
+          <h3 class="text-secondary font-extrabold text-xl group-hover/project:text-primary group/title">
+            <strong class="">{project.title}</strong> - {project.subtitle}
+          </h3>
 
           <p class="text-base">{project.description}</p>
           <div class="grid grid-cols-3">
