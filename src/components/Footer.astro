@@ -19,16 +19,15 @@ const contacts = [
 ];
 ---
 
-<footer class="my-20 w-full flex flex-col gap-10 px-5">
+<footer class="my-20 w-full flex flex-col gap-10 px-5 pt-10">
   <div class="grid grid-cols-4 gap-y-4">
-    <span class="font-bold text-xl w-full col-span-4">Contacto:</span>
     {
       contacts.map((i) => (
         <a
           href={i.link}
           target="_blank"
           title={i.title}
-          class="underline flex  items-center gap-2 font-bold col-span-2 md:col-span-1 hover:text-white hover:decoration-2"
+          class="flex items-center gap-2 col-span-2 md:col-span-1 w-fit font-bold text-lg hover:underline decoration-2"
         >
           {" "}
           <i.icon class="w-5 h-5" />
