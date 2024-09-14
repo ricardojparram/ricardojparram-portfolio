@@ -42,7 +42,7 @@ const jobs = [
       jobs.map((job) => (
         <li class="grid grid-cols-1 md:grid-cols-6 gap-3">
           <div class="col-span-2">
-            <h3 class="text-lg text-[#50cf61] font-extrabold ">{job.role}</h3>
+            <h3 class="text-lg text-lime-400 font-extrabold ">{job.role}</h3>
             <h4 class="text-base font-bold text-slate-100 ">{job.company}</h4>
             <time class="text-sm text-slate-300">{job.date}</time>
           </div>
@@ -58,9 +58,9 @@ const jobs = [
     }
   </ol>
   <div
-    class="absolute flex items-end justify-center text-base bottom-0 w-full h-[150px] md:h-[120px] bg-gradient-to-b from-transparent via-[#0d1521b7] to-[#0d1521]"
+    class="absolute flex items-end justify-center text-base bottom-1 w-full h-[150px] md:h-[120px] bg-gradient-to-b from-transparent via-[#0d1521b7] to-[#0d1521]"
   >
-    <Button class="px-5" id="more-experience">Ver más...</Button>
+    <Button class="px-2" id="more-experience">Ver más...</Button>
   </div>
 </div>
 
