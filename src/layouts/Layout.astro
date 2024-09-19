@@ -1,5 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
 // import Header from "../components/Header.astro";
 
 interface Props {
@@ -35,8 +36,8 @@ const { title } = Astro.props;
       class="absolute top-0 -z-10 h-[25vh] w-full bg-gradient-to-b from-[#abc7fba6] dark:from-[#1a253bb5] via-transparent to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
     >
     </div>
-    <!-- <Header /> -->
     <div class="max-w-[800px]">
+      <Header />
       <slot />
       <Footer />
     </div>
