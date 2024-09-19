@@ -1,5 +1,14 @@
+---
+import Astro from "./icons/Astro.astro";
+import Moon from "./icons/Moon.astro";
+import Sun from "./icons/Sun.astro";
+---
+
 <span>
-  <label class="relative cursor-pointer p-2" for="theme-switch">
+  <label
+    class="relative cursor-pointer p-2 text-slate-700 dark:text-slate-200"
+    for="theme-switch"
+  >
     <input
       type="checkbox"
       name="theme-switch"
@@ -7,61 +16,36 @@
       class="theme-switch sr-only"
       aria-label="Input for changing theme to dark or light"
     />
-    <svg
-      class="hidden dark:block w-10 h-10 fill-slate-400 [filter:drop-shadow(-5px_-10px_15px_rgba(255,238,0,0.767))] hover:[filter:drop-shadow(-5px_-10px_17px_rgba(255,238,0,0.952))] hover:scale-105 transition-all"
-      viewBox="0 0 24 24"
-    >
-      <path fill="#ffe600" d="M11.5 8a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0"
-      ></path>
-      <path
-        fill="#ffd000"
-        fill-rule="evenodd"
-        d="M7.5 1.25a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-1.5 0V2a.75.75 0 0 1 .75-.75M3.08 3.08a.75.75 0 0 1 1.062 0l.216.217a.75.75 0 0 1-1.061 1.06l-.216-.216a.75.75 0 0 1 0-1.06m8.839 0a.75.75 0 0 1 0 1.061l-.216.216a.75.75 0 1 1-1.06-1.06l.215-.216a.75.75 0 0 1 1.061 0M1.25 7.5A.75.75 0 0 1 2 6.75h.5a.75.75 0 0 1 0 1.5H2a.75.75 0 0 1-.75-.75m3.108 3.143a.75.75 0 0 1 0 1.06l-.216.216a.75.75 0 0 1-1.061-1.06l.216-.216a.75.75 0 0 1 1.06 0"
-        clip-rule="evenodd"></path>
-      <path
-        fill="white"
-        d="M16.286 22C19.442 22 22 19.472 22 16.353c0-2.472-1.607-4.573-3.845-5.338C17.837 8.194 15.415 6 12.476 6C9.32 6 6.762 8.528 6.762 11.647c0 .69.125 1.35.354 1.962a4.351 4.351 0 0 0-.83-.08C3.919 13.53 2 15.426 2 17.765C2 20.104 3.919 22 6.286 22z"
-      ></path>
-    </svg>
-    <svg
-      class="darkIcon dark:hidden w-10 h-10 [filter:drop-shadow(0_0_15px_rgba(108,147,255,0.966))] hover:[filter:drop-shadow(0_0_17px_rgba(131,162,255,1))] fill-slate-400 hover:scale-105 transition-all"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M12 22c5.523 0 10-4.477 10-10c0-.463-.694-.54-.933-.143a6.5 6.5 0 1 1-8.924-8.924C12.54 2.693 12.463 2 12 2C6.477 2 2 6.477 2 12s4.477 10 10 10"
-        opacity=".6"></path>
-      <path
-        d="M11.286 22C13.337 22 15 20.42 15 18.47c0-1.544-1.045-2.857-2.5-3.336C12.295 13.371 10.72 12 8.81 12c-2.052 0-3.715 1.58-3.715 3.53c0 .43.082.844.23 1.226a2.949 2.949 0 0 0-.54-.05C3.248 16.706 2 17.89 2 19.353C2 20.815 3.247 22 4.786 22z"
-      ></path>
-    </svg>
+    <Sun class="hidden dark:block w-8 h-8" />
+    <Moon class="dark:hidden w-8 h-8" />
   </label>
 </span>
 <script is:inline>
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
+  if (
+    localStorage.theme === "dark" ||
+    (!("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+
+  const toggleTheme = () => {
+    const theme = localStorage.theme;
+    if (theme === "light") {
+      localStorage.theme = "dark";
       document.documentElement.classList.add("dark");
     } else {
+      localStorage.theme = "light";
       document.documentElement.classList.remove("dark");
     }
+  };
 
-    const toggleTheme = () => {
-      const theme = localStorage.theme;
-      if (theme === "light") {
-        localStorage.theme = "dark";
-        document.documentElement.classList.add("dark");
-      } else {
-        localStorage.theme = "light";
-        document.documentElement.classList.remove("dark");
-      }
-    };
-
-    const $switch = document.querySelector("#theme-switch");
-    if ($switch) {
-      $switch.addEventListener("click", function () {
-        toggleTheme();
-      });
-    }
+  const $switch = document.querySelector("#theme-switch");
+  if ($switch) {
+    $switch.addEventListener("click", function () {
+      toggleTheme();
+    });
+  }
 </script>
