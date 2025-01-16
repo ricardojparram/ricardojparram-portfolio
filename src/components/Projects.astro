@@ -44,7 +44,10 @@ const projects = [
 <div class="flex flex-col gap-y-16">
   {
     projects.map((project) => (
-      <article class="grid grid-cols-2 gap-y-10 px-3 md:px-0 text-pretty group/project hover:scale-105 transition-transform duration-300 relative">
+      <article
+        data-animate="intersection"
+        class="grid grid-cols-2 gap-y-10 px-3 md:px-0 text-pretty group/project hover:scale-105 transition-transform duration-300 relative"
+      >
         <div class="col-span-2 md:col-span-1  aspect-video rounded-lg overflow-hidden w-full md:w-[380px] relative shadow-[rgba(59,_59,_81,_0.25)_0px_50px_80px_-20px,_rgba(81,_81,_89,_0.3)_0px_30px_30px_-30px]">
           <a
             href={project.link || "#"}

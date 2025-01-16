@@ -9,11 +9,15 @@ const props = Astro.props;
     class="relative flex flex-col items-center md:flex-row gap-5 pt-20 md:pt-0 md:mt-20"
   >
     <div
+      data-animate="0.2"
       class="rounded-full w-24 h-24 aspect-square overflow-hidden hover:scale-105 transition-transform"
     >
       <img src="/profile.webp" alt="Ricardo Parra" class="" />
     </div>
-    <div class="flex flex-col justify-center text-center md:text-start">
+    <div
+      data-animate="0.3"
+      class="flex flex-col justify-center text-center md:text-start"
+    >
       <h1
         class="font-bold text-2xl flex flex-col text-slate-700 dark:text-slate-100"
       >
@@ -26,6 +30,8 @@ const props = Astro.props;
         🇻🇪 Barquisimeto, Lara. Venezuela
       </span>
     </div>
-    <div class="absolute top-0 right-4 md:right-10"><ThemeSwitch /></div>
+    <div class="absolute top-0 right-4 md:right-10" data-animate="0.5">
+      <ThemeSwitch />
+    </div>
   </div>
 </header>

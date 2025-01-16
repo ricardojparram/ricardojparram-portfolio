@@ -1,5 +1,4 @@
 ---
-import type { ACTION_ERROR_CODES } from "astro:actions";
 import Button from "./Button.astro";
 
 const jobs = [
@@ -39,8 +38,11 @@ const jobs = [
 >
   <ol class="flex flex-col gap-8">
     {
-      jobs.map((job) => (
-        <li class="grid grid-cols-1 md:grid-cols-6 gap-3">
+      jobs.map((job, i) => (
+        <li
+          class="grid grid-cols-1 md:grid-cols-6 gap-3"
+          data-animate={0.5 + i * 0.2}
+        >
           <div class="col-span-2">
             <h3 class="text-lg text-lime-500 dark:text-lime-400 font-extrabold ">
               {job.role}
@@ -66,7 +68,9 @@ const jobs = [
   <div
     class="absolute flex items-end justify-center text-base bottom-1 w-full h-[150px] md:h-[120px] bg-gradient-to-b from-transparent to-slate-200 via-[#e2e8f087] dark:via-[#0d1521dc] dark:to-[#0d1521]"
   >
-    <Button class="px-2" id="more-experience">Ver más...</Button>
+    <span data-animate="1">
+      <Button class="px-2" id="more-experience">Ver más...</Button>
+    </span>
   </div>
 </div>
 
@@ -77,9 +81,9 @@ const jobs = [
     $more_experience.addEventListener("click", function () {
       $experience_container.classList.remove(
         "max-h-[500px]",
-        "md:max-h-[350px]"
+        "md:max-h-[350px]",
       );
-      $more_experience.parentElement.classList.add("hidden");
+      $more_experience.parentElement.parentElement.classList.add("hidden");
     });
   }
 </script>
