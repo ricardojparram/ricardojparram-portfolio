@@ -1,39 +1,62 @@
 ---
-import Button from "../components/Button.astro";
-import Email from "../components/icons/Email.astro";
-import Github from "../components/icons/Github.astro";
-import Linkedin from "../components/icons/Linkedin.astro";
-const contacts = [
-  { icon: Email, title: "Contáctame", link: "mailto:ricardo.prxr16@gmail.com" },
-  { icon: Github, title: "Github", link: "https://github.com/ricardojparram" },
-  {
-    icon: Linkedin,
-    title: "LinkedIn",
-    link: "https://linkedin.com/in/ricardojparram/",
-  },
-];
+import SkillCarrousel from "./SkillCarrousel.astro";
+const props = Astro.props;
 ---
 
-<div class="flex flex-col gap-5">
-  <h2 class="text-xl text-pretty max-w-[600px]" data-animate="0.3">
-    +3 años de Experiencia.
-    <strong class="text-lime-500 dark:text-lime-400">
-      Desarrollador WEB Full-Stack especializado en front-end.
-    </strong>
-    Perfeccionista y apasionado a la hora de sobrepasar las espectativas del cliente.
-  </h2>
-  <div class="flex flex-col px-1" data-animate="0.5">
-    <ul class="flex gap-3 flex-wrap text-slate-300 text-base">
-      {
-        contacts.map((i) => (
-          <li>
-            <Button link={i.link} title={i.title}>
-              <i.icon class="w-5 h-5" />
-              {i.title}
-            </Button>
-          </li>
-        ))
-      }
-    </ul>
+<header
+  class="max-w-[700px] h-dvh self-center flex flex-col gap-4 justify-center"
+>
+  <div class="mb-5 flex flex-col justify-start items-center md:flex-row gap-6">
+    <div
+      data-animate="0.2"
+      class="rounded-full border-4 w-40 h-40 aspect-square overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img src="/profile.webp" alt="Ricardo Parra" class="" />
+    </div>
+    <div
+      data-animate="0.3"
+      class="flex flex-col gap-3 justify-center text-center md:text-start"
+    >
+      <h1
+        class="font-bold text-4xl flex flex-col text-slate-700 dark:text-slate-100"
+      >
+        Ricardo Parra
+        <span
+          class="text-slate-500 mt-1 dark:text-slate-300 font-medium text-2xl"
+          >Desarrollador WEB</span
+        >
+      </h1>
+      <span class="text-slate-600 dark:text-slate-300 text-xl">
+        🇻🇪 Barquisimeto, Lara. Venezuela
+      </span>
+    </div>
   </div>
-</div>
+
+  <div class="flex flex-col gap-5 p-2">
+    <h2 class="text-xl text-pretty" data-animate="0.3">
+      +3 años de Experiencia.
+      <strong class="text-lime-500 dark:text-lime-400">
+        Ingeniero en Informática y Desarrollo WEB especializado en front-end.
+      </strong>
+      <br />
+      Perfeccionista y apasionado a la hora de sobrepasar las espectativas del cliente.
+    </h2>
+    <p class="text-balance mb-4">
+      Te invito a conocer, mi perfil profesional y tecnologías que uso mirando
+      mi
+      <a
+        href="#work-experience"
+        class="text-lime-500 dark:text-lime-400 hover:bg-lime-400 hover:text-slate-900 px-1 py-px font-bold underline underline-offset-4 transition-all"
+        data-interactive="">experiencia laboral</a
+      >, <a
+        href="#projects"
+        class="text-lime-500 dark:text-lime-400 hover:bg-lime-400 hover:text-slate-900 px-1 py-px font-bold underline underline-offset-4 transition-all"
+        data-interactive="">mis proyectos</a
+      >, o <a
+        href="#contact"
+        class="text-lime-500 dark:text-lime-400 hover:bg-lime-400 hover:text-slate-900 px-1 py-px font-bold underline underline-offset-4 transition-all"
+        data-interactive="">Contactándome!</a
+      >.
+    </p>
+  </div>
+</header>
