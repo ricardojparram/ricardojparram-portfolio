@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Lekton&display=swap");
+body {
+  font-family: "JetBrains Mono", monospace;
+}
 .fade-in {
   animation: fadeIn 0.4s forwards;
 }
