@@ -2,6 +2,7 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../css/style.css";
+import "lenis/dist/lenis.css";
 
 interface Props {
   title: string;
@@ -67,10 +68,21 @@ const { title } = Astro.props;
       class="absolute top-0 -z-10 h-[25vh] w-full bg-gradient-to-b from-[#abc7fba6] dark:from-[#1a253bb5] via-transparent to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
     >
     </div>
-    <div class="max-w-[900px]">
-      <Header />
-      <slot />
-      <Footer />
-    </div>
+    <!-- <Header /> -->
+    <slot />
+    <Footer />
   </body>
+  <script>
+    import Lenis from "lenis";
+    const lenis = new Lenis({
+      lerp: 0.08,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  </script>
 </html>

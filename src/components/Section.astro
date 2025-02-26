@@ -1,19 +1,30 @@
 ---
 interface Props {
   id: string;
+  title?: string;
 }
-const { id } = Astro.props;
-const { title } = Astro.slots;
+const { id, title } = Astro.props;
 ---
 
-<section class="flex flex-col gap-y-8 text-xl pt-8" id={id}>
+<section
+  class="relative flex flex-col items-center gap-y-8 text-xl pt-8 min-h-dvh"
+  id={id}
+>
   {
     title && (
-      <h2 class="text-3xl font-bold flex gap-3 items-center">
-        <slot name="icon" />
-        <slot name="title" />
-      </h2>
+      <div class="w-full sticky top-0 z-50">
+        <div class="relative w-full">
+          {[0, 1].map(() => (
+            <div class="absolute inset-0 w-full h-full mask-to-t backdrop-blur-md" />
+          ))}
+          <h2 class="w-full text-4xl font-bold flex gap-3 justify-center py-4 pb-8">
+            <span class="z-50 text-slate-700 dark:text-slate-200">{title}</span>
+          </h2>
+        </div>
+      </div>
     )
   }
-  <slot />
+  <div class="max-w-[900px] px-6 md:px-0">
+    <slot />
+  </div>
 </section>

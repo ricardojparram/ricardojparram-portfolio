@@ -9,60 +9,15 @@ import Projects from "../components/Projects.astro";
 ---
 
 <Layout title="Ricardo Parra - Desarrollador Web con +3 años de experiencia.">
-  <main class="z-10 w-full h-full flex flex-col gap-16 px-6 md:px-0">
-    <HeroSection />
-    <Section id="work-experience">
-      <Briefcase class="w-9 h-9" slot="icon" data-animate="0.4" />
-      <span slot="title" data-animate="0.5">Experiencia laboral</span>
+  <main class="w-full h-full flex flex-col gap-16">
+    <Section id="hero">
+      <HeroSection />
+    </Section>
+    <Section id="work-experience" title="Experiencia laboral">
       <WorkExperience />
     </Section>
-    <Section id="projects">
-      <Phone class="w-9 h-9" slot="icon" data-animate="1" />
-      <span slot="title" data-animate="1.1">Proyectos</span>
+    <Section id="projects" title="Proyectos">
       <Projects />
     </Section>
   </main>
 </Layout>
-
-<script>
-  const $elements = document.querySelectorAll("[data-animate]");
-  const [animated_with_time, animated_with_intersection] = Array.from(
-    $elements,
-  ).reduce(
-    (acc, element) => {
-      const time = Number(element.dataset.animate);
-      if (time) {
-        acc[0].push(element);
-      } else {
-        acc[1].push(element);
-      }
-      return acc;
-    },
-    [[], []],
-  );
-  animated_with_time.forEach((element) => {
-    element.classList.add("opacity-0");
-    setTimeout(
-      () => {
-        element.classList.add("fade-in");
-      },
-      Number(element.dataset.animate) * 1000,
-    );
-  });
-  const options = {
-    root: null,
-    rootMargin: "-100px",
-    threshold: 0,
-  };
-  const callback = (entries) => {
-    entries.forEach((entry) => {
-      entry.target.classList.add("opacity-0");
-      if (entry.isIntersecting) {
-        entry.target.classList.add("fade-in");
-      }
-    });
-  };
-
-  const observer = new IntersectionObserver(callback, options);
-  animated_with_intersection.forEach((section) => observer.observe(section));
-</script>
