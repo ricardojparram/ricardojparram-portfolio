@@ -1,6 +1,4 @@
 ---
-import Button from "./Button.astro";
-
 const jobs = [
   {
     role: "Desarrollador Full-Stack",
@@ -11,6 +9,7 @@ const jobs = [
       "Busco nuevas propuestas para la optimización de los procesos dentro del departamento de informática.",
       "Instruyo a pasantes universitarios, enseñándoles sobre el desarrollo web básico con tecnologías como: HTML, CSS3, Javascript y Tailwind.",
     ],
+    active: true,
   },
   {
     role: "Desarrollador Web",
@@ -20,6 +19,7 @@ const jobs = [
       "Desarrollé una aplicación web para la gestión de inventario. Solucioné junto a mi equipo la mala administración de inventario médico entre las sedes de la fundación.  Mejoramos la organización del inventario, y optimizamos el proceso de movimiento de éste.",
       "Lideré el desarrollo de una aplicación móvil que tiene como función principal el reporte del inventario por sedes y todos sus movimientos.",
     ],
+    active: false,
   },
   {
     role: "Pasante",
@@ -28,62 +28,52 @@ const jobs = [
     info: [
       "Realicé un e-commerce para la farmacia, así como un sistema inventario para la gestión de inventario y ventas online o presenciales. Ésta aplicación web implementó una mejor organización para las ventas e inventario.",
     ],
+    active: false,
   },
 ];
 ---
 
-<div
-  class="relative w-full h-full max-h-[500px] md:max-h-[350px] overflow-y-hidden"
-  id="experience-container"
->
-  <ol class="flex flex-col gap-8">
+<div class="w-full h-full p-4" id="experience-container">
+  <div class="space-y-8 relative py-12">
+    <div
+      class="absolute inset-0 ml-5 translate-x-px md:mx-auto md:translate-x-0 h-full w-1 bg-gradient-to-b from-transparent via-slate-400 to-transparent"
+    >
+    </div>
     {
       jobs.map((job, i) => (
-        <li
-          class="grid grid-cols-1 md:grid-cols-6 gap-3"
-          data-animate={0.5 + i * 0.2}
+        <div
+          class:list={[
+            "relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group",
+            { "is-active": job.active },
+          ]}
         >
-          <div class="col-span-2">
-            <h3 class="text-lg text-lime-500 dark:text-lime-400 font-extrabold ">
-              {job.role}
-            </h3>
-            <h4 class="text-base font-bold text-slate-700 dark:text-slate-100 ">
-              {job.company}
-            </h4>
-            <time class="text-sm text-slate-600 dark:text-slate-300">
-              {job.date}
-            </time>
+          <div class="flex items-center justify-center w-5 h-5 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-emerald-500 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-[30px] md:group-even:translate-x-[30px]">
+            <!-- <svg -->
+            <!--   class="fill-current" -->
+            <!--   xmlns="http://www.w3.org/2000/svg" -->
+            <!--   width="12" -->
+            <!--   height="10" -->
+            <!-- > -->
+            <!--   <path -->
+            <!--     fill-rule="nonzero" -->
+            <!--     d="M10.422 1.257 4.655 7.025 2.553 4.923A.916.916 0 0 0 1.257 6.22l2.75 2.75a.916.916 0 0 0 1.296 0l6.415-6.416a.916.916 0 0 0-1.296-1.296Z" -->
+            <!--   /> -->
+            <!-- </svg> -->
           </div>
-          <div class="col-span-4">
-            <ul class="flex flex-col gap-2 text-base">
+          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded hover:scale-105 transition-all">
+            <div class="flex flex-col space-x-2 mb-2">
+              <time class="text-base italic text-slate-700  dark:text-slate-300">{job.date}</time>
+              <h3 class="text-xl font-bold text-lime-500">{job.company}</h3>
+              <h4 class="text-lg font-medium text-slate-700  dark:text-slate-300">{job.role}</h4>
+            </div>
+            <div class="text-base text-slate-700  dark:text-slate-300 flex flex-col gap-3">
               {job.info.map((info) => (
-                <li>{info}</li>
+                <p>{info}</p>
               ))}
-            </ul>
+            </div>
           </div>
-        </li>
+        </div>
       ))
     }
-  </ol>
-  <div
-    class="absolute flex items-end justify-center text-base bottom-1 w-full h-[150px] md:h-[120px] bg-gradient-to-b from-transparent to-slate-200 via-[#e2e8f087] dark:via-[#0d1521dc] dark:to-[#0d1521]"
-  >
-    <span data-animate="1">
-      <Button class="px-2" id="more-experience">Ver más...</Button>
-    </span>
   </div>
 </div>
-
-<script is:inline>
-  const $more_experience = document.querySelector("#more-experience");
-  const $experience_container = document.querySelector("#experience-container");
-  if ($more_experience) {
-    $more_experience.addEventListener("click", function () {
-      $experience_container.classList.remove(
-        "max-h-[500px]",
-        "md:max-h-[350px]",
-      );
-      $more_experience.parentElement.parentElement.classList.add("hidden");
-    });
-  }
-</script>

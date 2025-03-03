@@ -1,23 +1,25 @@
 ---
 import Section from "../components/Section.astro";
-import Briefcase from "../components/icons/Briefcase.astro";
 import HeroSection from "../components/HeroSection.astro";
 import WorkExperience from "../components/WorkExperience.astro";
 import Layout from "../layouts/Layout.astro";
-import Phone from "../components/icons/Phone.astro";
 import Projects from "../components/Projects.astro";
+import Contacts from "../components/Contacts.astro";
 ---
 
 <Layout title="Ricardo Parra - Desarrollador Web con +3 años de experiencia.">
   <main class="w-full h-full flex flex-col gap-16">
-    <Section id="hero">
+    <Section id="hero" class="min-h-dvh">
       <HeroSection />
     </Section>
-    <Section id="work-experience" title="Experiencia laboral">
+    <Section id="work-experience" class="min-h-dvh" title="Experiencia laboral">
       <WorkExperience />
     </Section>
-    <Section id="projects" title="Proyectos">
+    <Section id="projects" class="min-h-dvh" title="Proyectos">
       <Projects />
+    </Section>
+    <Section id="contact" title="Contacto">
+      <Contacts />
     </Section>
   </main>
 </Layout>

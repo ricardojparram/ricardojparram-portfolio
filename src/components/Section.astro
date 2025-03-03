@@ -2,12 +2,16 @@
 interface Props {
   id: string;
   title?: string;
+  class?: string;
 }
-const { id, title } = Astro.props;
+const { id, title, class: className } = Astro.props;
 ---
 
 <section
-  class="relative flex flex-col items-center gap-y-8 text-xl pt-8 min-h-dvh"
+  class:list={[
+    "relative flex flex-col items-center gap-y-8 text-xl pt-8",
+    className,
+  ]}
   id={id}
 >
   {
