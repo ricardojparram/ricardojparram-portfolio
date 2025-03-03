@@ -9,6 +9,9 @@
     rgba(0, 0, 0, 1) 100%
   );
 }
+@utility text-color {
+  @apply text-slate-700 dark:text-slate-200;
+}
 body {
   font-family: "JetBrains Mono", monospace;
 }
