@@ -1,45 +1,9 @@
----
-import Email from "../components/icons/Email.astro";
-import Github from "../components/icons/Github.astro";
-import Linkedin from "../components/icons/Linkedin.astro";
-import CV from "../components/icons/CVIcon.astro";
-const contacts = [
-  { icon: Email, title: "Gmail", link: "mailto:ricardo.prxr16@gmail.com" },
-  { icon: Github, title: "Github", link: "https://github.com/ricardojparram" },
-  {
-    icon: Linkedin,
-    title: "LinkedIn",
-    link: "https://linkedin.com/in/ricardojparram/",
-  },
-  {
-    icon: CV,
-    title: "Curriculum",
-    link: "https://docs.google.com/document/d/1YCOEqHyrk7IXP_OnDcGMCEZ0o1LZmZ0zx4W2oZsuHgE/edit?usp=drive_link",
-  },
-];
----
-
 <footer class="my-20 w-full flex flex-col gap-10 px-5 pt-10">
-  <div class="grid grid-cols-4 gap-y-4">
-    {
-      contacts.map((i) => (
-        <a
-          href={i.link}
-          target="_blank"
-          title={i.title}
-          class="flex items-center gap-2 col-span-2 md:col-span-1 w-fit font-bold text-lg hover:underline decoration-2"
-        >
-          {" "}
-          <i.icon class="w-5 h-5" />
-          {i.title}
-        </a>
-      ))
-    }
-  </div>
   <span class="m-auto font-bold text-slate-700 dark:text-slate-300 text-lg">
     2024 - <a
       href="https://github.com/ricardojparram"
-      class="hover:underline decoration-2">@ricardojparram</a
+      class="hover:underline decoration-2 text-lime-600 dark:text-lime-500"
+      >@ricardojparram</a
     >
   </span>
 </footer>

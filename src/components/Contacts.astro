@@ -1,0 +1,74 @@
+---
+import Email from "../components/icons/Email.astro";
+import Github from "../components/icons/Github.astro";
+import Linkedin from "../components/icons/Linkedin.astro";
+import CV from "../components/icons/CVIcon.astro";
+import CopyIcon from "../components/icons/Copy.astro";
+import CopyIconCheck from "../components/icons/CopyCheck.astro";
+import ArrowOutward from "../components/icons/ArrowOutward.astro";
+const contacts = [
+  {
+    icon: Email,
+    title: "ricardo.prxr16@gmail.com",
+    link: "mailto:ricardo.prxr16@gmail.com",
+  },
+  {
+    icon: Github,
+    title: "ricardojparram",
+    link: "https://github.com/ricardojparram",
+  },
+  {
+    icon: Linkedin,
+    title: "ricardojparram",
+    link: "https://linkedin.com/in/ricardojparram/",
+  },
+  {
+    icon: CV,
+    title: "Curriculum",
+    link: "https://docs.google.com/document/d/1YCOEqHyrk7IXP_OnDcGMCEZ0o1LZmZ0zx4W2oZsuHgE/edit?usp=drive_link",
+  },
+];
+---
+
+<div class="h-full w-full my-10" id="contact">
+  <div class="flex flex-col gap-4">
+    {
+      contacts.map((contact) => (
+        <div class="flex gap-2 md:gap-4 items-center pb-1 w-fit transition-all relative group">
+          <a
+            href={contact.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline underline-offset-2 font-bold flex gap-2 md:gap-4 items-center pb-1 border-b border-b-transparent"
+            title={"Ir a" + contact.link}
+          >
+            {<contact.icon class="w-8 h-8" />}
+            <span class="text-xs md:text-base">{contact.title}</span>
+          </a>
+          <div class="sticky md:left-[90%] md:opacity-0 md:group-hover:left-[110%] group-hover:opacity-100 flex gap-2 md:gap-4 transition-all">
+            <button class="copyButton cursor-pointer" data-copy={contact.title}>
+              <CopyIcon class="h-5 w-5 text-slate-300 copy" />
+              <CopyIconCheck class="h-5 w-5 text-slate-300 hidden check" />
+            </button>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+<script>
+  const $copyButton = document.querySelectorAll(".copyButton");
+  $copyButton.forEach((button) => {
+    button.addEventListener("click", function () {
+      const $copyIcon = this.children[0];
+      const $copyCheckIcon = this.children[1];
+      navigator.clipboard.writeText(this.dataset.code);
+      $copyIcon.classList.add("hidden");
+      $copyCheckIcon.classList.remove("hidden");
+      setTimeout(() => {
+        $copyIcon.classList.remove("hidden");
+        $copyCheckIcon.classList.add("hidden");
+      }, 3000);
+    });
+  });
+</script>
