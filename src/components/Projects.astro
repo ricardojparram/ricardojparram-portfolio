@@ -83,7 +83,7 @@ const projects = [
 ---
 
 <div
-  class="grid grid-cols-1 md:grid-cols-13 w-full md:grid-rows-[repeat(9,minmax(50px,100px)] gap-5 my-10"
+  class="grid grid-cols-1 md:grid-cols-13 w-full md:grid-rows-[repeat(9,minmax(50px,100px)] gap-6 my-10"
 >
   {
     projects.map((project) => (
@@ -95,53 +95,62 @@ const projects = [
       >
         <div
           class:list={[
-            project.mobile ? "aspect-[9.5/18]" : "aspect-video",
-            "overflow-hidden rounded-lg w-full relative",
+            project.mobile
+              ? "aspect-[14/16] md:aspect-[9.4/18]"
+              : "aspect-video",
+            "overflow-hidden rounded-lg w-full relative shadow-xl",
           ]}
         >
           <div class="absolute inset-0">
             <div class="relative w-full h-full">
               {[0, 1].map(() => (
-                <div class="absolute z-10 inset-x-0 bottom-0 h-[30%] bg-gradient-to-b from-transparent via-slate-700/10 to-slate-700/30 mask-to-b backdrop-blur-md" />
+                <div
+                  class:list={[
+                    "absolute z-10 inset-x-0 bottom-0 ",
+                    "bg-gradient-to-b from-transparent via-slate-500/10 to-slate-500/30 group-hover/project:via-slate-400/10 group-hover/project:to-slate-400/40 transition-colors duration-300",
+                    "mask-to-b backdrop-blur-md",
+                    project.mobile ? "h-[20%]" : "h-[30%]",
+                  ]}
+                />
               ))}
-              <div class="absolute z-10 inset-x-0 bottom-0 mix-blend-lighten">
+              <div class="absolute flex justify-between z-10 inset-x-0 bottom-0">
                 <h3 class="text-slate-100 font-bold px-4 py-2">
                   {project.title}
                 </h3>
+                <div class="flex gap-2 self-end px-4 py-2">
+                  <TechnhologiesBadge
+                    icons={project.technologies}
+                    class="w-6 h-6"
+                  />
+                </div>
               </div>
             </div>
           </div>
-          <a
-            href={project.link || "#"}
-            target="_blank"
-            aria-label={"Visita la web del proyecto" + project.title}
-          >
-            <img
-              decoding="async"
-              loading="lazy"
-              src={project.img}
-              alt={project.alt + " image"}
-              class:list={[
-                "aspect-auto",
-                "object-cover w-full h-full absolute transition-opacity duration-300 ",
-                {
-                  "hidden md:block md:opacity-100 md:group-hover/project:opacity-0":
-                    project.video,
-                },
-              ]}
-            />
+          <img
+            decoding="async"
+            loading="lazy"
+            src={project.img}
+            alt={project.alt + " image"}
+            class:list={[
+              "aspect-auto",
+              "object-cover object-top w-full h-full absolute transition-opacity duration-300 ",
+              {
+                "hidden md:block md:opacity-100 md:group-hover/project:opacity-0":
+                  project.video,
+              },
+            ]}
+          />
 
-            {project.video && (
-              <video
-                autoplay
-                loop
-                muted
-                class="object-cover w-full h-full absolute aspect-video transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover/project:opacity-100 md:group-hover/project:relative"
-              >
-                <source src={project.video} type="video/webm" />
-              </video>
-            )}
-          </a>
+          {project.video && (
+            <video
+              autoplay
+              loop
+              muted
+              class="object-cover w-full h-full absolute transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover/project:opacity-100 md:group-hover/project:relative"
+            >
+              <source src={project.video} type="video/webm" />
+            </video>
+          )}
         </div>
       </article>
     ))
