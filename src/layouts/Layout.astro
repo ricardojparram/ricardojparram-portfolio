@@ -62,13 +62,22 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body
-    class="min-h-screen relative bg-slate-200 text-[#0d1521] dark:bg-[#0d1521] dark:text-gray-200 flex flex-col items-center"
+    class="min-h-screen relative bg-bg text-text flex flex-col items-center"
   >
     <div
-      class="absolute top-0 -z-10 h-[25vh] w-full bg-gradient-to-b from-[#abc7fba6] dark:from-[#1a253bb5] via-transparent to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
+      class="absolute top-0 z-[-2] h-screen w-full bg-transparent bg-[radial-gradient(100%_50%_at_10%_0%,rgba(0,163,255,0.10)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
     >
     </div>
-    <!-- <Header /> -->
+
+    <div
+      class="absolute top-0 z-[-2] h-full w-full bg-transparent bg-[radial-gradient(ellipse_40%_30%_at_110%_40%,rgba(0,163,255,0.10),rgba(255,255,255,0))]"
+    >
+    </div>
+    <div
+      class="absolute top-0 z-[-2] h-full w-full bg-transparent bg-[radial-gradient(ellipse_50%_40%_at_-20%_90%,rgba(0,163,255,0.10),rgba(255,255,255,0))]"
+    >
+    </div>
+    <Header />
     <slot />
     <Footer />
   </body>
