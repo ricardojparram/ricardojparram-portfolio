@@ -3,6 +3,10 @@ import Link from "./icons/Link.astro";
 import Button from "./Button.astro";
 import Github from "./icons/Github.astro";
 import TechnhologiesBadge from "./TechnhologiesBadge.astro";
+const grid_styles = {
+  mobile: "md:col-span-5 md:row-span-2",
+  pc: "md:col-span-8 md:row-span-1",
+};
 const projects = [
   {
     title: "Sistema de Inventario",
@@ -15,6 +19,18 @@ const projects = [
     technologies: ["PHP", "Mysql", "Bootstrap"],
   },
   {
+    title: "Cambio Rápido",
+    subtitle: "Calcula la conversión del dólar en Venezuela",
+    description:
+      "Es una prueba de velocidad de internet inspirada en la simplicidad de fast.com. Al igual que tiene la funcionalidad de mostrar tu ip e informacion del ASN.",
+    link: "https://netest-three.vercel.app/",
+    github: "https://github.com/ricardojparram/network-test-app",
+    img: "/assets/cambio-rapido.png",
+    alt: "Personal project NETEST",
+    technologies: ["Astro", "React", "Tailwind"],
+    mobile: true,
+  },
+  {
     title: "RJPM.UI",
     subtitle: "Easy-to-Use Tailwind CSS Agnostic Components",
     description:
@@ -24,6 +40,31 @@ const projects = [
     img: "/assets/rjpm-ui.webp",
     video: "/assets/rjpm-ui.webm",
     alt: "Personal project rjpm.ui",
+    technologies: ["Astro", "React", "Tailwind"],
+  },
+  {
+    title: "Cambio Rápido",
+    subtitle: "Conversión del dólar en Venezuela",
+    description:
+      "Es una prueba de velocidad de internet inspirada en la simplicidad de fast.com. Al igual que tiene la funcionalidad de mostrar tu ip e informacion del ASN.",
+    link: "https://netest-three.vercel.app/",
+    github: "https://github.com/ricardojparram/network-test-app",
+    img: "/assets/cambio-rapido.png",
+    alt: "Personal project NETEST",
+    technologies: ["Astro", "React", "Tailwind"],
+    mobile: true,
+  },
+
+  {
+    title: "NETEST",
+    subtitle: "Check Your Internet Speed in Seconds",
+    description:
+      "Es una prueba de velocidad de internet inspirada en la simplicidad de fast.com. Al igual que tiene la funcionalidad de mostrar tu ip e informacion del ASN.",
+    link: "https://netest-three.vercel.app/",
+    github: "https://github.com/ricardojparram/network-test-app",
+    img: "/assets/netest.webp",
+    video: "/assets/netest.webm",
+    alt: "Personal project NETEST",
     technologies: ["Astro", "React", "Tailwind"],
   },
   {
@@ -41,14 +82,35 @@ const projects = [
 ];
 ---
 
-<div class="flex flex-col gap-y-16 my-10">
+<div
+  class="grid grid-cols-1 md:grid-cols-13 w-full md:grid-rows-[repeat(9,minmax(50px,100px)] gap-5 my-10"
+>
   {
     projects.map((project) => (
       <article
-        data-animate="intersection"
-        class="grid grid-cols-2 gap-y-10 px-3 md:px-0 text-pretty group/project hover:scale-105 transition-transform duration-300 relative"
+        class:list={[
+          "flex flex-col gap-y-6 text-pretty group/project transition-transform duration-300 relative",
+          grid_styles[project.mobile ? "mobile" : "pc"],
+        ]}
       >
-        <div class="col-span-2 md:col-span-1  aspect-video rounded-lg overflow-hidden w-full md:w-[380px] relative shadow-[rgba(59,_59,_81,_0.25)_0px_50px_80px_-20px,_rgba(81,_81,_89,_0.3)_0px_30px_30px_-30px]">
+        <div
+          class:list={[
+            project.mobile ? "aspect-[9.5/18]" : "aspect-video",
+            "overflow-hidden rounded-lg w-full relative",
+          ]}
+        >
+          <div class="absolute inset-0">
+            <div class="relative w-full h-full">
+              {[0, 1].map(() => (
+                <div class="absolute z-10 inset-x-0 bottom-0 h-[30%] bg-gradient-to-b from-transparent via-slate-700/10 to-slate-700/30 mask-to-b backdrop-blur-md" />
+              ))}
+              <div class="absolute z-10 inset-x-0 bottom-0 mix-blend-lighten">
+                <h3 class="text-slate-100 font-bold px-4 py-2">
+                  {project.title}
+                </h3>
+              </div>
+            </div>
+          </div>
           <a
             href={project.link || "#"}
             target="_blank"
@@ -59,7 +121,14 @@ const projects = [
               loading="lazy"
               src={project.img}
               alt={project.alt + " image"}
-              class={`object-cover w-full absolute aspect-video transition-opacity duration-300 ${project.video ? "hidden md:block md:opacity-100 md:group-hover/project:opacity-0" : ""}`}
+              class:list={[
+                "aspect-auto",
+                "object-cover w-full h-full absolute transition-opacity duration-300 ",
+                {
+                  "hidden md:block md:opacity-100 md:group-hover/project:opacity-0":
+                    project.video,
+                },
+              ]}
             />
 
             {project.video && (
@@ -73,35 +142,6 @@ const projects = [
               </video>
             )}
           </a>
-        </div>
-        <div class="col-span-2 md:col-span-1 flex flex-col gap-y-3 py-2">
-          <h3 class="strong-text font-extrabold text-xl dark:group-hover/project:text-lime-500 group/title">
-            <strong class="">{project.title}</strong> - {project.subtitle}
-          </h3>
-
-          <p class="text-base">{project.description}</p>
-          <div class="grid grid-cols-3">
-            <span class="col-span-2 flex gap-2 items-center">
-              {project.github && (
-                <Button link={project.github} class="text-base w-fit">
-                  <Github class="w-5 h-5" />
-                  Código
-                </Button>
-              )}
-              {project.link && (
-                <Button link={project.link} class="text-base w-fit">
-                  <Link class="w-4 h-4" />
-                  Visitar
-                </Button>
-              )}
-            </span>
-            <span class="col-span-1 flex gap-3 items-center">
-              <TechnhologiesBadge
-                icons={project.technologies}
-                class="w-5 h-5"
-              />
-            </span>
-          </div>
         </div>
       </article>
     ))
