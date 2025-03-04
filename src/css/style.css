@@ -1,6 +1,18 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  --background-color: var(--color-slate-200);
+  --text-color: var(--color-slate-900);
+}
+.dark {
+  --background-color: var(--color-slate-900);
+  --text-color: var(--color-slate-200);
+}
+@theme {
+  --color-bg: var(--background-color);
+  --color-text: var(--text-color);
+}
 @utility mask-to-t {
   mask: linear-gradient(
     to top,
@@ -8,6 +20,15 @@
     rgba(0, 0, 0, 0.8) 50%,
     rgba(0, 0, 0, 1) 100%
   );
+}
+@utility text-color {
+  @apply text-slate-700 dark:text-slate-200;
+}
+@utility anchor-hover {
+  @apply text-lime-600 dark:text-lime-400 hover:bg-lime-400 hover:text-slate-900;
+}
+@utility strong-text {
+  @apply text-lime-600 dark:text-lime-400;
 }
 body {
   font-family: "JetBrains Mono", monospace;

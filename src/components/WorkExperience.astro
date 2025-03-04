@@ -34,39 +34,27 @@ const jobs = [
 ---
 
 <div class="w-full h-full p-4" id="experience-container">
-  <div class="space-y-8 relative py-12">
+  <div class="space-y-8 relative py-16">
     <div
       class="absolute inset-0 ml-0 translate-x-px md:mx-auto md:translate-x-0 h-full w-1 bg-gradient-to-b from-transparent via-slate-400 to-transparent"
     >
     </div>
     {
-      jobs.map((job, i) => (
+      jobs.map((job) => (
         <div
           class:list={[
             "relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group",
             { "is-active": job.active },
           ]}
         >
-          <div class="flex items-center justify-center w-5 h-5 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-emerald-500 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 -translate-x-[7px] md:group-odd:-translate-x-[30px] md:group-even:translate-x-[30px]">
-            <!-- <svg -->
-            <!--   class="fill-current" -->
-            <!--   xmlns="http://www.w3.org/2000/svg" -->
-            <!--   width="12" -->
-            <!--   height="10" -->
-            <!-- > -->
-            <!--   <path -->
-            <!--     fill-rule="nonzero" -->
-            <!--     d="M10.422 1.257 4.655 7.025 2.553 4.923A.916.916 0 0 0 1.257 6.22l2.75 2.75a.916.916 0 0 0 1.296 0l6.415-6.416a.916.916 0 0 0-1.296-1.296Z" -->
-            <!--   /> -->
-            <!-- </svg> -->
-          </div>
-          <div class="w-[calc(100%-1rem)] md:w-[calc(50%-2.5rem)] p-4 rounded hover:scale-105 transition-all">
+          <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 group-hover:scale-125 transition-all border-bg bg-slate-400 group-[.is-active]:bg-lime-500 text-slate-500 group-[.is-active]:text-emerald-50  shrink-0 md:order-1 -translate-x-[7px] md:group-odd:-translate-x-[30px] md:group-even:translate-x-[30px]" />
+          <div class="text-color w-[calc(100%-1rem)] md:w-[calc(50%-2.5rem)] p-4 rounded group-hover:scale-105 transition-all">
             <div class="flex flex-col space-x-2 mb-2">
-              <time class="text-base italic text-slate-700  dark:text-slate-300">{job.date}</time>
+              <time class="text-base italic">{job.date}</time>
               <h3 class="text-xl font-bold text-lime-500">{job.company}</h3>
-              <h4 class="text-lg font-medium text-slate-700  dark:text-slate-300">{job.role}</h4>
+              <h4 class="text-lg font-medium">{job.role}</h4>
             </div>
-            <div class="text-base text-slate-700  dark:text-slate-300 flex flex-col gap-3">
+            <div class="text-base flex flex-col gap-3">
               {job.info.map((info) => (
                 <p>{info}</p>
               ))}

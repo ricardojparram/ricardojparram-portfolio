@@ -31,7 +31,7 @@ const contacts = [
 ---
 
 <div class="h-full w-full my-10" id="contact">
-  <div class="flex flex-col gap-4 text-slate-700 dark:text-slate-200">
+  <div class="flex flex-col gap-4 text-color">
     {
       contacts.map((contact) => (
         <div class="flex gap-2 md:gap-4 items-center pb-1 w-fit transition-all relative group">
@@ -39,16 +39,18 @@ const contacts = [
             href={contact.link}
             target="_blank"
             rel="noopener noreferrer"
-            class="underline underline-offset-2 font-bold flex gap-2 md:gap-4 items-center pb-1 border-b border-b-transparent"
+            class="font-bold flex gap-2 md:gap-4 items-center pb-1 border-b border-b-transparent"
             title={"Ir a" + contact.link}
           >
-            {<contact.icon class="w-8 h-8" />}
-            <span class="text-xs md:text-base">{contact.title}</span>
+            {<contact.icon class="w-7 h-7" />}
+            <span class="underline underline-offset-4 decoration-2 text-base md:text-lg">
+              {contact.title}
+            </span>
           </a>
           <div class="sticky md:left-[90%] md:opacity-0 md:group-hover:left-[110%] group-hover:opacity-100 flex gap-2 md:gap-4 transition-all">
             <button class="copyButton cursor-pointer" data-copy={contact.title}>
-              <CopyIcon class="h-5 w-5 copy" />
-              <CopyIconCheck class="h-5 w-5 hidden check" />
+              <CopyIcon class="h-6 w-6 copy" />
+              <CopyIconCheck class="h-6 w-6 hidden check" />
             </button>
           </div>
         </div>
