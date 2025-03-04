@@ -28,13 +28,21 @@ const options = {
 interface Props {
   icons: Array<string>;
   class: string;
+  type?: string;
 }
-const { icons, class: className } = Astro.props;
+const { icons, class: className, type } = Astro.props;
 ---
 
 {
   icons.map((icon) => {
     const Component = options[icon].icon;
-    return <Component class={className} title={icon} />;
+    return type === "badge" ? (
+      <div class="border border-text bg-bg text-text px-2 py-1 flex gap-2 items-center justify-center text-base font-bold rounded-md">
+        <p>{icon}</p>
+        <Component class={className} title={icon} class="fill-text" />
+      </div>
+    ) : (
+      <Component class={className} title={icon} />
+    );
   })
 }
