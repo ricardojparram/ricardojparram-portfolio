@@ -3,8 +3,9 @@ interface Props {
   id: string;
   title?: string;
   class?: string;
+  "max-w"?: string;
 }
-const { id, title, class: className } = Astro.props;
+const { id, title, class: className, "max-w": maxWidth } = Astro.props;
 ---
 
 <section
@@ -28,7 +29,7 @@ const { id, title, class: className } = Astro.props;
       </div>
     )
   }
-  <div class="max-w-[900px] px-6 md:px-0">
+  <div class:list={[maxWidth ?? "max-w-[900px]", "w-full px-6 md:px-0"]}>
     <slot />
   </div>
 </section>
