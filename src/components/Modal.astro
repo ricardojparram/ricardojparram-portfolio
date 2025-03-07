@@ -1,42 +1,43 @@
 ---
 import Close from "./icons/Close.astro";
-const { id } = Astro.props;
+const { id, title } = Astro.props;
 ---
 
-<style>
-  dialog {
-    position: fixed;
-    transform: translate(-50%, -50%);
-    &::backdrop {
-      overflow: hidden;
-      position: fixed;
-      top: 0px;
-      right: 0px;
-      bottom: 0px;
-      left: 0px;
-    }
-  }
-</style>
-
-<dialog
+<div
   id={id}
   class:list={[
-    "relative",
-    "w-[90vw] max-w-[700px] p-4 pt-0",
-    "left-[47%] top-[50%] md:left-[50%]",
-    "text-text bg-bg/90 rounded-lg shadow-2xl backdrop:bg-slate-600/30 backdrop:backdrop-blur-lg dark:backdrop:bg-slate-900/30 ",
-    "border-none ring-0 focus:ring-0 focus-visible:ring-0 outline-none",
+    "hidden w-full h-full ",
+    "fixed z-40 inset-0 overflow-hidden",
+    "flex justify-center items-center",
+    "duration-300",
+    "backdrop-blur-xl p-4",
   ]}
+  onclick={`document.querySelector('#${id}').classList.add('hidden')`}
+  data-lenis-prevent
 >
-  <div class="relative w-full p-4 pt-6 flex justify-between">
-    <h3 class="text-xl font-bold">Detalle del proyecto</h3>
-    <button
-      type="button"
-      class="border-none outline-none cursor-pointer"
-      onclick={`document.querySelector('#${id}').close()`}
-    >
-      <Close class="w-8 h-8" />
-    </button>
+  <div
+    class="relative bg-bg/90 shadow rounded-lg overflow-hidden max-w-[500px] z-50"
+  >
+    <!-- Modal header -->
+    <div class="flex bg-bg/40 items-center justify-between p-4 md:p-5 shadow">
+      <div class="px-4 sm:px-0">
+        <h3 class="text-lg font-semibold leading-7">
+          {title}
+        </h3>
+      </div>
+      <button
+        type="button"
+        class:list={[
+          "rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center",
+          "text-text bg-transparent hover:bg-text hover:text-bg",
+        ]}
+        onclick={`document.querySelector('#${id}').classList.add('hidden')`}
+      >
+        <Close class="w-8 h-8" />
+      </button>
+    </div>
+    <div class="p-4 md:p-6 text-text max-h-[90vh] overflow-y-auto">
+      <slot />
+    </div>
   </div>
-  <slot />
-</dialog>
+</div>
