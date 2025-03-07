@@ -41,11 +41,10 @@ const projects: project[] = [
       "Es una aplicación móvil hecha para mejorar la portabilidad del Sistema de manejo de Inventario de la Fundación Centro Médico Wesley.",
       "En ésta aplicación se le permite al usuario revisar el inventario disponible por cada sede, productos dañados, empleados, donaciones, transferencias, compras y ventas.",
     ],
-    // link: "https://netest-three.vercel.app/",
-    github: "https://github.com/ricardojparram/network-test-app",
-    img: "/assets/cambio-rapido.png",
-    alt: "Personal project NETEST",
-    technologies: ["Astro", "React", "Tailwind"],
+    github: "https://github.com/ricardojparram/app-inventario-wesley",
+    img: "/assets/app-inventario-wesley.webp",
+    alt: "Personal project App de Inventario",
+    technologies: ["Expo", "React", "Jest"],
     mobile: true,
   },
   {
@@ -76,7 +75,6 @@ const projects: project[] = [
     alt: "Personal project Cambio Rápido",
     mobile: true,
   },
-
   {
     title: "NETEST",
     subtitle: "Check Your Internet Speed in Seconds",
@@ -90,6 +88,19 @@ const projects: project[] = [
     video: "/assets/netest.webm",
     alt: "Personal project NETEST",
     technologies: ["Astro", "React", "Tailwind"],
+  },
+  {
+    title: "Chat Room",
+    subtitle: "A websocket chat easy to host",
+    description: [
+      'Es un chat hecho utilizando PHP vanilla y la libería de websockets "Rachet".',
+      "Tiene autenticación de usuarios para evitar el spam.",
+      "La interfaz busca tener un estilo brutalista y animado.",
+    ],
+    github: "https://github.com/ricardojparram/ChatRoom",
+    img: "/assets/chat-room.webp",
+    alt: "Personal project ChatRoom",
+    technologies: ["PHP", "MySQL", "CSS", "JQuery"],
   },
 ];
 ---
@@ -215,7 +226,12 @@ const projects: project[] = [
             />
           </div>
 
-          <p class="text-lg">{project.description}</p>
+          <div class="text-base flex flex-col gap-3 my-2">
+            {project.description.map((info) => (
+              <p>{info}</p>
+            ))}
+          </div>
+
           <div class="flex justify-between">
             <span class="flex gap-2 items-center">
               {project.github && (
