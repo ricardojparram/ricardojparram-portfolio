@@ -8,6 +8,7 @@ import GraphQL from "../components/icons/GraphQL.astro";
 import Expo from "../components/icons/Expo.astro";
 import CSS from "../components/icons/CSS.astro";
 import JQuery from "../components/icons/JQuery.astro";
+import Jest from "../components/icons/Jest.astro";
 export const Technologies = {
   Tailwind,
   Astro,
@@ -19,5 +20,6 @@ export const Technologies = {
   GraphQL,
   CSS,
   JQuery,
+  Jest,
 };
 export type TechnologiesType = keyof typeof Technologies;
