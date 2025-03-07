@@ -1,41 +1,18 @@
 ---
-import AstroIcon from "./icons/Astro.astro";
-import PHP from "./icons/PHP.astro";
-import React from "./icons/React.astro";
-import Tailwind from "./icons/Tailwind.astro";
-import MySQL from "./icons/MySQL.astro";
-import Bootstrap from "./icons/Bootstrap.astro";
-const options = {
-  Tailwind: {
-    icon: Tailwind,
-  },
-  Astro: {
-    icon: AstroIcon,
-  },
-  PHP: {
-    icon: PHP,
-  },
-  React: {
-    icon: React,
-  },
-  Mysql: {
-    icon: MySQL,
-  },
-  Bootstrap: {
-    icon: Bootstrap,
-  },
-};
+import type { TechnologiesType } from "../lib/technologies";
+import { Technologies } from "../lib/technologies";
+type type = "badge" | "icon" | undefined;
 interface Props {
-  icons: Array<string>;
+  icons: TechnologiesType[];
   class: string;
-  type?: string;
+  type?: type;
 }
 const { icons, class: className, type } = Astro.props;
 ---
 
 {
   icons.map((icon) => {
-    const Component = options[icon].icon;
+    const Component = Technologies[icon];
     return type === "badge" ? (
       <div class="border border-text bg-bg text-text px-2 py-1 flex gap-2 items-center justify-center text-base font-bold rounded-md">
         <p>{icon}</p>
