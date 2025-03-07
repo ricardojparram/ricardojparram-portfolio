@@ -7,16 +7,15 @@ const { id, title } = Astro.props;
   id={id}
   class:list={[
     "hidden w-full h-full ",
-    "fixed z-40 inset-0 overflow-hidden",
+    "fixed z-30 inset-0 overflow-hidden",
     "flex justify-center items-center",
     "duration-300",
     "backdrop-blur-xl p-4",
   ]}
-  onclick={`document.querySelector('#${id}').classList.add('hidden')`}
   data-lenis-prevent
 >
   <div
-    class="relative bg-bg/90 shadow rounded-lg overflow-hidden max-w-[500px] z-50"
+    class="relative bg-bg/90 shadow rounded-lg overflow-hidden max-w-[600px] z-50"
   >
     <!-- Modal header -->
     <div class="flex bg-bg/40 items-center justify-between p-4 md:p-5 shadow">
@@ -39,5 +38,10 @@ const { id, title } = Astro.props;
     <div class="p-4 md:p-6 text-text max-h-[90vh] overflow-y-auto">
       <slot />
     </div>
+  </div>
+  <div
+    class="absolute inset-0 z-40"
+    onclick={`document.querySelector('#${id}').classList.add('hidden')`}
+  >
   </div>
 </div>
