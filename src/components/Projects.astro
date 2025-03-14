@@ -4,7 +4,7 @@ import Button from "./Button.astro";
 import Github from "./icons/Github.astro";
 import TechnhologiesBadge from "./TechnhologiesBadge.astro";
 import type { TechnologiesType } from "../lib/technologies.ts";
-import Modal from "./Modal.astro";
+import Modal from "./Modal2.astro";
 const grid_styles = {
   mobile: "md:col-span-5 md:row-span-2",
   pc: "md:col-span-8 md:row-span-1",
@@ -118,7 +118,7 @@ const projects: project[] = [
           "flex flex-col gap-y-6 text-pretty group/project transition-transform duration-300 relative",
           grid_styles[project.mobile ? "mobile" : "pc"],
         ]}
-        onclick={`document.querySelector('#${"project-" + i}').classList.toggle('hidden')`}
+        onclick={`document.querySelector('#${"project-" + i}').showModal()`}
       >
         <div
           class:list={[
