@@ -14,7 +14,13 @@ const { icons, class: className, type } = Astro.props;
   icons.map((icon) => {
     const Component = Technologies[icon];
     return type === "badge" ? (
-      <div class="border border-text bg-bg text-text px-2 py-1 flex gap-2 items-center justify-center text-base font-bold rounded-md">
+      <div
+        class:list={[
+          "border border-text bg-bg rounded-xl",
+          "text-text text-xs font-bold",
+          "py-1 px-3 flex gap-2 items-center justify-center ",
+        ]}
+      >
         <p>{icon}</p>
         <Component class={className} title={icon} class="fill-text" />
       </div>
