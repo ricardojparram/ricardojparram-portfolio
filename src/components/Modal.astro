@@ -6,14 +6,19 @@ const { id, title } = Astro.props;
 <dialog
   id={id}
   class:list={[
-    "w-[90vw] md:w-full h-full max-w-[600px] m-auto",
-    "shadow rounded-lg bg-bg/90 overflow-hidden",
-    "backdrop:backdrop-blur-2xl",
+    "w-[90vw] md:w-full max-w-[600px] m-auto",
+    "shadow-lg rounded-lg bg-bg/90 overflow-hidden",
+    "backdrop:backdrop-blur-2xl backdrop:bg-bg/60",
+    "border-2 border-text/90",
+    "starting:open:opacity-0 opacity-0 open:opacity-100 transition-discrete open:transition-discrete transition-all duration-300",
+    "starting:open:backdrop:opacity-0 backdrop:opacity-0 open:backdrop:opacity-100 backdrop:transition-discrete open:backdrop:transition-discrete backdrop:transition-all backdrop:duration-300",
   ]}
   data-lenis-prevent
 >
   <!-- Modal header -->
-  <div class="flex bg-bg/40 items-center justify-between p-4 md:p-5 shadow">
+  <div
+    class="flex bg-bg/40 border-b-2 border-text/90 items-center justify-between p-4 md:p-5 shadow"
+  >
     <div class="px-4 sm:px-0">
       <h3 class="text-lg font-semibold leading-7 text-text">
         {title}
