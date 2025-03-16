@@ -21,7 +21,9 @@ const grid_styles = {
     projects.map((project, i) => (
       <article
         class:list={[
-          "text-base  flex flex-col gap-y-6 text-pretty group/project transition-transform duration-300 relative",
+          "flex flex-col gap-y-6  relative",
+          "text-base text-pretty group/project transition-transform duration-300",
+          "cursor-pointer",
           grid_styles[project.mobile ? "mobile" : "pc"],
         ]}
         onclick={`document.querySelector('#${"project-" + i}').showModal()`}
