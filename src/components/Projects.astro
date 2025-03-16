@@ -79,7 +79,7 @@ const grid_styles = {
               autoplay
               loop
               muted
-              class="object-cover w-full h-full absolute transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover/project:opacity-100 md:group-hover/project:relative"
+              class="object-cover object-top w-full h-full absolute transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover/project:opacity-100 md:group-hover/project:relative"
             >
               <source src={project.video} type="video/webm" />
             </video>
@@ -106,7 +106,7 @@ const grid_styles = {
               autoplay
               loop
               muted
-              class="object-cover w-full h-full absolute aspect-auto"
+              class="object-cover object-top w-full h-full absolute aspect-auto"
             >
               <source src={project.video} type="video/webm" />
             </video>
@@ -116,7 +116,7 @@ const grid_styles = {
               loading="lazy"
               src={project.img}
               alt={project.alt + " image"}
-              class={`object-cover w-full absolute aspect-auto transition-opacity duration-300 ${project.video ? "hidden md:block md:opacity-100 md:group-hover/project:opacity-0" : ""}`}
+              class={`object-cover object-top w-full absolute aspect-auto transition-opacity duration-300 ${project.video ? "hidden md:block md:opacity-100 md:group-hover/project:opacity-0" : ""}`}
             />
           )}
         </div>
