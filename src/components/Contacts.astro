@@ -48,7 +48,7 @@ const contacts = [
             </span>
           </a>
           <div class="sticky md:left-[90%] md:opacity-0 md:group-hover:left-[110%] group-hover:opacity-100 flex gap-2 md:gap-4 transition-all">
-            <button class="copyButton cursor-pointer" data-copy={contact.title}>
+            <button class="copyButton cursor-pointer" data-copy={contact.link}>
               <CopyIcon class="h-6 w-6 copy" />
               <CopyIconCheck class="h-6 w-6 hidden check" />
             </button>
@@ -64,7 +64,7 @@ const contacts = [
     button.addEventListener("click", function () {
       const $copyIcon = this.children[0];
       const $copyCheckIcon = this.children[1];
-      navigator.clipboard.writeText(this.dataset.code);
+      navigator.clipboard.writeText(this.dataset.copy);
       $copyIcon.classList.add("hidden");
       $copyCheckIcon.classList.remove("hidden");
       setTimeout(() => {
