@@ -13,6 +13,7 @@ const { id, title } = Astro.props;
     "starting:open:backdrop:opacity-0 backdrop:opacity-0 open:backdrop:opacity-100 backdrop:transition-discrete open:backdrop:transition-discrete backdrop:transition-all backdrop:duration-300",
   ]}
   data-lenis-prevent
+  closedby="any"
 >
   <!-- Modal header -->
   <div
@@ -23,16 +24,17 @@ const { id, title } = Astro.props;
         {title}
       </h3>
     </div>
-    <button
-      type="button"
-      class:list={[
-        "rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center",
-        "text-slate-100 bg-transparent hover:bg-text hover:text-bg",
-      ]}
-      onclick={`document.querySelector('#${id}').close()`}
-    >
-      <Close class="w-8 h-8" />
-    </button>
+    <form method="dialog">
+      <button
+        class:list={[
+          "rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center",
+          "text-slate-100 bg-transparent hover:bg-text hover:text-bg",
+          "ring-0 outline-0",
+        ]}
+      >
+        <Close class="w-8 h-8" />
+      </button>
+    </form>
   </div>
   <div class="p-4 md:p-6 text-text max-h-[90vh] overflow-y-auto">
     <slot />
