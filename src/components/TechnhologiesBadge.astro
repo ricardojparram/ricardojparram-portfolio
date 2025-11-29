@@ -1,31 +1,38 @@
 ---
-import type { TechnologiesType } from "../lib/technologies";
-import { Technologies } from "../lib/technologies";
-type type = "badge" | "icon" | undefined;
 interface Props {
-  icons: TechnologiesType[];
+  icons: { name: string; icon: string }[];
   class: string;
-  type?: type;
+  type?: "badge" | "icon";
 }
 const { icons, class: className, type } = Astro.props;
 ---
 
 {
-  icons.map((icon) => {
-    const Component = Technologies[icon];
-    return type === "badge" ? (
-      <div
-        class:list={[
-          "border border-text bg-bg rounded-xl",
-          "text-text text-xs font-bold",
-          "py-1 px-3 flex gap-2 items-center justify-center ",
-        ]}
-      >
-        <p>{icon}</p>
-        <Component class={className} title={icon} class="fill-text" />
-      </div>
-    ) : (
-      <Component class={className} title={icon} />
-    );
-  })
+  icons &&
+    icons.map((tech) =>
+      type === "badge" ? (
+        <div
+          class:list={[
+            "border border-text bg-bg rounded-xl",
+            "text-text text-xs font-bold",
+            "py-1 px-3 flex gap-2 items-center justify-center ",
+          ]}
+        >
+          <p>{tech.name}</p>
+          <img
+            src={tech.icon}
+            alt={tech.name}
+            class={className}
+            title={tech.name}
+          />
+        </div>
+      ) : (
+        <img
+          src={tech.icon}
+          alt={tech.name}
+          class={className}
+          title={tech.name}
+        />
+      ),
+    )
 }

@@ -1,36 +1,14 @@
 ---
-const jobs = [
-  {
-    role: "Desarrollador Full-Stack",
-    company: "Alcaldía de Iribarren",
-    date: "2024 - Actualmente",
-    info: [
-      "Desarrollo sistemas administrativos internos, refactorizo y rediseño sistemas antiguos que se utilizan en los distintos departamentos.",
-      "Busco nuevas propuestas para la optimización de los procesos dentro del departamento de informática.",
-      "Instruyo a pasantes universitarios, enseñándoles sobre el desarrollo web básico con tecnologías como: HTML, CSS3, Javascript y Tailwind.",
-    ],
-    active: true,
-  },
-  {
-    role: "Desarrollador Web",
-    company: "Fundación Centro Médico Wesley",
-    date: "2023 - 2024",
-    info: [
-      "Desarrollé una aplicación web para la gestión de inventario. Solucioné junto a mi equipo la mala administración de inventario médico entre las sedes de la fundación.  Mejoramos la organización del inventario, y optimizamos el proceso de movimiento de éste.",
-      "Lideré el desarrollo de una aplicación móvil que tiene como función principal el reporte del inventario por sedes y todos sus movimientos.",
-    ],
-    active: false,
-  },
-  {
-    role: "Pasante",
-    company: "Farmacia MediSalud C.A",
-    date: "2022 - 2023",
-    info: [
-      "Realicé un e-commerce para la farmacia, así como un sistema inventario para la gestión de inventario y ventas online o presenciales. Ésta aplicación web implementó una mejor organización para las ventas e inventario.",
-    ],
-    active: false,
-  },
-];
+import { client } from "../lib/sanity";
+
+const jobs =
+  await client.fetch(`*[_type == "experience"] | order(active desc, _createdAt desc){
+  role,
+  company,
+  date,
+  "info": info[].children[].text,
+  active
+}`);
 ---
 
 <div class="w-full h-full p-4" id="experience-container">

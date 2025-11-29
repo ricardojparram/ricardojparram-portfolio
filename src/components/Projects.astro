@@ -3,8 +3,27 @@ import Link from "./icons/Link.astro";
 import Button from "./Button.astro";
 import Github from "./icons/Github.astro";
 import TechnhologiesBadge from "./TechnhologiesBadge.astro";
-import { projects } from "../lib/projects.ts";
 import Modal from "./Modal.astro";
+import { client as sanityClient } from "../lib/sanity";
+
+const projects = await sanityClient.fetch(
+  `*[_type == "project"] | order(order asc) {
+    title,
+    subtitle,
+    "description": description[].children[].text,
+    "img": img.asset->url,
+    "video": video.asset->url,
+    alt,
+    link,
+    github,
+    technologies[]->{
+      name,
+      "icon": icon.asset->url
+    },
+    mobile
+  }`,
+);
+
 const grid_styles = {
   mobile: "md:col-span-5 md:row-span-2",
   pc: "md:col-span-8 md:row-span-1",

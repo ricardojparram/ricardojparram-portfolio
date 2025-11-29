@@ -1,63 +1,62 @@
 ---
+import CopyIcon from "../components/icons/Copy.astro";
+import CopyIconCheck from "../components/icons/CopyCheck.astro";
 import Email from "../components/icons/Email.astro";
 import Github from "../components/icons/Github.astro";
 import Linkedin from "../components/icons/Linkedin.astro";
-import CV from "../components/icons/CVIcon.astro";
-import CopyIcon from "../components/icons/Copy.astro";
-import CopyIconCheck from "../components/icons/CopyCheck.astro";
-import ArrowOutward from "../components/icons/ArrowOutward.astro";
-const contacts = [
-  {
-    icon: Email,
-    title: "ricardo.prxr16@gmail.com",
-    link: "mailto:ricardo.prxr16@gmail.com",
-  },
-  {
-    icon: Github,
-    title: "ricardojparram",
-    link: "https://github.com/ricardojparram",
-  },
-  {
-    icon: Linkedin,
-    title: "ricardojparram",
-    link: "https://linkedin.com/in/ricardojparram/",
-  },
-  {
-    icon: CV,
-    title: "Curriculum",
-    link: "https://docs.google.com/document/d/1YCOEqHyrk7IXP_OnDcGMCEZ0o1LZmZ0zx4W2oZsuHgE/edit?usp=drive_link",
-  },
-];
+import CVIcon from "../components/icons/CVIcon.astro";
+import { client } from "../lib/sanity";
+
+const contacts = await client.fetch(`*[_type == "profile"][0].contacts[]{
+  title,
+  link,
+  type
+}`);
+
+const ICONS = {
+  email: Email,
+  github: Github,
+  linkedin: Linkedin,
+  cv: CVIcon,
+};
 ---
 
 <div class="h-full max-w-[300px] mx-auto my-10" id="contact">
   <div class="flex flex-col gap-4 text-color">
     {
-      contacts.map((contact) => (
-        <div class="flex gap-2 md:gap-4 items-center pb-1 w-fit transition-all relative group">
-          <a
-            href={contact.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-bold flex gap-2 md:gap-4 items-center pb-1 border-b border-b-transparent"
-            title={"Ir a" + contact.link}
-          >
-            {<contact.icon class="w-7 h-7" />}
-            <span class="underline underline-offset-4 decoration-2 text-base md:text-lg">
-              {contact.title}
-            </span>
-          </a>
-          <div class="sticky md:left-[90%] md:opacity-0 md:group-hover:left-[110%] group-hover:opacity-100 flex gap-2 md:gap-4 transition-all">
-            <button class="copyButton cursor-pointer" data-copy={contact.link}>
-              <CopyIcon class="h-6 w-6 copy" />
-              <CopyIconCheck class="h-6 w-6 hidden check" />
-            </button>
-          </div>
-        </div>
-      ))
+      contacts &&
+        contacts.map((contact) => {
+          const Icon = ICONS[contact.type] || null;
+          return (
+            <div class="flex gap-2 md:gap-4 items-center pb-1 w-fit transition-all relative group">
+              <a
+                href={contact.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-bold flex gap-2 md:gap-4 items-center pb-1 border-b border-b-transparent"
+                title={"Ir a" + contact.link}
+              >
+                {Icon && <Icon class="w-7 h-7" />}
+                <span class="underline underline-offset-4 decoration-2 text-base md:text-lg">
+                  {contact.title}
+                </span>
+              </a>
+              <div class="sticky md:left-[90%] md:opacity-0 md:group-hover:left-[110%] group-hover:opacity-100 flex gap-2 md:gap-4 transition-all">
+                <button
+                  class="copyButton cursor-pointer"
+                  data-copy={contact.link}
+                >
+                  <CopyIcon class="h-6 w-6 copy" />
+                  <CopyIconCheck class="h-6 w-6 hidden check" />
+                </button>
+              </div>
+            </div>
+          );
+        })
     }
   </div>
 </div>
+
 <script>
   const $copyButton = document.querySelectorAll(".copyButton");
   $copyButton.forEach((button) => {
