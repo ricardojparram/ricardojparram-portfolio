@@ -57,6 +57,11 @@ export const project = defineType({
             type: "url",
         }),
         defineField({
+            name: "order",
+            title: "Order",
+            type: "number",
+        }),
+        defineField({
             name: "mobile",
             title: "Is Mobile Project?",
             type: "boolean",

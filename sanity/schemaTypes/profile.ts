@@ -34,9 +34,29 @@ export const profile = defineType({
                 {
                     type: "object",
                     fields: [
-                        defineField({ name: "title", type: "string" }),
-                        defineField({ name: "link", type: "url" }),
-                        defineField({ name: "type", type: "string" }), // e.g. 'github', 'linkedin'
+                        defineField({
+                            name: "title",
+                            title: "Title",
+                            type: "string"
+                        }),
+                        defineField({
+                            name: "link",
+                            title: "Link",
+                            type: "url"
+                        }),
+                        defineField({
+                            name: "type",
+                            title: "Type",
+                            type: "string",
+                            options: {
+                                list: [
+                                    { title: "Email", value: "email" },
+                                    { title: "Github", value: "github" },
+                                    { title: "Linkedin", value: "linkedin" },
+                                    { title: "CV", value: "cv" },
+                                ],
+                            },
+                        }),
                     ],
                 },
             ],
