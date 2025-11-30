@@ -1,13 +1,13 @@
 ---
 import { PortableText } from "astro-portabletext";
-import { client } from "../lib/sanity";
+import { client, urlFor } from "../lib/sanity";
 
 const profile = await client.fetch(`*[_type == "profile"][0]{
   name,
   role,
   location,
   bio,
-  "image": image.asset->url
+  image
 }`);
 
 const props = Astro.props;
@@ -20,7 +20,7 @@ const props = Astro.props;
       class="rounded-full border-4 border-slate-700 dark:border-slate-300 w-30 h-30 md:w-40 md:h-40 aspect-square overflow-hidden hover:scale-105 transition-transform"
     >
       <img
-        src={profile?.image || "/profile.webp"}
+        src={profile?.image ? urlFor(profile.image).url() : "/profile.webp"}
         alt={profile?.name || "Ricardo Parra"}
         class="w-full h-full object-cover"
       />
