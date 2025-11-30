@@ -27,6 +27,14 @@ export const profile = defineType({
             of: [{ type: "block" }],
         }),
         defineField({
+            name: "image",
+            title: "Image",
+            type: "image",
+            options: {
+                hotspot: true,
+            },
+        }),
+        defineField({
             name: "contacts",
             title: "Contacts",
             type: "array",
@@ -42,7 +50,10 @@ export const profile = defineType({
                         defineField({
                             name: "link",
                             title: "Link",
-                            type: "url"
+                            type: "url",
+                            validation: (Rule) => Rule.uri({
+                                scheme: ['http', 'https', 'mailto']
+                            })
                         }),
                         defineField({
                             name: "type",
