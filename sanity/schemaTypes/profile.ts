@@ -11,6 +11,18 @@ export const profile = defineType({
             type: "string",
         }),
         defineField({
+            name: "heroTitle",
+            title: "Hero Title",
+            type: "string",
+            description: "The large headline in the hero section (e.g. 'Crafting digital experiences').",
+        }),
+        defineField({
+            name: "heroSubtitle",
+            title: "Hero Subtitle",
+            type: "text",
+            description: "The supporting paragraph below the hero title.",
+        }),
+        defineField({
             name: "role",
             title: "Role",
             type: "string",

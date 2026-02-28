@@ -3,6 +3,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sanity from "@sanity/astro";
+import react from "@astrojs/react";
 
 import { loadEnv } from "vite";
 
@@ -13,7 +14,15 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  i18n: {
+    defaultLocale: "es",
+    locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: false, // '/' = ES, '/en/' = EN
+    },
+  },
   integrations: [
+    react(),
     sanity({
       projectId: PUBLIC_SANITY_PROJECT_ID,
       dataset: PUBLIC_SANITY_DATASET,
@@ -21,4 +30,5 @@ export default defineConfig({
     }),
   ],
 });
+
 

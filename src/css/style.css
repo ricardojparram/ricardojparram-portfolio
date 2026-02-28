@@ -1,73 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --background-color: var(--color-slate-200);
-  --text-color: var(--color-slate-900);
-}
-.dark {
-  --background-color: var(--color-slate-900);
-  --text-color: var(--color-slate-200);
-}
+/* =========================================
+   DESIGN SYSTEM: Liquid Glass / iOS Inspired
+   ========================================= */
 @theme {
-  --color-bg: var(--background-color);
-  --color-text: var(--text-color);
-}
-@utility mask-to-t {
-  mask: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.8) 50%,
-    rgba(0, 0, 0, 1) 100%
-  );
+  /* Brand Colors */
+  --color-primary: #3713ec;
+  --color-primary-light: #5a3ef5;
+
+  /* Dark Background */
+  --color-background: #0a0812;
+
+  /* Glass Surface Tokens */
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-surface: rgba(255, 255, 255, 0.03);
+  --color-glass-highlight: rgba(255, 255, 255, 0.1);
+
+  /* Font */
+  --font-display: "Inter", sans-serif;
 }
 
-@utility mask-to-b {
-  mask: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.8) 50%,
-    rgba(0, 0, 0, 1) 100%
-  );
-}
-@utility text-color {
-  @apply text-slate-700 dark:text-slate-200;
-}
-@utility anchor-hover {
-  @apply text-lime-600 dark:text-lime-400 hover:bg-lime-400 hover:text-slate-900;
-}
-@utility strong-text {
-  @apply text-lime-600 dark:text-lime-400;
+/* =========================================
+   GLOBAL RESET & BASE STYLES
+   ========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 40px;
-}
-
-*::-webkit-scrollbar-track {
-  @apply bg-slate-500/20;
-}
-
-*::-webkit-scrollbar-thumb {
-  @apply bg-text/20;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  @apply bg-text/20;
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-display);
+  background-color: var(--color-background);
+  color: var(--color-slate-100, #f1f5f9);
+  overflow-x: hidden;
+  min-height: 100vh;
 }
-.fade-in {
-  animation: fadeIn 0.4s forwards;
+
+::selection {
+  background-color: var(--color-primary);
+  color: white;
 }
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+
+/* =========================================
+   LIQUID GLASS UTILITIES
+   ========================================= */
+
+/* Main Glass Card - frosted-glass panel */
+@utility glass-card {
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Glass Header - slightly more opaque for readability */
+@utility glass-header {
+  background: rgba(10, 8, 18, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Glow text effect for hero headline */
+@utility text-glow {
+  text-shadow: 0 0 40px rgba(55, 19, 236, 0.5);
+}
+
+/* Section heading underline decoration */
+@utility heading-underline {
+  display: block;
+  width: 5rem;
+  height: 0.25rem;
+  background: var(--color-primary);
+  border-radius: 9999px;
+  margin-top: 1rem;
+}
+
+/* Gradient icon container background */
+@utility icon-bg-primary {
+  background: linear-gradient(135deg,
+      rgba(55, 19, 236, 0.15),
+      rgba(124, 58, 237, 0.15));
+}
+
+/* Footer glass blur background */
+@utility footer-glass {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Email CTA glow shadow */
+@utility shadow-primary-glow {
+  box-shadow: 0 8px 30px rgba(55, 19, 236, 0.35);
+}
+
+/* Timeline icon glow */
+@utility shadow-primary-soft {
+  box-shadow: 0 0 20px rgba(55, 19, 236, 0.2);
+}
+
+
+/* Scrollbar Styling */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
 }

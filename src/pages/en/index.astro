@@ -1,0 +1,91 @@
+---
+// /en/index.astro — English version
+// Astro automatically sets Astro.currentLocale = "en" for this route
+import Layout from "../../layouts/Layout.astro";
+import AmbientBackground from "../../components/react/AmbientBackground";
+import Hero from "../../components/react/Hero";
+import Work from "../../components/astro/Work.astro";
+import About from "../../components/astro/About.astro";
+import Experience from "../../components/astro/Experience.astro";
+import Services from "../../components/astro/Services.astro";
+import Contact from "../../components/astro/Contact.astro";
+import {
+    getProfile,
+    getProjects,
+    getExperiences,
+    getServices,
+} from "../../lib/queries";
+
+const lang = Astro.currentLocale ?? "en";
+
+// Fetch all EN data from Sanity in parallel
+const [profile, projects, experiences, services] = await Promise.all([
+    getProfile(lang),
+    getProjects(lang),
+    getExperiences(lang),
+    getServices(lang),
+]);
+
+// Fallback profile values in English if Sanity is not yet populated
+const safeProfile = profile ?? {
+    name: "Ricardo J. Parra M.",
+    heroTitle: "Crafting digital experiences",
+    heroSubtitle:
+        "Frontend Developer & UI/UX Designer exploring the intersection of design and technology through liquid interfaces and immersive interactions.",
+    role: "Frontend Developer",
+    location: "Barquisimeto, Venezuela",
+    bio: [],
+    image: null,
+    contacts: [
+        {
+            title: "Email",
+            link: "mailto:ricardo.prxr16@gmail.com",
+            type: "email" as const,
+        },
+        {
+            title: "GitHub",
+            link: "https://github.com/ricardojparram",
+            type: "github" as const,
+        },
+        {
+            title: "LinkedIn",
+            link: "https://linkedin.com/in/ricardojparram/",
+            type: "linkedin" as const,
+        },
+    ],
+};
+---
+
+<Layout title="Ricardo Parra - Frontend Developer with 3+ years of experience.">
+    <!-- Ambient animated background (React Island) -->
+    <AmbientBackground client:load />
+
+    <main class="relative flex-grow pt-32 pb-20 px-4 md:px-8 z-10">
+        <div class="max-w-[1200px] mx-auto flex flex-col gap-32">
+            <!-- Hero section -->
+            <Hero
+                client:load
+                name={safeProfile.name}
+                heroTitle={safeProfile.heroTitle ??
+                    "Crafting digital experiences"}
+                heroSubtitle={safeProfile.heroSubtitle ??
+                    "Frontend Developer & UI/UX Designer."}
+            />
+
+            <!-- Selected Works / Projects -->
+            {projects.length > 0 && <Work projects={projects} />}
+
+            <!-- About Me -->
+            <About profile={safeProfile} />
+
+            <!-- Work Experience -->
+            {experiences.length > 0 && <Experience experiences={experiences} />}
+
+            <!-- Services -->
+            {services.length > 0 && <Services services={services} />}
+
+            <!-- Contact -->
+            <Contact profile={safeProfile} />
+        </div>
+    </main>
+</Layout>

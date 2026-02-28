@@ -13,17 +13,19 @@
     },
     "dependencies": {
         "@sanity/dashboard": "^5.0.0",
+        "@sanity/document-internationalization": "^5.1.0",
         "@sanity/image-url": "^1.0.2",
         "@sanity/vision": "^3.99.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
+        "@types/react-dom": "^19.2.3",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
         "sanity": "^3.0.0",
         "sanity-plugin-dashboard-widget-vercel": "^3.1.4",
         "styled-components": "^6.1.19"
     },
     "devDependencies": {
         "@sanity/eslint-config-studio": "^3.0.1",
-        "@types/react": "^18.0.25",
+        "@types/react": "^19.2.14",
         "eslint": "^8.6.0",
         "prettier": "^3.0.0",
         "typescript": "^5.0.0"
