@@ -14,13 +14,13 @@ export default function LanguageSwitcher({ currentLang }: Props) {
     };
 
     return (
-        <div className="flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/10 backdrop-blur-md">
+        <div className="flex items-center h-[40px] gap-1 bg-white/5 rounded-full p-1 border border-white/10 backdrop-blur-md">
             <button
                 onClick={() => goTo('es')}
                 aria-label="Español"
-                className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'es'
-                        ? 'bg-primary text-white'
-                        : 'text-slate-400 hover:text-white hover:bg-white/10'
+                className={`px-3 py-1.5 rounded-full h-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'es'
+                    ? 'bg-primary/50 text-white'
+                    : 'text-slate-400 hover:text-white hover:bg-white/10'
                     }`}
             >
                 ES
@@ -29,8 +29,8 @@ export default function LanguageSwitcher({ currentLang }: Props) {
                 onClick={() => goTo('en')}
                 aria-label="English"
                 className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'en'
-                        ? 'bg-primary text-white'
-                        : 'text-slate-400 hover:text-white hover:bg-white/10'
+                    ? 'bg-primary/50 text-white'
+                    : 'text-slate-400 hover:text-white hover:bg-white/10'
                     }`}
             >
                 EN

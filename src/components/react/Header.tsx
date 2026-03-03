@@ -1,8 +1,27 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Code2, Menu, X } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const navLinks = ['Work', 'About', 'Experience', 'Services', 'Contact'];
+
+const menuVariants = {
+    hidden: { opacity: 0, y: -12, scaleY: 0.95 },
+    visible: { opacity: 1, y: 0, scaleY: 1 },
+    exit: { opacity: 0, y: -12, scaleY: 0.95 },
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: (i: number) => ({ opacity: 1, x: 0, transition: { delay: i * 0.04 + 0.06 } }),
+    exit: { opacity: 0, x: -10 },
+};
+
+const iconVariants = {
+    initial: { rotate: -90, scale: 0.5, opacity: 0 },
+    animate: { rotate: 0, scale: 1, opacity: 1 },
+    exit: { rotate: 90, scale: 0.5, opacity: 0 },
+};
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
@@ -12,7 +31,6 @@ export default function Header() {
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 50);
         window.addEventListener('scroll', handleScroll);
-        // Detect current language from URL
         setCurrentLang(window.location.pathname.startsWith('/en') ? 'en' : 'es');
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -32,12 +50,13 @@ export default function Header() {
                 {/* Logo */}
                 <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className={`flex items-center gap-3 group cursor-pointer px-2 pr-4 py-2 ${scrolled ? 'bg-white/5 rounded-full border border-white/5 backdrop-blur-md' : 'bg-transparent border border-transparent'}`}
+                    className={`flex items-center gap-3 group cursor-pointer px-2 pr-4 py-2 ${scrolled
+                            ? 'bg-white/5 rounded-full border border-white/5 backdrop-blur-md'
+                            : 'bg-transparent border border-transparent'
+                        }`}
                     aria-label="Scroll to top"
                 >
-                    <div
-                        className="size-10 rounded-full flex items-center justify-center shadow-lg transition-shadow group-hover:shadow-primary/40 bg-gradient-to-br from-primary to-purple-600"
-                    >
+                    <div className="size-10 rounded-full flex items-center justify-center shadow-lg transition-shadow group-hover:shadow-primary/40 bg-gradient-to-br from-primary to-purple-600">
                         <Code2 className="text-white size-6" />
                     </div>
                     <span className="text-white text-xl font-bold tracking-tight">Ricardo Parra</span>
@@ -64,38 +83,92 @@ export default function Header() {
                     >
                         Let's Talk
                     </button>
+
                     {/* Language Switcher — desktop */}
                     <div className="hidden md:block">
                         <LanguageSwitcher currentLang={currentLang} />
                     </div>
+
+                    {/* Mobile toggle */}
                     <button
-                        className="md:hidden p-2 text-slate-300 hover:text-white transition-colors"
+                        className="md:hidden relative size-10 flex items-center justify-center text-slate-300 hover:text-white transition-colors bg-white/5 rounded-full border border-white/10 backdrop-blur-md overflow-hidden"
                         onClick={() => setMenuOpen((o) => !o)}
                         aria-label="Toggle menu"
+                        aria-expanded={menuOpen}
                     >
-                        {menuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+                        <AnimatePresence mode="popLayout" initial={false}>
+                            {menuOpen ? (
+                                <motion.span
+                                    key="close"
+                                    variants={iconVariants}
+                                    initial="initial"
+                                    animate="animate"
+                                    exit="exit"
+                                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                                    style={{ display: 'inline-flex' }}
+                                >
+                                    <X className="size-6" />
+                                </motion.span>
+                            ) : (
+                                <motion.span
+                                    key="open"
+                                    variants={iconVariants}
+                                    initial="initial"
+                                    animate="animate"
+                                    exit="exit"
+                                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                                    style={{ display: 'inline-flex' }}
+                                >
+                                    <Menu className="size-6" />
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
                     </button>
                 </div>
             </div>
 
             {/* Mobile Menu */}
-            {menuOpen && (
-                <div className="md:hidden glass-header border-t border-white/5 mt-2 px-6 py-4 flex flex-col gap-2">
-                    {navLinks.map((item) => (
-                        <button
-                            key={item}
-                            onClick={() => scrollTo(item.toLowerCase())}
-                            className="text-left px-4 py-3 text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all text-sm font-medium"
+            <AnimatePresence>
+                {menuOpen && (
+                    <motion.div
+                        key="mobile-menu"
+                        variants={menuVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        style={{ transformOrigin: 'top center' }}
+                        className="md:hidden bg-white/5 border border-white/10 backdrop-blur-md mt-2 px-6 py-4 flex flex-col gap-2 mx-6 rounded-xl"
+                    >
+                        {navLinks.map((item, i) => (
+                            <motion.button
+                                key={item}
+                                custom={i}
+                                variants={itemVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                onClick={() => scrollTo(item.toLowerCase())}
+                                className="text-left px-4 py-3 text-white hover:bg-white/20 rounded-xl transition-colors text-sm font-medium"
+                            >
+                                {item}
+                            </motion.button>
+                        ))}
+
+                        {/* Language Switcher — mobile */}
+                        <motion.div
+                            custom={navLinks.length}
+                            variants={itemVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            className="pt-2 border-t border-white/5 mt-2 w-fit"
                         >
-                            {item}
-                        </button>
-                    ))}
-                    {/* Language Switcher — mobile */}
-                    <div className="pt-2 border-t border-white/5 mt-2">
-                        <LanguageSwitcher currentLang={currentLang} />
-                    </div>
-                </div>
-            )}
+                            <LanguageSwitcher currentLang={currentLang} />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header>
     );
 }
