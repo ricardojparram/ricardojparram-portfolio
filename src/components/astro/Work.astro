@@ -1,12 +1,15 @@
 ---
 import { urlFor } from "../../lib/sanity";
 import type { Project } from "../../lib/queries";
+import { useTranslations } from "../../i18n/ui";
 
 interface Props {
     projects: Project[];
+    lang: string;
 }
 
-const { projects } = Astro.props;
+const { projects, lang } = Astro.props;
+const t = useTranslations(lang);
 
 // Mobile projects get full-width (col-span-12), desktop/regular vary
 function getColSpan(project: Project, index: number): string {
@@ -26,7 +29,7 @@ function getColSpan(project: Project, index: number): string {
 <section id="work" class="scroll-mt-28">
     <div class="mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-white">
-            Selected Works
+            {t.work.title}
         </h2>
         <span class="heading-underline"></span>
     </div>
@@ -62,7 +65,7 @@ function getColSpan(project: Project, index: number): string {
                                         href={project.github}
                                         target="_blank"
                                         rel="noreferrer"
-                                        class="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary transition-colors border border-white/20"
+                                        class="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/50 hover:border-primary transition-colors border border-white/20"
                                         aria-label={`GitHub: ${project.title}`}
                                     >
                                         <svg
@@ -80,22 +83,20 @@ function getColSpan(project: Project, index: number): string {
                                         href={project.link}
                                         target="_blank"
                                         rel="noreferrer"
-                                        class="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary transition-colors border border-white/20"
+                                        class="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary/50 hover:border-primary transition-colors border border-white/20"
                                         aria-label={`Live: ${project.title}`}
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             class="size-5"
-                                            fill="none"
                                             viewBox="0 0 24 24"
+                                            fill="none"
                                             stroke="currentColor"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
                                             stroke-width="2"
                                         >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                            />
+                                            <path d="M7 7h10v10M7 17L17 7" />
                                         </svg>
                                     </a>
                                 )}

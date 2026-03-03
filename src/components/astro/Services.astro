@@ -1,11 +1,14 @@
 ---
 import type { Service } from "../../lib/queries";
+import { useTranslations } from "../../i18n/ui";
 
 interface Props {
     services: Service[];
+    lang: string;
 }
 
-const { services } = Astro.props;
+const { services, lang } = Astro.props;
+const t = useTranslations(lang);
 
 // Inline SVG icons keyed by iconIdentifier
 const iconMap: Record<string, string> = {
@@ -20,7 +23,9 @@ const iconMap: Record<string, string> = {
 
 <section id="services" class="scroll-mt-28">
     <div class="mb-12 text-center flex flex-col items-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white">What I Do</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white">
+            {t.services.title}
+        </h2>
         <span class="heading-underline"></span>
     </div>
 

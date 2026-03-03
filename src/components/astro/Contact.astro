@@ -1,11 +1,14 @@
 ---
 import type { Profile } from "../../lib/queries";
+import { useTranslations } from "../../i18n/ui";
 
 interface Props {
     profile: Profile;
+    lang: string;
 }
 
-const { profile } = Astro.props;
+const { profile, lang } = Astro.props;
+const t = useTranslations(lang);
 
 // Find contact links by type
 const email = profile.contacts?.find((c) => c.type === "email")?.link;
@@ -17,11 +20,10 @@ const cv = profile.contacts?.find((c) => c.type === "cv")?.link;
 <section id="contact" class="scroll-mt-28">
     <div class="py-10 md:py-20 text-center flex flex-col items-center gap-6">
         <h2 class="text-4xl md:text-6xl font-black text-white">
-            Let's work together.
+            {t.contact.title}
         </h2>
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl">
-            ¿Tienes un proyecto en mente? Contáctame para crear tu próxima
-            aplicación web o móvil.
+            {t.contact.subtitle}
         </p>
 
         <!-- CTA Buttons -->
@@ -46,7 +48,7 @@ const cv = profile.contacts?.find((c) => c.type === "cv")?.link;
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                             />
                         </svg>
-                        Email Me
+                        {t.contact.email}
                     </a>
                 )
             }
@@ -72,7 +74,7 @@ const cv = profile.contacts?.find((c) => c.type === "cv")?.link;
                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                             />
                         </svg>
-                        Curriculum
+                        {t.contact.cv}
                     </a>
                 )
             }

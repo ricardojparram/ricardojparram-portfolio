@@ -14,7 +14,7 @@ export default function LanguageSwitcher({ currentLang }: Props) {
     };
 
     return (
-        <div className="flex items-center h-[40px] gap-1 bg-white/5 rounded-full p-1 border border-white/10 backdrop-blur-md">
+        <div className="flex items-center h-[40px] gap-1 bg-white/10 rounded-full p-1 border border-white/10 backdrop-blur-md">
             <button
                 onClick={() => goTo('es')}
                 aria-label="Español"

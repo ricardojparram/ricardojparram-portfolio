@@ -1,23 +1,40 @@
 ---
 import type { Profile } from "../../lib/queries";
+import { useTranslations } from "../../i18n/ui";
 
 interface Props {
     profile: Profile;
+    lang: string;
 }
 
-const { profile } = Astro.props;
+const { profile, lang } = Astro.props;
+const t = useTranslations(lang);
 
 const skills = [
-    { icon: "code", title: "Frontend", desc: "React, Astro, Tailwind" },
-    { icon: "palette", title: "Design", desc: "UI/UX, Figma, Glassmorphism" },
-    { icon: "terminal", title: "Backend", desc: "PHP, Node.js, MySQL" },
-    { icon: "cpu", title: "Mobile", desc: "Expo, React Native" },
+    {
+        icon: "code",
+        title: t.about.skills.frontend,
+        desc: "React, Astro, Tailwind",
+    },
+    {
+        icon: "palette",
+        title: t.about.skills.design,
+        desc: "UI/UX, Figma, Glassmorphism",
+    },
+    {
+        icon: "terminal",
+        title: t.about.skills.backend,
+        desc: "PHP, Node.js, MySQL",
+    },
+    { icon: "cpu", title: t.about.skills.mobile, desc: "Expo, React Native" },
 ];
 ---
 
 <section id="about" class="scroll-mt-28">
     <div class="mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-white">About Me</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white">
+            {t.about.title}
+        </h2>
         <span class="heading-underline"></span>
     </div>
 
@@ -26,7 +43,9 @@ const skills = [
         <div
             class="flex flex-col justify-center gap-4 text-slate-300 leading-relaxed text-lg"
         >
-            <h3 class="text-2xl font-bold text-white mb-2">My Journey</h3>
+            <h3 class="text-2xl font-bold text-white mb-2">
+                {t.about.subtitle}
+            </h3>
             {
                 profile.bio?.length > 0 ? (
                     profile.bio.map((block: any) => (

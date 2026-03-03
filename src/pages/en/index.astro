@@ -15,8 +15,10 @@ import {
     getExperiences,
     getServices,
 } from "../../lib/queries";
+import { useTranslations } from "../../i18n/ui";
 
 const lang = Astro.currentLocale ?? "en";
+const t = useTranslations(lang);
 
 // Fetch all EN data from Sanity in parallel
 const [profile, projects, experiences, services] = await Promise.all([
@@ -70,22 +72,31 @@ const safeProfile = profile ?? {
                     "Crafting digital experiences"}
                 heroSubtitle={safeProfile.heroSubtitle ??
                     "Frontend Developer & UI/UX Designer."}
+                badgeText={t.hero.badge}
             />
 
             <!-- Selected Works / Projects -->
-            {projects.length > 0 && <Work projects={projects} />}
+            {projects.length > 0 && <Work projects={projects} lang={lang} />}
 
             <!-- About Me -->
-            <About profile={safeProfile} />
+            <About profile={safeProfile} lang={lang} />
 
             <!-- Work Experience -->
-            {experiences.length > 0 && <Experience experiences={experiences} />}
+            {
+                experiences.length > 0 && (
+                    <Experience experiences={experiences} lang={lang} />
+                )
+            }
 
             <!-- Services -->
-            {services.length > 0 && <Services services={services} />}
+            {
+                services.length > 0 && (
+                    <Services services={services} lang={lang} />
+                )
+            }
 
             <!-- Contact -->
-            <Contact profile={safeProfile} />
+            <Contact profile={safeProfile} lang={lang} />
         </div>
     </main>
 </Layout>

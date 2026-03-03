@@ -4,9 +4,10 @@ interface HeroProps {
     name: string;
     heroTitle: string;
     heroSubtitle: string;
+    badgeText: string;
 }
 
-export default function Hero({ name, heroTitle, heroSubtitle }: HeroProps) {
+export default function Hero({ name, heroTitle, heroSubtitle, badgeText }: HeroProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -17,7 +18,7 @@ export default function Hero({ name, heroTitle, heroSubtitle }: HeroProps) {
             {/* Name badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/15 text-xs font-bold uppercase tracking-wider mb-2 text-green-500">
                 <span className="w-2 h-2 rounded-full animate-pulse bg-green-500" />
-                Open to work
+                {badgeText}
             </div>
 
             {/* Main headline */}
