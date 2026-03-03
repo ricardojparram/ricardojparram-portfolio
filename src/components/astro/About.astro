@@ -1,33 +1,45 @@
 ---
-import type { Profile } from "../../lib/queries";
+import type { Profile, Skill } from "../../lib/queries";
 import { useTranslations } from "../../i18n/ui";
 
 interface Props {
     profile: Profile;
     lang: string;
+    skills: Skill[];
 }
 
-const { profile, lang } = Astro.props;
+const { profile, lang, skills: sanitySkills } = Astro.props;
 const t = useTranslations(lang);
 
-const skills = [
+// Fallback if Sanity has no skills yet
+const fallbackSkills: Skill[] = [
     {
-        icon: "code",
+        _id: "1",
         title: t.about.skills.frontend,
-        desc: "React, Astro, Tailwind",
+        description: "NextJS, NuxtJS, Astro, Tailwind",
+        iconIdentifier: "code",
     },
     {
-        icon: "palette",
+        _id: "2",
         title: t.about.skills.design,
-        desc: "UI/UX, Figma, Glassmorphism",
+        description: "UI/UX, Figma, Framer",
+        iconIdentifier: "palette",
     },
     {
-        icon: "terminal",
+        _id: "3",
         title: t.about.skills.backend,
-        desc: "PHP, Node.js, MySQL",
+        description: "NestJS, Laravel, PostgreSQL",
+        iconIdentifier: "terminal",
     },
-    { icon: "cpu", title: t.about.skills.mobile, desc: "Expo, React Native" },
+    {
+        _id: "4",
+        title: t.about.skills.mobile,
+        description: "Expo, React Native",
+        iconIdentifier: "cpu",
+    },
 ];
+
+const skills = sanitySkills?.length > 0 ? sanitySkills : fallbackSkills;
 ---
 
 <section id="about" class="scroll-mt-28">
@@ -47,7 +59,7 @@ const skills = [
                 {t.about.subtitle}
             </h3>
             {
-                profile.bio?.length > 0 ? (
+                profile.bio?.length > 0 &&
                     profile.bio.map((block: any) => (
                         <p>
                             {block.children
@@ -55,37 +67,16 @@ const skills = [
                                 .join("")}
                         </p>
                     ))
-                ) : (
-                    <>
-                        <p>
-                            <strong>+3 años de Experiencia.</strong> Ingeniero
-                            en Informática y Desarrollador WEB especializado en
-                            front-end.
-                        </p>
-                        <p>
-                            Soy perfeccionista y apasionado a la hora de
-                            sobrepasar las expectativas del cliente. Me enfoco
-                            en crear aplicaciones únicas, desarrollando sistemas
-                            administrativos, e-commerce, y aplicaciones móviles.
-                        </p>
-                        <p>
-                            Busco constantemente nuevas propuestas para la
-                            optimización de procesos y disfruto liderando
-                            proyectos y compartiendo conocimiento con otros
-                            desarrolladores.
-                        </p>
-                    </>
-                )
             }
         </div>
 
-        <!-- Skill cards grid -->
+        <!-- Skill cards from Sanity (with fallback) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {
                 skills.map((skill) => (
-                    <div class="glass-card rounded-3xl p-6 flex flex-col gap-4 hover:border-white/20 transition-colors duration-300 group">
-                        <div class="size-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-white/20 transition-colors text-primary">
-                            {skill.icon === "code" && (
+                    <div class="glass-card rounded-3xl p-6 flex flex-col gap-4 hover:border-white/20 transition-colors duration-300 group  hover:bg-primary/10!">
+                        <div class="size-12 bg-primary/10 rounded-2xl border border-white/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:border-white/20  group-hover:scale-110 transition-colors transition-transform duration-300 text-white">
+                            {skill.iconIdentifier === "code" && (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="size-6"
@@ -101,7 +92,7 @@ const skills = [
                                     />
                                 </svg>
                             )}
-                            {skill.icon === "palette" && (
+                            {skill.iconIdentifier === "palette" && (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="size-6"
@@ -117,7 +108,7 @@ const skills = [
                                     />
                                 </svg>
                             )}
-                            {skill.icon === "terminal" && (
+                            {skill.iconIdentifier === "terminal" && (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="size-6"
@@ -133,7 +124,7 @@ const skills = [
                                     />
                                 </svg>
                             )}
-                            {skill.icon === "cpu" && (
+                            {skill.iconIdentifier === "cpu" && (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="size-6"
@@ -155,7 +146,7 @@ const skills = [
                                 {skill.title}
                             </h4>
                             <p class="text-sm text-slate-400 mt-1">
-                                {skill.desc}
+                                {skill.description}
                             </p>
                         </div>
                     </div>

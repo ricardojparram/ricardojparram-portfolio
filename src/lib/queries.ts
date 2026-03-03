@@ -46,6 +46,14 @@ export interface Service {
     order?: number;
 }
 
+export interface Skill {
+    _id: string;
+    title: string;
+    description: string;
+    iconIdentifier: string;
+    order?: number;
+}
+
 export async function getProfile(lang = "es"): Promise<Profile | null> {
     return client.fetch<Profile | null>(
         `*[_type == "profile" && language == $lang][0]{
@@ -98,6 +106,19 @@ export async function getExperiences(lang = "es"): Promise<Experience[]> {
 export async function getServices(lang = "es"): Promise<Service[]> {
     return client.fetch<Service[]>(
         `*[_type == "service" && language == $lang] | order(order asc) {
+      _id,
+      title,
+      description,
+      iconIdentifier,
+      order
+    }`,
+        { lang }
+    );
+}
+
+export async function getSkills(lang = "es"): Promise<Skill[]> {
+    return client.fetch<Skill[]>(
+        `*[_type == "skill" && language == $lang] | order(order asc) {
       _id,
       title,
       description,

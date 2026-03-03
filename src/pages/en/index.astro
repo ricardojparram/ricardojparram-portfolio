@@ -14,6 +14,7 @@ import {
     getProjects,
     getExperiences,
     getServices,
+    getSkills,
 } from "../../lib/queries";
 import { useTranslations } from "../../i18n/ui";
 
@@ -21,11 +22,12 @@ const lang = Astro.currentLocale ?? "en";
 const t = useTranslations(lang);
 
 // Fetch all EN data from Sanity in parallel
-const [profile, projects, experiences, services] = await Promise.all([
+const [profile, projects, experiences, services, skills] = await Promise.all([
     getProfile(lang),
     getProjects(lang),
     getExperiences(lang),
     getServices(lang),
+    getSkills(lang),
 ]);
 
 // Fallback profile values in English if Sanity is not yet populated
@@ -79,7 +81,7 @@ const safeProfile = profile ?? {
             {projects.length > 0 && <Work projects={projects} lang={lang} />}
 
             <!-- About Me -->
-            <About profile={safeProfile} lang={lang} />
+            <About profile={safeProfile} lang={lang} skills={skills} />
 
             <!-- Work Experience -->
             {
