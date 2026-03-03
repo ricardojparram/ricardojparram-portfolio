@@ -9,6 +9,12 @@ interface Props {
 
 const { experiences, lang } = Astro.props;
 const t = useTranslations(lang);
+
+// Active first, then most recent startDate
+const sorted = [...experiences].sort((a, b) => {
+    if (b.active !== a.active) return Number(b.active) - Number(a.active);
+    return (b.startDate ?? "").localeCompare(a.startDate ?? "");
+});
 ---
 
 <section id="experience" class="scroll-mt-28">
@@ -27,10 +33,10 @@ const t = useTranslations(lang);
     before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent"
     >
         {
-            experiences.map((exp) => (
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+            sorted.map((exp) => (
+                <div class="relative flex items-center justify-between md:justify-normal md:even:flex-row-reverse group">
                     {/* Timeline Icon */}
-                    <div class="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 glass-card shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 shadow-primary-soft">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 glass-card shrink-0 md:order-1 md:group-even:-translate-x-1/2 md:group-odd:translate-x-1/2 z-10 shadow-primary-soft">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="size-5 text-primary"
@@ -74,6 +80,21 @@ const t = useTranslations(lang);
                                 <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                                 {t.experience.current}
                             </span>
+                        )}
+                        {exp.info?.length > 0 && (
+                            <ul class="flex flex-col gap-1.5 mt-1">
+                                {exp.info.map((block: any) => {
+                                    const text = block.children
+                                        ?.map((c: any) => c.text)
+                                        .join("");
+                                    return text ? (
+                                        <li class="flex items-start gap-2 text-sm text-slate-400 leading-relaxed">
+                                            <span class="mt-1.5 size-1.5 rounded-full bg-primary shrink-0" />
+                                            {text}
+                                        </li>
+                                    ) : null;
+                                })}
+                            </ul>
                         )}
                     </div>
                 </div>

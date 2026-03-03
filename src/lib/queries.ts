@@ -34,6 +34,8 @@ export interface Experience {
     role: string;
     company: string;
     date: string;
+    startDate: string;   // ISO date YYYY-MM-DD
+    endDate?: string;    // undefined = current position
     info: any[];
     active: boolean;
 }
@@ -91,11 +93,13 @@ export async function getProjects(lang = "es"): Promise<Project[]> {
 
 export async function getExperiences(lang = "es"): Promise<Experience[]> {
     return client.fetch<Experience[]>(
-        `*[_type == "experience" && language == $lang] | order(_createdAt desc) {
+        `*[_type == "experience" && language == $lang] | order(startDate desc) {
       _id,
       role,
       company,
       date,
+      startDate,
+      endDate,
       info,
       active
     }`,
