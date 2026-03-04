@@ -43,7 +43,7 @@ export default function Header({ nav, lang }: HeaderProps) {
         { key: 'work', label: nav.work },
         { key: 'about', label: nav.about },
         { key: 'experience', label: nav.experience },
-        { key: 'services', label: nav.services },
+        // { key: 'services', label: nav.services },
     ];
 
     useEffect(() => {
@@ -80,7 +80,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                 </button>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-md">
+                <nav className="hidden md:flex items-center gap-1 bg-white/8 rounded-full p-1 border border-white/5 backdrop-blur-md">
                     {navLinks.map(({ key, label }) => (
                         <button
                             key={key}

@@ -2,7 +2,7 @@ import type { UIDict } from './es';
 
 const en: UIDict = {
     nav: {
-        work: 'Work',
+        work: 'Projects',
         about: 'About',
         experience: 'Experience',
         services: 'Services',
@@ -12,7 +12,7 @@ const en: UIDict = {
         badge: 'Open to Work',
     },
     work: {
-        title: 'Selected Works',
+        title: 'Projects',
     },
     about: {
         title: 'About Me',
