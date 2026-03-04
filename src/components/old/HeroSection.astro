@@ -1,6 +1,6 @@
 ---
 import { PortableText } from "astro-portabletext";
-import { client, urlFor } from "../lib/sanity";
+import { client, urlFor } from "../../lib/sanity";
 
 const profile = await client.fetch(`*[_type == "profile"][0]{
   name,

@@ -1,11 +1,11 @@
 ---
-import CopyIcon from "../components/icons/Copy.astro";
-import CopyIconCheck from "../components/icons/CopyCheck.astro";
-import Email from "../components/icons/Email.astro";
-import Github from "../components/icons/Github.astro";
-import Linkedin from "../components/icons/Linkedin.astro";
-import CVIcon from "../components/icons/CVIcon.astro";
-import { client } from "../lib/sanity";
+import CopyIcon from "../../components/icons/Copy.astro";
+import CopyIconCheck from "../../components/icons/CopyCheck.astro";
+import Email from "../../components/icons/Email.astro";
+import Github from "../../components/icons/Github.astro";
+import Linkedin from "../../components/icons/Linkedin.astro";
+import CVIcon from "../../components/icons/CVIcon.astro";
+import { client } from "../../lib/sanity";
 
 const contacts = await client.fetch(`*[_type == "profile"][0].contacts[]{
   title,
