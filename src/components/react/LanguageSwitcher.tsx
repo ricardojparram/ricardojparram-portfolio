@@ -6,6 +6,10 @@ interface Props {
 
 export default function LanguageSwitcher({ currentLang }: Props) {
     const goTo = (lang: string) => {
+        // Mark that the user has explicitly chosen a language so the
+        // middleware won't override it with an automatic redirect.
+        document.cookie = "lang-redirected=1; path=/; max-age=31536000; SameSite=Lax";
+
         if (lang === 'es') {
             window.location.href = '/';
         } else {
