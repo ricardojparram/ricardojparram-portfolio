@@ -57,9 +57,11 @@ const safeProfile = profile ?? {
     },
   ],
 };
+
+const title = `${safeProfile.name} - ${safeProfile.role};
 ---
 
-<Layout title="Ricardo Parra - Desarrollador Web con +3 años de experiencia.">
+<Layout title={title}>
   <!-- Ambient animated background (React Island) -->
   <AmbientBackground client:load />
 
@@ -69,9 +71,8 @@ const safeProfile = profile ?? {
       <Hero
         client:load
         name={safeProfile.name}
-        heroTitle={safeProfile.heroTitle ?? "Crafting digital experiences"}
-        heroSubtitle={safeProfile.heroSubtitle ??
-          "Frontend Developer & UI/UX Designer."}
+        heroTitle={safeProfile.heroTitle}
+        heroSubtitle={safeProfile.heroSubtitle}
         badgeText={t.hero.badge}
       />
 
