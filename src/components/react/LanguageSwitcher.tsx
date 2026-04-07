@@ -18,13 +18,13 @@ export default function LanguageSwitcher({ currentLang }: Props) {
     };
 
     return (
-        <div className="flex items-center h-[40px] gap-1 bg-white/10 rounded-full p-1 border border-white/10 backdrop-blur-md">
+        <div className="flex items-center gap-1 h-9 px-1 rounded-full border border-white/12 bg-linear-to-br from-zinc-800 to-zinc-950">
             <button
                 onClick={() => goTo('es')}
                 aria-label="Español"
-                className={`px-3 py-1.5 rounded-full h-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'es'
-                    ? 'bg-primary/50 text-white'
-                    : 'text-slate-400 hover:text-white hover:bg-white/10'
+                className={`px-3 h-7 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'es'
+                    ? 'bg-zinc-200 text-zinc-900'
+                    : 'text-slate-300 hover:text-white hover:bg-white/8'
                     }`}
             >
                 ES
@@ -32,9 +32,9 @@ export default function LanguageSwitcher({ currentLang }: Props) {
             <button
                 onClick={() => goTo('en')}
                 aria-label="English"
-                className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'en'
-                    ? 'bg-primary/50 text-white'
-                    : 'text-slate-400 hover:text-white hover:bg-white/10'
+                className={`px-3 h-7 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'en'
+                    ? 'bg-zinc-200 text-zinc-900'
+                    : 'text-slate-300 hover:text-white hover:bg-white/8'
                     }`}
             >
                 EN
