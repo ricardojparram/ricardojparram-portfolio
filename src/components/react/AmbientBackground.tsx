@@ -21,7 +21,7 @@ export default function AmbientBackground() {
                     scale: [1, 1.1, 0.9, 1],
                 }}
                 transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-                className="absolute w-[600px] h-[600px] bg-purple-600 rounded-full bottom-[-10%] right-[-10%] mix-blend-screen filter blur-[100px] opacity-35"
+                className="absolute w-[600px] h-[600px] bg-zinc-500 rounded-full bottom-[-10%] right-[-10%] mix-blend-screen filter blur-[100px] opacity-20"
             />
             {/* Mid-page accent glow */}
             <motion.div
@@ -31,7 +31,7 @@ export default function AmbientBackground() {
                     scale: [1, 1.1, 0.9, 1],
                 }}
                 transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
-                className="absolute w-80 h-80 bg-blue-500 rounded-full top-[40%] left-[60%] mix-blend-screen filter blur-[80px] opacity-20"
+                className="absolute w-80 h-80 bg-stone-400 rounded-full top-[40%] left-[60%] mix-blend-screen filter blur-[80px] opacity-12"
             />
         </div>
     );

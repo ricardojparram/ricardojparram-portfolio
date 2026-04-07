@@ -73,7 +73,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                         }`}
                     aria-label="Scroll to top"
                 >
-                    <div className="size-10 rounded-full flex items-center justify-center shadow-lg transition-shadow group-hover:shadow-primary/40 bg-gradient-to-br from-primary to-purple-600">
+                    <div className="size-10 rounded-full flex items-center justify-center shadow-lg transition-shadow group-hover:shadow-primary/40 bg-gradient-to-br from-primary to-zinc-500">
                         <Code2 className="text-white size-6" />
                     </div>
                     <span className="text-white text-xl font-bold tracking-tight">Ricardo Parra</span>
@@ -96,7 +96,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => scrollTo('contact')}
-                        className="hidden md:flex h-10 px-6 items-center justify-center rounded-full text-white text-sm font-semibold transition-all border border-white/10 backdrop-blur-sm bg-white/8 hover:bg-primary/50 hover:border-primary/50 hover:border-primary"
+                        className="hidden md:flex h-10 px-6 items-center justify-center rounded-full text-white text-sm font-semibold transition-all border border-white/10 backdrop-blur-sm bg-white/8 hover:bg-primary/25 hover:border-primary/45"
                     >
                         {nav.cta}
                     </button>

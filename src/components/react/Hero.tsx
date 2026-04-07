@@ -16,8 +16,8 @@ export default function Hero({ name, heroTitle, heroSubtitle, badgeText }: HeroP
             className="flex flex-col gap-6 items-start py-10 relative"
         >
             {/* Name badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/15 text-xs font-bold uppercase tracking-wider mb-2 text-green-500">
-                <span className="w-2 h-2 rounded-full animate-pulse bg-green-500" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-bold uppercase tracking-wider mb-2 text-primary-light">
+                <span className="w-2 h-2 rounded-full animate-pulse bg-primary" />
                 {badgeText}
             </div>
 

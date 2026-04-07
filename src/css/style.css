@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 
 /* =========================================
    DESIGN SYSTEM: Liquid Glass / iOS Inspired
    ========================================= */
 @theme {
-  /* Brand Colors */
-  --color-primary: #3713ec;
-  --color-primary-light: #6145f7;
+  /* Dark monochrome palette with a warm neutral accent */
+  --color-primary: #b8a79a;
+  --color-primary-light: #d4c5ba;
 
   /* Dark Background */
-  --color-background: #0a0812;
+  --color-background: #060708;
 
   /* Glass Surface Tokens */
-  --color-glass-border: rgba(255, 255, 255, 0.08);
-  --color-glass-surface: rgba(255, 255, 255, 0.03);
-  --color-glass-highlight: rgba(255, 255, 255, 0.1);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-surface: rgba(255, 255, 255, 0.02);
+  --color-glass-highlight: rgba(255, 255, 255, 0.07);
 
   /* Font */
   --font-display: "Inter", sans-serif;
@@ -37,15 +37,26 @@ html {
 
 body {
   font-family: var(--font-display);
-  background-color: var(--color-background);
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(255, 255, 255, 0.04),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(184, 167, 154, 0.08),
+      transparent 45%
+    ),
+    var(--color-background);
   color: var(--color-slate-100, #f1f5f9);
   overflow-x: hidden;
   min-height: 100vh;
 }
 
 ::selection {
-  background-color: var(--color-primary);
-  color: white;
+  background-color: rgba(184, 167, 154, 0.32);
+  color: #fff;
 }
 
 /* =========================================
@@ -54,29 +65,31 @@ body {
 
 /* Main Glass Card - frosted-glass panel */
 @utility glass-card {
-  background: linear-gradient(145deg,
-      rgba(255, 255, 255, 0.05) 0%,
-      rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-glass-border);
   box-shadow:
-    0 8px 32px 0 rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 8px 32px 0 rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* Glass Header - slightly more opaque for readability */
 @utility glass-header {
-  background: rgba(10, 8, 18, 0.5);
+  background: rgba(8, 9, 10, 0.62);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.35);
 }
 
 /* Glow text effect for hero headline */
 @utility text-glow {
-  text-shadow: 0 0 40px rgba(55, 19, 236, 0.5);
+  text-shadow: 0 0 36px rgba(184, 167, 154, 0.25);
 }
 
 /* Section heading underline decoration */
@@ -91,9 +104,11 @@ body {
 
 /* Gradient icon container background */
 @utility icon-bg-primary {
-  background: linear-gradient(135deg,
-      rgba(55, 19, 236, 0.15),
-      rgba(124, 58, 237, 0.15));
+  background: linear-gradient(
+    135deg,
+    rgba(184, 167, 154, 0.14),
+    rgba(255, 255, 255, 0.06)
+  );
 }
 
 /* Footer glass blur background */
@@ -105,14 +120,13 @@ body {
 
 /* Email CTA glow shadow */
 @utility shadow-primary-glow {
-  box-shadow: 0 8px 30px rgba(55, 19, 236, 0.35);
+  box-shadow: 0 8px 30px rgba(184, 167, 154, 0.28);
 }
 
 /* Timeline icon glow */
 @utility shadow-primary-soft {
-  box-shadow: 0 0 20px rgba(55, 19, 236, 0.2);
+  box-shadow: 0 0 20px rgba(184, 167, 154, 0.16);
 }
-
 
 /* Scrollbar Styling */
 *::-webkit-scrollbar {
