@@ -65,7 +65,7 @@ body {
 
 /* Dark panel card with subtle top glint */
 @utility glass-card {
-  background: linear-gradient(165deg, #191b1f 0%, #101216 56%, #08090b 100%);
+  background: linear-gradient(135deg, #191b1f 0%, #101216 56%, #08090b 100%);
   border: 1px solid rgba(255, 255, 255, 0.09);
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.55),
