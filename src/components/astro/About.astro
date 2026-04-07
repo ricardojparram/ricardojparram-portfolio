@@ -3,9 +3,9 @@ import type { Profile, Skill } from "../../lib/queries";
 import { useTranslations } from "../../i18n/ui";
 
 interface Props {
-    profile: Profile;
-    lang: string;
-    skills: Skill[];
+  profile: Profile;
+  lang: string;
+  skills: Skill[];
 }
 
 const { profile, lang, skills: sanitySkills } = Astro.props;
@@ -13,145 +13,139 @@ const t = useTranslations(lang);
 
 // Fallback if Sanity has no skills yet
 const fallbackSkills: Skill[] = [
-    {
-        _id: "1",
-        title: t.about.skills.frontend,
-        description: "NextJS, NuxtJS, Astro, Tailwind",
-        iconIdentifier: "code",
-    },
-    {
-        _id: "2",
-        title: t.about.skills.design,
-        description: "UI/UX, Figma, Framer",
-        iconIdentifier: "palette",
-    },
-    {
-        _id: "3",
-        title: t.about.skills.backend,
-        description: "NestJS, Laravel, PostgreSQL",
-        iconIdentifier: "terminal",
-    },
-    {
-        _id: "4",
-        title: t.about.skills.mobile,
-        description: "Expo, React Native",
-        iconIdentifier: "cpu",
-    },
+  {
+    _id: "1",
+    title: t.about.skills.frontend,
+    description: "NextJS, NuxtJS, Astro, Tailwind",
+    iconIdentifier: "code",
+  },
+  {
+    _id: "2",
+    title: t.about.skills.design,
+    description: "UI/UX, Figma, Framer",
+    iconIdentifier: "palette",
+  },
+  {
+    _id: "3",
+    title: t.about.skills.backend,
+    description: "NestJS, Laravel, PostgreSQL",
+    iconIdentifier: "terminal",
+  },
+  {
+    _id: "4",
+    title: t.about.skills.mobile,
+    description: "Expo, React Native",
+    iconIdentifier: "cpu",
+  },
 ];
 
 const skills = sanitySkills?.length > 0 ? sanitySkills : fallbackSkills;
 ---
 
 <section id="about" class="scroll-mt-28">
-    <div class="mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-white">
-            {t.about.title}
-        </h2>
-        <span class="heading-underline"></span>
+  <div class="mb-9">
+    <h2 class="text-3xl md:text-4xl font-bold text-white">
+      {t.about.title}
+    </h2>
+    <span class="heading-underline"></span>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+    <!-- Bio text from Sanity -->
+    <div
+      class="flex flex-col justify-center gap-3 text-slate-300 leading-relaxed text-base md:text-lg"
+    >
+      <h3 class="text-2xl font-bold text-white mb-2">
+        {t.about.subtitle}
+      </h3>
+      {
+        profile.bio?.length > 0 &&
+          profile.bio.map((block: any) => (
+            <p>{block.children?.map((child: any) => child.text).join("")}</p>
+          ))
+      }
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <!-- Bio text from Sanity -->
-        <div
-            class="flex flex-col justify-center gap-4 text-slate-300 leading-relaxed text-lg"
-        >
-            <h3 class="text-2xl font-bold text-white mb-2">
-                {t.about.subtitle}
-            </h3>
-            {
-                profile.bio?.length > 0 &&
-                    profile.bio.map((block: any) => (
-                        <p>
-                            {block.children
-                                ?.map((child: any) => child.text)
-                                .join("")}
-                        </p>
-                    ))
-            }
-        </div>
-
-        <!-- Skill cards from Sanity (with fallback) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {
-                skills.map((skill) => (
-                    <div class="glass-card rounded-3xl p-6 flex flex-col gap-4 hover:border-white/20 transition-colors duration-300 group  hover:bg-primary/10!">
-                        <div class="size-12 bg-primary/10 rounded-2xl border border-white/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:border-white/20  group-hover:scale-110 transition-colors transition-transform duration-300 text-white">
-                            {skill.iconIdentifier === "code" && (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="size-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                                    />
-                                </svg>
-                            )}
-                            {skill.iconIdentifier === "palette" && (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="size-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-                                    />
-                                </svg>
-                            )}
-                            {skill.iconIdentifier === "terminal" && (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="size-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                    />
-                                </svg>
-                            )}
-                            {skill.iconIdentifier === "cpu" && (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="size-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"
-                                    />
-                                </svg>
-                            )}
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-white">
-                                {skill.title}
-                            </h4>
-                            <p class="text-sm text-slate-400 mt-1">
-                                {skill.description}
-                            </p>
-                        </div>
-                    </div>
-                ))
-            }
-        </div>
+    <!-- Skill cards from Sanity (with fallback) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {
+        skills.map((skill) => (
+          <div class="glass-card rounded-3xl p-5 flex flex-col gap-3 hover:border-white/20 transition-colors duration-300 group">
+            <div class="size-11 bg-primary/12 rounded-2xl border border-white/10 flex items-center justify-center group-hover:bg-primary/18 group-hover:border-white/20 group-hover:scale-105 transition-all duration-300 text-white">
+              {skill.iconIdentifier === "code" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                  />
+                </svg>
+              )}
+              {skill.iconIdentifier === "palette" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                  />
+                </svg>
+              )}
+              {skill.iconIdentifier === "terminal" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              )}
+              {skill.iconIdentifier === "cpu" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"
+                  />
+                </svg>
+              )}
+            </div>
+            <div>
+              <h4 class="text-base md:text-lg font-bold text-white">
+                {skill.title}
+              </h4>
+              <p class="text-sm text-slate-400 mt-1">{skill.description}</p>
+            </div>
+          </div>
+        ))
+      }
     </div>
+  </div>
 </section>

@@ -60,32 +60,32 @@ export default function Header({ nav, lang }: HeaderProps) {
 
     return (
         <header
-            className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'py-4' : 'bg-transparent py-8'
+            className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'py-3' : 'bg-transparent py-5'
                 }`}
         >
-            <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
                 <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className={`flex items-center gap-3 group cursor-pointer px-2 pr-4 py-2 ${scrolled
+                    className={`flex items-center gap-2 group cursor-pointer px-2 pr-3 py-1.5 ${scrolled
                         ? 'bg-white/5 rounded-full border border-white/5 backdrop-blur-md'
                         : 'bg-transparent border border-transparent'
                         }`}
                     aria-label="Scroll to top"
                 >
-                    <div className="size-10 rounded-full flex items-center justify-center shadow-lg transition-shadow group-hover:shadow-primary/40 bg-gradient-to-br from-primary to-zinc-500">
+                    <div className="size-10 rounded-full flex items-center justify-center shadow-lg transition-shadow group-hover:shadow-primary/40 bg-linear-to-br from-primary to-zinc-500">
                         <Code2 className="text-white size-6" />
                     </div>
-                    <span className="text-white text-xl font-bold tracking-tight">Ricardo Parra</span>
+                    <span className="text-white text-lg font-bold tracking-tight">Ricardo Parra</span>
                 </button>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-1 bg-white/8 rounded-full p-1 border border-white/5 backdrop-blur-md">
+                <nav className="hidden md:flex items-center gap-1 bg-white/8 rounded-full p-0.5 border border-white/8 backdrop-blur-md">
                     {navLinks.map(({ key, label }) => (
                         <button
                             key={key}
                             onClick={() => scrollTo(key)}
-                            className="px-5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                            className="px-4 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all"
                         >
                             {label}
                         </button>
@@ -96,7 +96,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => scrollTo('contact')}
-                        className="hidden md:flex h-10 px-6 items-center justify-center rounded-full text-white text-sm font-semibold transition-all border border-white/10 backdrop-blur-sm bg-white/8 hover:bg-primary/25 hover:border-primary/45"
+                        className="hidden md:flex h-9 px-5 items-center justify-center rounded-full text-white text-sm font-semibold transition-all border border-white/10 backdrop-blur-sm bg-white/8 hover:bg-primary/20 hover:border-primary/40"
                     >
                         {nav.cta}
                     </button>
