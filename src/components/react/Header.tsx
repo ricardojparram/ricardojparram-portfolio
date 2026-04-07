@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Code2, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 
 interface NavDict {
@@ -38,6 +38,7 @@ const iconVariants = {
 export default function Header({ nav, lang }: HeaderProps) {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState('work');
 
     const navLinks = [
         { key: 'work', label: nav.work },
@@ -47,8 +48,26 @@ export default function Header({ nav, lang }: HeaderProps) {
     ];
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', handleScroll);
+        const sectionIds = ['work', 'about', 'experience'];
+
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+
+            let current = sectionIds[0];
+            const offset = 220;
+
+            for (const id of sectionIds) {
+                const section = document.getElementById(id);
+                if (section && window.scrollY + offset >= section.offsetTop) {
+                    current = id;
+                }
+            }
+
+            setActiveSection(current);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -60,87 +79,99 @@ export default function Header({ nav, lang }: HeaderProps) {
 
     return (
         <header
-            className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'py-3' : 'bg-transparent py-5'
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'pt-2 pb-0' : 'pt-5 pb-0'
                 }`}
         >
-            <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                {/* Logo */}
-                <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className={`flex items-center gap-2 group cursor-pointer px-2 pr-3 py-1.5 ${scrolled
-                        ? 'bg-white/5 rounded-full border border-white/5 backdrop-blur-md'
-                        : 'bg-transparent border border-transparent'
+            <div className="px-4 md:px-7">
+                <div
+                    className={`max-w-6xl mx-auto rounded-3xl overflow-hidden transition-all duration-500 ${scrolled
+                        ? 'glass-card'
+                        : 'border border-transparent bg-transparent shadow-none backdrop-blur-0'
                         }`}
-                    aria-label="Scroll to top"
                 >
-                    <div className="size-10 rounded-full flex items-center justify-center shadow-lg transition-shadow group-hover:shadow-primary/40 bg-linear-to-br from-primary to-zinc-500">
-                        <Code2 className="text-white size-6" />
-                    </div>
-                    <span className="text-white text-lg font-bold tracking-tight">Ricardo Parra</span>
-                </button>
-
-                {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-1 bg-white/8 rounded-full p-0.5 border border-white/8 backdrop-blur-md">
-                    {navLinks.map(({ key, label }) => (
+                    <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'px-3 md:px-4 py-2 md:py-2.5' : 'px-0 py-0 md:py-1.5'
+                        }`}>
+                        {/* Logo */}
                         <button
-                            key={key}
-                            onClick={() => scrollTo(key)}
-                            className="px-4 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="flex items-center gap-2 group cursor-pointer px-0 py-0"
+                            aria-label="Scroll to top"
                         >
-                            {label}
+                            <span className="text-white text-lg font-semibold tracking-tight">ricardojparram</span>
                         </button>
-                    ))}
-                </nav>
 
-                {/* CTA + Language Switcher + Mobile Toggle */}
-                <div className="flex items-center gap-3">
-                    <button
-                        onClick={() => scrollTo('contact')}
-                        className="hidden md:flex h-9 px-5 items-center justify-center rounded-full text-white text-sm font-semibold transition-all border border-white/10 backdrop-blur-sm bg-white/8 hover:bg-primary/20 hover:border-primary/40"
-                    >
-                        {nav.cta}
-                    </button>
+                        {/* Desktop Nav */}
+                        <nav className="hidden md:flex items-center gap-5">
+                            {navLinks.map(({ key, label }) => (
+                                <button
+                                    key={key}
+                                    onClick={() => scrollTo(key)}
+                                    className={`relative px-0 pb-2 pt-1 text-sm font-medium transition-colors ${activeSection === key
+                                        ? 'text-white'
+                                        : 'text-slate-400 hover:text-slate-200'
+                                        }`}
+                                    aria-current={activeSection === key ? 'page' : undefined}
+                                >
+                                    <span>{label}</span>
+                                    <span
+                                        className={`absolute left-0 -bottom-0.5 h-0.5 rounded-full bg-zinc-300 transition-all duration-300 ${activeSection === key ? 'w-full opacity-100' : 'w-0 opacity-0'
+                                            }`}
+                                    />
+                                </button>
+                            ))}
+                        </nav>
 
-                    {/* Language Switcher — desktop */}
-                    <div className="hidden md:block">
-                        <LanguageSwitcher currentLang={lang} />
+                        {/* CTA + Language Switcher + Mobile Toggle */}
+                        <div className="flex items-center gap-3">
+                            <button
+                                onClick={() => scrollTo('contact')}
+                                className="hidden md:flex h-9 px-5 items-center justify-center rounded-full text-white text-sm font-semibold transition-all border border-white/12 bg-linear-to-br from-zinc-800 to-zinc-950 hover:border-zinc-300/30 hover:from-zinc-700 hover:to-zinc-900"
+                            >
+                                {nav.cta}
+                            </button>
+
+                            {/* Language Switcher — desktop */}
+                            <div className="hidden md:block">
+                                <LanguageSwitcher currentLang={lang} />
+                            </div>
+
+                            {/* Mobile toggle */}
+                            <button
+                                className="md:hidden relative size-10 flex items-center justify-center text-slate-300 hover:text-white transition-colors bg-white/5 rounded-full border border-white/10 backdrop-blur-md overflow-hidden"
+                                onClick={() => setMenuOpen((o) => !o)}
+                                aria-label="Toggle menu"
+                                aria-expanded={menuOpen}
+                            >
+                                <AnimatePresence mode="popLayout" initial={false}>
+                                    {menuOpen ? (
+                                        <motion.span
+                                            key="close"
+                                            variants={iconVariants}
+                                            initial="initial"
+                                            animate="animate"
+                                            exit="exit"
+                                            transition={{ duration: 0.2, ease: 'easeInOut' }}
+                                            style={{ display: 'inline-flex' }}
+                                        >
+                                            <X className="size-6" />
+                                        </motion.span>
+                                    ) : (
+                                        <motion.span
+                                            key="open"
+                                            variants={iconVariants}
+                                            initial="initial"
+                                            animate="animate"
+                                            exit="exit"
+                                            transition={{ duration: 0.2, ease: 'easeInOut' }}
+                                            style={{ display: 'inline-flex' }}
+                                        >
+                                            <Menu className="size-6" />
+                                        </motion.span>
+                                    )}
+                                </AnimatePresence>
+                            </button>
+                        </div>
                     </div>
-
-                    {/* Mobile toggle */}
-                    <button
-                        className="md:hidden relative size-10 flex items-center justify-center text-slate-300 hover:text-white transition-colors bg-white/5 rounded-full border border-white/10 backdrop-blur-md overflow-hidden"
-                        onClick={() => setMenuOpen((o) => !o)}
-                        aria-label="Toggle menu"
-                        aria-expanded={menuOpen}
-                    >
-                        <AnimatePresence mode="popLayout" initial={false}>
-                            {menuOpen ? (
-                                <motion.span
-                                    key="close"
-                                    variants={iconVariants}
-                                    initial="initial"
-                                    animate="animate"
-                                    exit="exit"
-                                    transition={{ duration: 0.2, ease: 'easeInOut' }}
-                                    style={{ display: 'inline-flex' }}
-                                >
-                                    <X className="size-6" />
-                                </motion.span>
-                            ) : (
-                                <motion.span
-                                    key="open"
-                                    variants={iconVariants}
-                                    initial="initial"
-                                    animate="animate"
-                                    exit="exit"
-                                    transition={{ duration: 0.2, ease: 'easeInOut' }}
-                                    style={{ display: 'inline-flex' }}
-                                >
-                                    <Menu className="size-6" />
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
-                    </button>
                 </div>
             </div>
 
@@ -155,34 +186,39 @@ export default function Header({ nav, lang }: HeaderProps) {
                         exit="exit"
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                         style={{ transformOrigin: 'top center' }}
-                        className="md:hidden bg-white/5 border border-white/10 backdrop-blur-md mt-2 px-6 py-4 flex flex-col gap-2 mx-6 rounded-xl"
+                        className="md:hidden mt-3 px-4 md:px-7"
                     >
-                        {navLinks.map(({ key, label }, i) => (
-                            <motion.button
-                                key={key}
-                                custom={i}
+                        <div className="max-w-6xl mx-auto rounded-2xl bg-[linear-gradient(135deg,rgba(25,27,31,0.96)_0%,rgba(10,11,13,0.96)_100%)] border border-white/10 backdrop-blur-xl px-4 py-4 flex flex-col gap-2 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
+                            {navLinks.map(({ key, label }, i) => (
+                                <motion.button
+                                    key={key}
+                                    custom={i}
+                                    variants={itemVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="exit"
+                                    onClick={() => scrollTo(key)}
+                                    className={`text-left px-4 py-3 rounded-xl transition-colors text-sm font-medium ${activeSection === key
+                                        ? 'text-white bg-white/10'
+                                        : 'text-slate-300 hover:bg-white/10'
+                                        }`}
+                                >
+                                    {label}
+                                </motion.button>
+                            ))}
+
+                            {/* Language Switcher — mobile */}
+                            <motion.div
+                                custom={navLinks.length}
                                 variants={itemVariants}
                                 initial="hidden"
                                 animate="visible"
                                 exit="exit"
-                                onClick={() => scrollTo(key)}
-                                className="text-left px-4 py-3 text-white hover:bg-white/20 rounded-xl transition-colors text-sm font-medium"
+                                className="pt-2 border-t border-white/8 mt-2 w-fit"
                             >
-                                {label}
-                            </motion.button>
-                        ))}
-
-                        {/* Language Switcher — mobile */}
-                        <motion.div
-                            custom={navLinks.length}
-                            variants={itemVariants}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            className="pt-2 border-t border-white/5 mt-2 w-fit"
-                        >
-                            <LanguageSwitcher currentLang={lang} />
-                        </motion.div>
+                                <LanguageSwitcher currentLang={lang} />
+                            </motion.div>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
