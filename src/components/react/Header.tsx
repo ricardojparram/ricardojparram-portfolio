@@ -97,7 +97,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                             className="flex items-center gap-2 group cursor-pointer px-0 py-0"
                             aria-label="Scroll to top"
                         >
-                            <span className="text-white text-lg font-semibold tracking-tight">ricardojparram</span>
+                            <span className="text-white text-base md:text-lg font-semibold tracking-tight">ricardojparram</span>
                         </button>
 
                         {/* Desktop Nav */}
@@ -106,7 +106,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                                 <button
                                     key={key}
                                     onClick={() => scrollTo(key)}
-                                    className={`relative px-0 pb-2 pt-1 text-sm font-medium transition-colors ${activeSection === key
+                                    className={`relative px-0 pb-2 pt-1 text-sm font-semibold transition-colors ${activeSection === key
                                         ? 'text-white'
                                         : 'text-slate-400 hover:text-slate-200'
                                         }`}

@@ -19,10 +19,10 @@ const cv = profile.contacts?.find((c) => c.type === "cv")?.link;
 
 <section id="contact" class="scroll-mt-28">
   <div class="py-6 md:py-12 text-center flex flex-col items-center gap-4">
-    <h2 class="text-4xl md:text-5xl font-black text-white">
+    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">
       {t.contact.title}
     </h2>
-    <p class="text-slate-400 text-base md:text-lg max-w-2xl">
+    <p class="text-slate-400 text-base max-w-2xl">
       {t.contact.subtitle}
     </p>
 
@@ -32,7 +32,7 @@ const cv = profile.contacts?.find((c) => c.type === "cv")?.link;
         email && (
           <a
             href={email}
-            class="h-12 px-6 rounded-xl bg-primary text-white font-bold transition-all flex items-center justify-center gap-2 shadow-primary-glow hover:opacity-90"
+            class="h-12 px-6 rounded-xl bg-primary text-white text-sm font-semibold transition-all flex items-center justify-center gap-2 shadow-primary-glow hover:opacity-90"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ const cv = profile.contacts?.find((c) => c.type === "cv")?.link;
             href={cv}
             target="_blank"
             rel="noreferrer"
-            class="h-12 px-6 rounded-xl glass-card text-white font-bold transition-all border border-white/10 hover:border-white/20 flex items-center justify-center gap-2"
+            class="h-12 px-6 rounded-xl glass-card text-white text-sm font-semibold transition-all border border-white/10 hover:border-white/20 flex items-center justify-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +88,7 @@ const cv = profile.contacts?.find((c) => c.type === "cv")?.link;
             href={github}
             target="_blank"
             rel="noreferrer"
-            class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 font-medium"
+            class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,7 @@ const cv = profile.contacts?.find((c) => c.type === "cv")?.link;
             href={linkedin}
             target="_blank"
             rel="noreferrer"
-            class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 font-medium"
+            class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
