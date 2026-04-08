@@ -55,8 +55,8 @@ function getColSpan(project: Project, index: number): string {
 }
 ---
 
-<section id="work" class="scroll-mt-28">
-  <div class="mb-9">
+<section id="work" class="scroll-mt-28" data-reveal-group>
+  <div class="mb-9" data-reveal-item>
     <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">
       {t.work.title}
     </h2>
@@ -68,6 +68,8 @@ function getColSpan(project: Project, index: number): string {
       projectCards.map((project, index) => (
         <div
           class={`${getColSpan(project, index)} group relative rounded-3xl glass-card overflow-hidden h-85 md:h-108 hover:border-primary/40 transition-all duration-500`}
+          data-reveal-item
+          style={`--reveal-index: ${index + 1};`}
         >
           {/* Background image */}
           {project.img && (

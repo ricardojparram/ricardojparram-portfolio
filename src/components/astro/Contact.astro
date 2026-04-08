@@ -74,17 +74,23 @@ const socialLinks: SocialAction[] = [
 ].filter(isPresent);
 ---
 
-<section id="contact" class="scroll-mt-28">
-  <div class="py-6 md:py-12 text-center flex flex-col items-center gap-4">
-    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">
+<section id="contact" class="scroll-mt-28" data-reveal-group>
+  <div
+    class="py-6 md:py-12 text-center flex flex-col items-center gap-4"
+    data-reveal-item
+  >
+    <h2
+      class="text-3xl md:text-4xl font-semibold tracking-tight text-white"
+      data-reveal-item
+    >
       {t.contact.title}
     </h2>
-    <p class="text-zinc-400 text-base max-w-2xl">
+    <p class="text-zinc-400 text-base max-w-2xl" data-reveal-item>
       {t.contact.subtitle}
     </p>
 
     <!-- CTA Buttons -->
-    <div class="flex flex-wrap gap-3 mt-3 justify-center">
+    <div class="flex flex-wrap gap-3 mt-3 justify-center" data-reveal-item>
       {
         ctaLinks.map((action) => {
           const Icon = action.Icon;
@@ -105,7 +111,7 @@ const socialLinks: SocialAction[] = [
     </div>
 
     <!-- Social Links -->
-    <div class="flex items-center gap-5 mt-3">
+    <div class="flex items-center gap-5 mt-3" data-reveal-item>
       {
         socialLinks.map((social) => {
           const Icon = social.Icon;

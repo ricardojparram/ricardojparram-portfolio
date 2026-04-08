@@ -60,6 +60,9 @@ const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
     <link rel="canonical" href="https://ricardojparram.vercel.app/" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body
     class="min-h-screen flex flex-col"
@@ -77,12 +80,59 @@ const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
     <!-- Smooth scroll -->
     <script>
       import Lenis from "lenis";
+
       const lenis = new Lenis({ lerp: 0.08 });
+
       function raf(time: number) {
         lenis.raf(time);
         requestAnimationFrame(raf);
       }
+
       requestAnimationFrame(raf);
+
+      function setupScrollReveal() {
+        const revealGroups = Array.from(
+          document.querySelectorAll<HTMLElement>("[data-reveal-group]"),
+        );
+
+        if (!revealGroups.length) return;
+
+        revealGroups.forEach((group) => {
+          const items = Array.from(
+            group.querySelectorAll<HTMLElement>("[data-reveal-item]"),
+          );
+
+          items.forEach((item, index) => {
+            if (!item.style.getPropertyValue("--reveal-index")) {
+              item.style.setProperty("--reveal-index", String(index));
+            }
+          });
+        });
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          revealGroups.forEach((group) => group.classList.add("is-revealed"));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries, currentObserver) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              entry.target.classList.add("is-revealed");
+              currentObserver.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.2,
+            rootMargin: "0px 0px -8% 0px",
+          },
+        );
+
+        revealGroups.forEach((group) => observer.observe(group));
+      }
+
+      setupScrollReveal();
     </script>
   </body>
 </html>

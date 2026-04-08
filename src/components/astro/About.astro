@@ -48,8 +48,8 @@ const skills = sanitySkills?.length > 0 ? sanitySkills : fallbackSkills;
 const skillCards = withIcon(skills, skillIconMap, defaultSkillIcon);
 ---
 
-<section id="about" class="scroll-mt-28">
-  <div class="mb-9">
+<section id="about" class="scroll-mt-28" data-reveal-group>
+  <div class="mb-9" data-reveal-item>
     <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">
       {t.about.title}
     </h2>
@@ -60,6 +60,7 @@ const skillCards = withIcon(skills, skillIconMap, defaultSkillIcon);
     <!-- Bio text from Sanity -->
     <div
       class="flex flex-col justify-center gap-3 text-zinc-300 leading-relaxed text-base"
+      data-reveal-item
     >
       <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">
         {t.about.subtitle}
@@ -79,7 +80,10 @@ const skillCards = withIcon(skills, skillIconMap, defaultSkillIcon);
           const Icon = skill.Icon;
 
           return (
-            <div class="glass-card rounded-3xl p-5 flex flex-col gap-3 hover:border-white/20 transition-colors duration-300 group">
+            <div
+              class="glass-card rounded-3xl p-5 flex flex-col gap-3 hover:border-white/20 transition-colors duration-300 group"
+              data-reveal-item
+            >
               <div class="size-11 bg-primary/12 rounded-2xl border border-white/10 flex items-center justify-center group-hover:bg-primary/18 group-hover:border-white/20 group-hover:scale-105 transition-all duration-300 text-white">
                 <Icon class="size-6" aria-hidden="true" />
               </div>
