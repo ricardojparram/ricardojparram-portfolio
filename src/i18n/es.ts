@@ -25,6 +25,8 @@ const es = {
     experience: {
         title: 'Experiencia laboral',
         current: 'Actual',
+        showMore: 'Ver más',
+        showLess: 'Ver menos',
     },
     services: {
         title: 'Lo que hago',

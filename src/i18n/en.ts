@@ -27,6 +27,8 @@ const en: UIDict = {
     experience: {
         title: 'Work Experience',
         current: 'Current',
+        showMore: 'Show more',
+        showLess: 'Show less',
     },
     services: {
         title: 'What I Do',
