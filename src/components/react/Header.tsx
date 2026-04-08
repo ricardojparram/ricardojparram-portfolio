@@ -80,26 +80,26 @@ export default function Header({ nav, lang }: HeaderProps) {
     return (
         <header
             className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
-                ? 'pt-0 pb-0 footer-glass backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
+                ? 'pt-0 pb-0 md:footer-glass md:backdrop-blur-xl md:bg-transparent md:backdrop-blur-0 md:shadow-none'
                 : 'pt-5 pb-0'
                 }`}
         >
             <div className="px-4 md:px-7">
                 <div
-                    className={`max-w-6xl mx-auto overflow-hidden transition-all duration-500 ${scrolled
-                        ? 'rounded-none border border-transparent bg-transparent shadow-none backdrop-blur-0'
-                        : 'rounded-3xl border border-transparent bg-transparent shadow-none backdrop-blur-0'
-                        }`}
+                    className={`max-w-6xl mx-auto overflow-visible transition-all duration-500`}
                 >
                     <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'px-0 py-2 md:py-2.5' : 'px-0 py-0 md:py-1.5'
                         }`}>
                         {/* Logo */}
                         <button
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                            className="flex items-center gap-2 group cursor-pointer px-0 py-0"
+                            className={`flex items-center gap-2 group cursor-pointer transition-all ${scrolled
+                                ? 'px-3 py-1.5 rounded-full border md:border-0 glass-card shadow-[0_6px_18px_rgba(0,0,0,0.35)]! md:px-0 md:py-0 md:rounded-none md:bg-none md:shadow-none'
+                                : 'px-0 py-0 rounded-none border border-transparent bg-transparent shadow-none'
+                                }`}
                             aria-label="Scroll to top"
                         >
-                            <span className="text-white text-base md:text-lg font-semibold tracking-tight">Ricardo J. Parra</span>
+                            <span className="text-white text-lg font-semibold tracking-tight">Ricardo J. Parra</span>
                         </button>
 
                         {/* Desktop Nav */}
@@ -139,7 +139,7 @@ export default function Header({ nav, lang }: HeaderProps) {
 
                             {/* Mobile toggle */}
                             <button
-                                className="md:hidden relative size-10 flex items-center justify-center text-zinc-300 hover:text-white transition-colors bg-white/5 rounded-full border border-white/10 backdrop-blur-md overflow-hidden"
+                                className={`md:hidden relative size-10 flex border-transparent items-center justify-center text-zinc-300 hover:text-white transition-colors rounded-full overflow-hidden ${scrolled ? 'glass-card' : ''}`}
                                 onClick={() => setMenuOpen((o) => !o)}
                                 aria-label="Toggle menu"
                                 aria-expanded={menuOpen}
@@ -190,7 +190,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                         style={{ transformOrigin: 'top center' }}
                         className="md:hidden mt-3 px-4 md:px-7"
                     >
-                        <div className="max-w-6xl mx-auto rounded-2xl bg-[linear-gradient(135deg,rgba(25,27,31,0.96)_0%,rgba(10,11,13,0.96)_100%)] border border-white/10 backdrop-blur-xl px-4 py-4 flex flex-col gap-2 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
+                        <div className="max-w-6xl mx-auto rounded-2xl glass-card px-4 py-4 flex flex-col gap-2 shadow-[0_18px_50px_rgba(0,0,0,0.45)]!">
                             {navLinks.map(({ key, label }, i) => (
                                 <motion.button
                                     key={key}
@@ -216,8 +216,14 @@ export default function Header({ nav, lang }: HeaderProps) {
                                 initial="hidden"
                                 animate="visible"
                                 exit="exit"
-                                className="pt-2 border-t border-white/8 mt-2 w-fit"
+                                className="pt-3 border-t border-white/8 mt-2 w-full flex items-center justify-between gap-3 "
                             >
+                                <button
+                                    onClick={() => scrollTo('contact')}
+                                    className="flex h-9 px-5 items-center justify-center rounded-full text-white text-sm font-semibold transition-all border border-white/12 bg-linear-to-br from-zinc-800 to-zinc-950 hover:border-zinc-300/30 hover:from-zinc-700 hover:to-zinc-900"
+                                >
+                                    {nav.cta}
+                                </button>
                                 <LanguageSwitcher currentLang={lang} />
                             </motion.div>
                         </div>
