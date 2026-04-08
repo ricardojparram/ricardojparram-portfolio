@@ -1,6 +1,7 @@
 ---
 import type { Experience } from "../../lib/queries";
 import { useTranslations } from "../../i18n/ui";
+import ExperienceRow from "./ExperienceRow.astro";
 
 interface Props {
   experiences: Experience[];
@@ -15,7 +16,9 @@ const sorted = [...experiences].sort((a, b) => {
   if (b.active !== a.active) return Number(b.active) - Number(a.active);
   return (b.startDate ?? "").localeCompare(a.startDate ?? "");
 });
-const hiddenCount = Math.max(0, sorted.length - 3);
+const visible = sorted.slice(0, 3);
+const hidden = sorted.slice(3);
+const hiddenCount = hidden.length;
 ---
 
 <section id="experience" class="scroll-mt-28" data-reveal-group>
@@ -33,65 +36,32 @@ const hiddenCount = Math.max(0, sorted.length - 3);
     before:bg-linear-to-b before:from-transparent before:via-15% before:to-95% before:via-white/50 before:to-transparent"
   >
     {
-      sorted.map((exp, index) => (
+      visible.map((exp, index) => (
+        <ExperienceRow
+          exp={exp}
+          index={index}
+          currentLabel={t.experience.current}
+        />
+      ))
+    }
+    {
+      hiddenCount > 0 && (
         <div
-          class={`relative pl-5 md:pl-0 md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-start group ${
-            index > 2
-              ? "overflow-hidden max-h-0 opacity-0 -translate-y-2 pointer-events-none transition-all duration-500 ease-in-out"
-              : ""
-          }`}
-          data-reveal-item
-          style={`--reveal-index: ${index + 1};`}
-          data-experience-hidden={index > 2 ? "true" : undefined}
-          aria-hidden={index > 2 ? "true" : undefined}
+          data-experience-hidden-container
+          aria-hidden="true"
+          class="overflow-hidden max-h-0 opacity-0 -translate-y-2 pointer-events-none transition-[max-height,opacity,transform] duration-500 ease-in-out"
         >
-          {/* Timeline Dot */}
-          <div class="absolute left-0 top-6 -translate-x-1/2 md:relative md:left-auto md:top-auto md:translate-x-0 flex items-center justify-center size-10 md:col-start-2 md:row-start-1 md:justify-self-center md:self-start md:mt-4 shrink-0 z-10 pointer-events-none">
-            <span class="absolute inset-0 rounded-full bg-zinc-500/10 blur-md opacity-80" />
-            <span
-              class:list={[
-                "relative size-2 rounded-full bg-zinc-500 shadow-[0_0_10px_rgba(113,113,122,0.18)]",
-              ]}
-            />
-          </div>
-
-          {/* Card */}
-          <div class="w-full md:w-full md:col-start-1 md:row-start-1 md:justify-self-start md:group-even:col-start-3 md:group-even:justify-self-end glass-card rounded-3xl p-4 md:p-5 hover:border-white/20 transition-colors">
-            <div class="flex flex-col gap-1 mb-2.5">
-              <h3 class="text-lg md:text-xl font-semibold text-white leading-tight">
-                {exp.role}
-              </h3>
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-sm font-medium text-primary-light">
-                  {exp.company}
-                </span>
-                {exp.date && (
-                  <span class="text-xs text-zinc-500">{exp.date}</span>
-                )}
-              </div>
-            </div>
-            {exp.active && (
-              <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/25 text-primary-light text-[11px] font-medium mb-3">
-                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                {t.experience.current}
-              </span>
-            )}
-            {exp.info?.length > 0 && (
-              <ul class="flex flex-col gap-1.5 mt-1">
-                {exp.info.map((block: any) => {
-                  const text = block.children?.map((c: any) => c.text).join("");
-                  return text ? (
-                    <li class="flex items-start gap-2 text-sm text-zinc-400 leading-relaxed">
-                      <span class="mt-1.5 size-1.5 rounded-full bg-primary shrink-0" />
-                      {text}
-                    </li>
-                  ) : null;
-                })}
-              </ul>
-            )}
+          <div class="flex flex-col gap-4">
+            {hidden.map((exp, index) => (
+              <ExperienceRow
+                exp={exp}
+                index={index + 3}
+                currentLabel={t.experience.current}
+              />
+            ))}
           </div>
         </div>
-      ))
+      )
     }
   </div>
 
@@ -114,14 +84,14 @@ const hiddenCount = Math.max(0, sorted.length - 3);
 </section>
 
 <script>
-  const hiddenRows = document.querySelectorAll(
-    "[data-experience-hidden='true']",
+  const hiddenContainer = document.querySelector(
+    "[data-experience-hidden-container]",
   );
   const toggle = document.querySelector("[data-experience-toggle]");
   const label = document.querySelector("[data-experience-label]");
 
-  if (hiddenRows.length > 0 && toggle && label) {
-    const rows = Array.from(hiddenRows) as HTMLElement[];
+  if (hiddenContainer && toggle && label) {
+    const container = hiddenContainer as HTMLElement;
     const button = toggle as HTMLButtonElement;
     const buttonLabel = label as HTMLElement;
     const moreLabel = button.dataset.moreLabel ?? "Ver más";
@@ -129,28 +99,35 @@ const hiddenCount = Math.max(0, sorted.length - 3);
     let expanded = false;
 
     const syncCollapsedState = () => {
-      rows.forEach((row) => {
-        row.style.maxHeight = "0px";
-        row.style.opacity = "0";
-        row.style.transform = "translateY(-8px)";
-        row.style.pointerEvents = "none";
-        row.setAttribute("aria-hidden", "true");
+      if (container.style.maxHeight === "none") {
+        container.style.maxHeight = `${container.scrollHeight}px`;
+      }
+      requestAnimationFrame(() => {
+        container.style.maxHeight = "0px";
+        container.style.opacity = "0";
+        container.style.transform = "translateY(-8px)";
       });
+      container.style.pointerEvents = "none";
+      container.setAttribute("aria-hidden", "true");
       button.setAttribute("aria-expanded", "false");
       buttonLabel.textContent = moreLabel;
     };
 
     const syncExpandedState = () => {
-      rows.forEach((row) => {
-        row.style.maxHeight = `${row.scrollHeight}px`;
-        row.style.opacity = "1";
-        row.style.transform = "translateY(0)";
-        row.style.pointerEvents = "auto";
-        row.setAttribute("aria-hidden", "false");
-      });
+      container.style.maxHeight = `${container.scrollHeight}px`;
+      container.style.opacity = "1";
+      container.style.transform = "translateY(0)";
+      container.style.pointerEvents = "auto";
+      container.setAttribute("aria-hidden", "false");
       button.setAttribute("aria-expanded", "true");
       buttonLabel.textContent = lessLabel;
     };
+
+    container.addEventListener("transitionend", (event) => {
+      if (event.propertyName === "max-height" && expanded) {
+        container.style.maxHeight = "none";
+      }
+    });
 
     syncCollapsedState();
 
@@ -166,9 +143,7 @@ const hiddenCount = Math.max(0, sorted.length - 3);
 
     window.addEventListener("resize", () => {
       if (expanded) {
-        rows.forEach((row) => {
-          row.style.maxHeight = `${row.scrollHeight}px`;
-        });
+        container.style.maxHeight = `${container.scrollHeight}px`;
       }
     });
   }
