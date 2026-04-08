@@ -1,50 +1,46 @@
-import {
-    AppWindow,
-    ArrowUpRight,
-    Code2,
-    FileText,
-    GaugeCircle,
-    Github,
-    Linkedin,
-    Mail,
-    Palette,
-    Rocket,
-    ServerCog,
-    Smartphone,
-    TerminalSquare,
-    Zap,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import ArrowOutward from "../components/icons/ArrowOutward.astro";
+import CVIcon from "../components/icons/CVIcon.astro";
+import Email from "../components/icons/Email.astro";
+import Github from "../components/icons/Github.astro";
+import Linkedin from "../components/icons/Linkedin.astro";
+import CodeIcon from "../components/icons/CodeIcon.astro";
+import PaletteIcon from "../components/icons/PaletteIcon.astro";
+import TerminalIcon from "../components/icons/TerminalIcon.astro";
+import MobileIcon from "../components/icons/MobileIcon.astro";
+import WebIcon from "../components/icons/WebIcon.astro";
+import InteractiveIcon from "../components/icons/InteractiveIcon.astro";
+import PerformanceIcon from "../components/icons/PerformanceIcon.astro";
 
-export type IconComponent = LucideIcon;
+export type IconComponent = AstroComponentFactory;
 
 export const skillIconMap: Record<string, IconComponent> = {
-    code: Code2,
-    palette: Palette,
-    terminal: TerminalSquare,
-    mobile: Smartphone,
-    cpu: Smartphone,
+    code: CodeIcon,
+    palette: PaletteIcon,
+    terminal: TerminalIcon,
+    mobile: MobileIcon,
+    cpu: MobileIcon,
 };
 
 export const serviceIconMap: Record<string, IconComponent> = {
-    web: AppWindow,
-    mobile: Smartphone,
-    interactive: Zap,
-    backend: ServerCog,
-    design: Palette,
-    performance: GaugeCircle,
+    web: WebIcon,
+    mobile: MobileIcon,
+    interactive: InteractiveIcon,
+    backend: TerminalIcon,
+    design: PaletteIcon,
+    performance: PerformanceIcon,
 };
 
-export const defaultSkillIcon = Code2;
-export const defaultServiceIcon = Rocket;
+export const defaultSkillIcon = CodeIcon;
+export const defaultServiceIcon = WebIcon;
 
 export const commonIconMap = {
-    email: Mail,
-    cv: FileText,
+    email: Email,
+    cv: CVIcon,
     github: Github,
     linkedin: Linkedin,
-    code: Code2,
-    external: ArrowUpRight,
+    code: CodeIcon,
+    external: ArrowOutward,
 };
 
 export function withIcon<T extends { iconIdentifier?: string }>(
