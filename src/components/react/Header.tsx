@@ -89,7 +89,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                         : 'border border-transparent bg-transparent shadow-none backdrop-blur-0'
                         }`}
                 >
-                    <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'px-3 md:px-4 py-2 md:py-2.5' : 'px-0 py-0 md:py-1.5'
+                    <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'px-3 md:pl-4 py-2 md:py-2.5' : 'px-0 py-0 md:py-1.5'
                         }`}>
                         {/* Logo */}
                         <button
@@ -97,7 +97,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                             className="flex items-center gap-2 group cursor-pointer px-0 py-0"
                             aria-label="Scroll to top"
                         >
-                            <span className="text-white text-base md:text-lg font-semibold tracking-tight">ricardojparram</span>
+                            <span className="text-white text-base md:text-lg font-semibold tracking-tight">Ricardo J. Parra</span>
                         </button>
 
                         {/* Desktop Nav */}
