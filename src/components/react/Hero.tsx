@@ -13,7 +13,7 @@ export default function Hero({ name, heroTitle, heroSubtitle, badgeText }: HeroP
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col gap-4 items-start py-4 relative"
+            className="flex flex-col gap-3 md:gap-4 items-start py-2 md:py-4 relative"
         >
             {/* Name badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-bold uppercase tracking-wider mb-2 text-primary-light">
@@ -22,7 +22,7 @@ export default function Hero({ name, heroTitle, heroSubtitle, badgeText }: HeroP
             </div>
 
             {/* Main headline */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-white text-glow leading-[1.08]">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-white text-glow leading-[1.08]">
                 {heroTitle.split(' ').slice(0, -1).join(' ')}{' '}
                 <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-zinc-500">
@@ -31,7 +31,7 @@ export default function Hero({ name, heroTitle, heroSubtitle, badgeText }: HeroP
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base md:text-lg text-zinc-400 max-w-2xl leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-zinc-400 max-w-xl md:max-w-2xl leading-relaxed">
                 {heroSubtitle}
             </p>
         </motion.div>
