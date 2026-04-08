@@ -12,7 +12,7 @@ export default function Hero({ name, heroTitle, heroSubtitle, badgeText }: HeroP
         <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col gap-3 md:gap-4 items-start py-2 md:py-4 relative"
         >
             {/* Name badge */}
