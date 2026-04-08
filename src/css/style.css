@@ -49,7 +49,7 @@ body {
       transparent 42%
     ),
     var(--color-background);
-  color: var(--color-slate-100, #f1f5f9);
+  color: #f4f4f5;
   overflow-x: hidden;
   min-height: 100vh;
 }

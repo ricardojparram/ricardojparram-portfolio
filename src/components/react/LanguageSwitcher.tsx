@@ -24,7 +24,7 @@ export default function LanguageSwitcher({ currentLang }: Props) {
                 aria-label="Español"
                 className={`px-3 h-7 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'es'
                     ? 'bg-zinc-200 text-zinc-900'
-                    : 'text-slate-300 hover:text-white hover:bg-white/8'
+                    : 'text-zinc-300 hover:text-white hover:bg-white/8'
                     }`}
             >
                 ES
@@ -34,7 +34,7 @@ export default function LanguageSwitcher({ currentLang }: Props) {
                 aria-label="English"
                 className={`px-3 h-7 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${currentLang === 'en'
                     ? 'bg-zinc-200 text-zinc-900'
-                    : 'text-slate-300 hover:text-white hover:bg-white/8'
+                    : 'text-zinc-300 hover:text-white hover:bg-white/8'
                     }`}
             >
                 EN

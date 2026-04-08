@@ -58,7 +58,7 @@ const hiddenExperiences = sorted.slice(3);
                   {exp.company}
                 </span>
                 {exp.date && (
-                  <span class="text-xs text-slate-500">{exp.date}</span>
+                  <span class="text-xs text-zinc-500">{exp.date}</span>
                 )}
               </div>
             </div>
@@ -73,7 +73,7 @@ const hiddenExperiences = sorted.slice(3);
                 {exp.info.map((block: any) => {
                   const text = block.children?.map((c: any) => c.text).join("");
                   return text ? (
-                    <li class="flex items-start gap-2 text-sm text-slate-400 leading-relaxed">
+                    <li class="flex items-start gap-2 text-sm text-zinc-400 leading-relaxed">
                       <span class="mt-1.5 size-1.5 rounded-full bg-primary shrink-0" />
                       {text}
                     </li>
@@ -112,7 +112,7 @@ const hiddenExperiences = sorted.slice(3);
                         {exp.company}
                       </span>
                       {exp.date && (
-                        <span class="text-xs text-slate-500">{exp.date}</span>
+                        <span class="text-xs text-zinc-500">{exp.date}</span>
                       )}
                     </div>
                   </div>
@@ -129,7 +129,7 @@ const hiddenExperiences = sorted.slice(3);
                           ?.map((c: any) => c.text)
                           .join("");
                         return text ? (
-                          <li class="flex items-start gap-2 text-sm text-slate-400 leading-relaxed">
+                          <li class="flex items-start gap-2 text-sm text-zinc-400 leading-relaxed">
                             <span class="mt-1.5 size-1.5 rounded-full bg-primary shrink-0" />
                             {text}
                           </li>

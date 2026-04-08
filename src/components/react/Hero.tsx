@@ -25,13 +25,13 @@ export default function Hero({ name, heroTitle, heroSubtitle, badgeText }: HeroP
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-white text-glow leading-[1.08]">
                 {heroTitle.split(' ').slice(0, -1).join(' ')}{' '}
                 <br />
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-slate-500">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-zinc-500">
                     {heroTitle.split(' ').at(-1)}.
                 </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base md:text-lg text-slate-400 max-w-2xl leading-relaxed">
+            <p className="text-base md:text-lg text-zinc-400 max-w-2xl leading-relaxed">
                 {heroSubtitle}
             </p>
         </motion.div>

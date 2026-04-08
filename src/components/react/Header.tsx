@@ -108,7 +108,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                                     onClick={() => scrollTo(key)}
                                     className={`relative px-0 pb-2 pt-1 text-sm font-semibold transition-colors ${activeSection === key
                                         ? 'text-white'
-                                        : 'text-slate-400 hover:text-slate-200'
+                                        : 'text-zinc-400 hover:text-zinc-200'
                                         }`}
                                     aria-current={activeSection === key ? 'page' : undefined}
                                 >
@@ -137,7 +137,7 @@ export default function Header({ nav, lang }: HeaderProps) {
 
                             {/* Mobile toggle */}
                             <button
-                                className="md:hidden relative size-10 flex items-center justify-center text-slate-300 hover:text-white transition-colors bg-white/5 rounded-full border border-white/10 backdrop-blur-md overflow-hidden"
+                                className="md:hidden relative size-10 flex items-center justify-center text-zinc-300 hover:text-white transition-colors bg-white/5 rounded-full border border-white/10 backdrop-blur-md overflow-hidden"
                                 onClick={() => setMenuOpen((o) => !o)}
                                 aria-label="Toggle menu"
                                 aria-expanded={menuOpen}
@@ -200,7 +200,7 @@ export default function Header({ nav, lang }: HeaderProps) {
                                     onClick={() => scrollTo(key)}
                                     className={`text-left px-4 py-3 rounded-xl transition-colors text-sm font-medium ${activeSection === key
                                         ? 'text-white bg-white/10'
-                                        : 'text-slate-300 hover:bg-white/10'
+                                        : 'text-zinc-300 hover:bg-white/10'
                                         }`}
                                 >
                                     {label}
