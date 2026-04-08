@@ -51,7 +51,7 @@ const hiddenCount = hidden.length;
           aria-hidden="true"
           class="overflow-hidden max-h-0 opacity-0 -translate-y-2 pointer-events-none transition-[max-height,opacity,transform] duration-500 ease-in-out"
         >
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4 pt-2.5">
             {hidden.map((exp, index) => (
               <ExperienceRow
                 exp={exp}
@@ -99,14 +99,16 @@ const hiddenCount = hidden.length;
     let expanded = false;
 
     const syncCollapsedState = () => {
-      if (container.style.maxHeight === "none") {
-        container.style.maxHeight = `${container.scrollHeight}px`;
-      }
-      requestAnimationFrame(() => {
-        container.style.maxHeight = "0px";
-        container.style.opacity = "0";
-        container.style.transform = "translateY(-8px)";
-      });
+      container.style.maxHeight = `${container.scrollHeight}px`;
+      container.style.opacity = "1";
+      container.style.transform = "translateY(0)";
+
+      // Force layout so the browser interpolates from current height to 0.
+      void container.offsetHeight;
+
+      container.style.maxHeight = "0px";
+      container.style.opacity = "0";
+      container.style.transform = "translateY(-8px)";
       container.style.pointerEvents = "none";
       container.setAttribute("aria-hidden", "true");
       button.setAttribute("aria-expanded", "false");
