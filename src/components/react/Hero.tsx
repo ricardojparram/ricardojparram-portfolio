@@ -12,7 +12,7 @@ export default function Hero({
   badgeText,
 }: HeroProps) {
   return (
-    <div className="flex flex-col gap-3 md:gap-4 items-start py-2 md:py-4 relative animate-fade-in-up opacity-0">
+    <div className="flex flex-col gap-3 md:gap-4 items-start py-2 md:py-4 relative">
       {/* Name badge */}
       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-bold uppercase tracking-wider mb-2 text-primary-light">
         <span className="w-2 h-2 rounded-full animate-pulse bg-primary" />
