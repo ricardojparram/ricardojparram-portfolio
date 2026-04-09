@@ -60,6 +60,9 @@ const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
     <link rel="canonical" href="https://ricardojparram.vercel.app/" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <script is:inline>
       document.documentElement.classList.add("js");
     </script>
@@ -69,7 +72,7 @@ const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
     style="background-color: var(--color-background); color: #f1f5f9; overflow-x: clip;"
   >
     <!-- React Header Island -->
-    <Header client:load nav={t.nav} lang={lang} />
+    <Header client:idle nav={t.nav} lang={lang} />
 
     <!-- Page content -->
     <slot />
