@@ -61,20 +61,6 @@ const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
     <link rel="canonical" href="https://ricardojparram.vercel.app/" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
     <script is:inline>
       document.documentElement.classList.add("js");
     </script>
@@ -95,16 +81,27 @@ const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
 
     <!-- Smooth scroll -->
     <script>
-      import Lenis from "lenis";
+      const startLenis = async () => {
+        const { default: Lenis } = await import("lenis");
+        const lenis = new Lenis({ lerp: 0.08 });
 
-      const lenis = new Lenis({ lerp: 0.08 });
+        function raf(time: number) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
 
-      function raf(time: number) {
-        lenis.raf(time);
         requestAnimationFrame(raf);
-      }
+      };
 
-      requestAnimationFrame(raf);
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(() => {
+          void startLenis();
+        }, { timeout: 1200 });
+      } else {
+        setTimeout(() => {
+          void startLenis();
+        }, 1);
+      }
 
       function setupScrollReveal() {
         const revealGroups = Array.from(
