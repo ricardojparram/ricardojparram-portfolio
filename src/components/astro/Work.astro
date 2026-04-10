@@ -3,6 +3,7 @@ import { urlFor } from "../../lib/sanity";
 import type { Project } from "../../lib/queries";
 import { useTranslations } from "../../i18n/ui";
 import { commonIconMap } from "../../lib/icon-registry";
+import { Image } from "astro:assets";
 
 interface Props {
   projects: Project[];
@@ -73,11 +74,23 @@ function getColSpan(project: Project, index: number): string {
         >
           {/* Background image */}
           {project.img && (
-            <img
-              src={urlFor(project.img).width(900).url()}
+            <Image
+              src={urlFor(project.img)
+                .width(900)
+                .height(600)
+                .fit("crop")
+                .auto("format")
+                .quality(80)
+                .url()}
               alt={project.alt}
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              width={900}
+              height={600}
+              sizes="(max-width: 767px) 100vw, (max-width: 1279px) 66vw, 33vw"
+              format="webp"
+              quality={75}
               loading="lazy"
+              decoding="async"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           )}
 

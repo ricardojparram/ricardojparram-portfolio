@@ -1,6 +1,6 @@
 ---
 import "../css/style.css";
-import Header from "../components/react/Header";
+import Header from "../components/astro/Header.astro";
 import FooterAstro from "../components/astro/Footer.astro";
 import "lenis/dist/lenis.css";
 import { useTranslations } from "../i18n/ui";
@@ -83,8 +83,7 @@ const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
     class="min-h-screen flex flex-col"
     style="background-color: var(--color-background); color: #f1f5f9; overflow-x: clip;"
   >
-    <!-- React Header Island -->
-    <Header client:idle nav={t.nav} lang={lang} />
+    <Header nav={t.nav} lang={lang} />
 
     <!-- Page content -->
     <slot />

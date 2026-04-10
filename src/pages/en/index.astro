@@ -2,8 +2,8 @@
 // /en/index.astro — English version
 // Astro automatically sets Astro.currentLocale = "en" for this route
 import Layout from "../../layouts/Layout.astro";
-import AmbientBackground from "../../components/react/AmbientBackground";
-import Hero from "../../components/react/Hero";
+import AmbientBackground from "../../components/astro/AmbientBackground.astro";
+import Hero from "../../components/astro/Hero.astro";
 import Work from "../../components/astro/Work.astro";
 import About from "../../components/astro/About.astro";
 import Experience from "../../components/astro/Experience.astro";
@@ -61,14 +61,13 @@ const safeProfile = profile ?? {
 ---
 
 <Layout title="Ricardo Parra - Frontend Developer with 3+ years of experience.">
-  <!-- Ambient animated background (React Island) -->
+  <!-- Ambient animated background -->
   <AmbientBackground />
 
   <main class="relative grow pt-28 pb-12 px-4 md:px-7 z-10">
     <div class="max-w-6xl mx-auto flex flex-col gap-12 md:gap-20">
       <!-- Hero section -->
       <Hero
-        name={safeProfile.name}
         heroTitle={safeProfile.heroTitle ?? "Crafting digital experiences"}
         heroSubtitle={safeProfile.heroSubtitle ??
           "Frontend Developer & UI/UX Designer."}
