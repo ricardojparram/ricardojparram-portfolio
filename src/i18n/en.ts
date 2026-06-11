@@ -41,6 +41,11 @@ const en: UIDict = {
     email: "Email Me",
     cv: "Resume",
   },
+  seo: {
+    title: "Ricardo Parra - Frontend Developer with +3 years of experience.",
+    description: "Hire Ricardo Parra to build your next web or mobile application. +3 years of experience in web development. Specialized in creating unique digital experiences.",
+    keywords: "Ricardo Parra, ricardojparram, Ricardo J. Parra, web developer, barquisimeto, Lara, web development, programmer, programming, rjpm, @ricardojparram, ricardo dev",
+  },
 };
 
 export default en;

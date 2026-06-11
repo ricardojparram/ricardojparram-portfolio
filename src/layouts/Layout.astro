@@ -12,53 +12,39 @@ interface Props {
 
 const lang = Astro.currentLocale ?? "es";
 const t = useTranslations(lang);
-const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
+const { title = t.seo.title } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, "https://ricardojparram.vercel.app").href;
 ---
 
 <!doctype html>
 <html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Contrata a Ricardo Parra para crear tu aplicación web o móvil. +3 años de experiencia en desarrollo web. Especializado en crear aplicaciones únicas."
-    />
-    <meta
-      name="keywords"
-      content="Ricardo Parra, ricardojparram, Ricardo J. Parra, desarrollador web, barquisimeto, Lara, desarrollo web iribarren, desarrollo web, programador, programación, rjpm, @ricardojparram, ricardo dev"
-    />
+    <meta name="description" content={t.seo.description} />
+    <meta name="keywords" content={t.seo.keywords} />
     <meta name="author" content="Ricardo Parra" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:url" content="https://ricardojparram.vercel.app/" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="Ricardo Parra - Desarrollador Web con +3 años de experiencia."
-    />
-    <meta
-      property="og:description"
-      content="Contrata a Ricardo Parra para crear tu aplicación web o móvil. +3 años de experiencia en desarrollo web. Especializado en crear aplicaciones únicas."
-    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={t.seo.description} />
     <meta
       property="og:image"
       content="https://ricardojparram.vercel.app/profile.webp"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://ricardojparram.vercel.app/" />
-    <meta
-      name="twitter:title"
-      content="Ricardo Parra - Desarrollador Web con +3 años de experiencia."
-    />
-    <meta
-      name="twitter:description"
-      content="Contrata a Ricardo Parra para crear tu aplicación web o móvil. +3 años de experiencia en desarrollo web. Especializado en crear aplicaciones únicas."
-    />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={t.seo.description} />
     <meta
       name="twitter:image"
       content="https://ricardojparram.vercel.app/profile.webp"
     />
     <link rel="icon" type="image/webp" href="/rp-favicon.webp" />
-    <link rel="canonical" href="https://ricardojparram.vercel.app/" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href="https://ricardojparram.vercel.app/" />
+    <link rel="alternate" hreflang="en" href="https://ricardojparram.vercel.app/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://ricardojparram.vercel.app/" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <script is:inline>
@@ -82,6 +68,7 @@ const { title = "Ricardo Parra - Frontend Developer" } = Astro.props;
     <!-- Smooth scroll -->
     <script>
       const startLenis = async () => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         const { default: Lenis } = await import("lenis");
         const lenis = new Lenis({ lerp: 0.08 });
 

@@ -39,6 +39,11 @@ const es = {
     email: "Envíame un email",
     cv: "Currículum",
   },
+  seo: {
+    title: "Ricardo Parra - Desarrollador Web con +3 años de experiencia.",
+    description: "Contrata a Ricardo Parra para crear tu aplicación web o móvil. +3 años de experiencia en desarrollo web. Especializado en crear aplicaciones únicas.",
+    keywords: "Ricardo Parra, ricardojparram, Ricardo J. Parra, desarrollador web, barquisimeto, Lara, desarrollo web iribarren, desarrollo web, programador, programación, rjpm, @ricardojparram, ricardo dev",
+  },
 } as const;
 
 export default es;
