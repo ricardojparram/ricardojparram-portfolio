@@ -98,24 +98,23 @@ const canonicalURL = new URL(Astro.url.pathname, "https://ricardojparram.vercel.
           return;
         }
 
+        // Set initial state immediately to avoid FOUC or elements being visible before they cross the trigger
+        gsap.set(items, { autoAlpha: 0, y: 30 });
+
         // ScrollTrigger.batch groups elements that enter the viewport at the same time
-        // This ensures items in a grid (like projects) stagger beautifully,
-        // but items further down wait until you scroll to them.
+        // This ensures items in a grid (like projects) stagger beautifully.
         ScrollTrigger.batch(items, {
-          start: "top 85%",
+          start: "top 95%", // Trigger slightly earlier (lower on screen) to reduce perceived delay
           once: true,
           onEnter: (batch) => {
-            gsap.fromTo(batch, 
-              { autoAlpha: 0, y: 24 },
-              {
-                autoAlpha: 1,
-                y: 0,
-                duration: 0.8,
-                ease: "power2.out",
-                stagger: 0.15,
-                overwrite: true
-              }
-            );
+            gsap.to(batch, {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              stagger: 0.15,
+              overwrite: true
+            });
           }
         });
       }
