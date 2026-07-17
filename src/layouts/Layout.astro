@@ -89,41 +89,34 @@ const canonicalURL = new URL(Astro.url.pathname, "https://ricardojparram.vercel.
       gsap.ticker.lagSmoothing(0);
 
       function setupScrollReveal() {
-        const revealGroups = Array.from(
-          document.querySelectorAll<HTMLElement>("[data-reveal-group]"),
-        );
+        const items = document.querySelectorAll<HTMLElement>("[data-reveal-item]");
 
-        if (!revealGroups.length) return;
+        if (!items.length) return;
 
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          const items = document.querySelectorAll<HTMLElement>("[data-reveal-item]");
           gsap.set(items, { autoAlpha: 1 });
           return;
         }
 
-        revealGroups.forEach((group) => {
-          const items = Array.from(
-            group.querySelectorAll<HTMLElement>("[data-reveal-item]"),
-          );
-          
-          if (!items.length) return;
-
-          // GSAP handles FOUC (visibility: hidden) by using autoAlpha
-          gsap.fromTo(items, 
-            { autoAlpha: 0, y: 24 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "power2.out",
-              stagger: 0.1,
-              scrollTrigger: {
-                trigger: group,
-                start: "top 85%", 
-                once: true,
+        // ScrollTrigger.batch groups elements that enter the viewport at the same time
+        // This ensures items in a grid (like projects) stagger beautifully,
+        // but items further down wait until you scroll to them.
+        ScrollTrigger.batch(items, {
+          start: "top 85%",
+          once: true,
+          onEnter: (batch) => {
+            gsap.fromTo(batch, 
+              { autoAlpha: 0, y: 24 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                stagger: 0.15,
+                overwrite: true
               }
-            }
-          );
+            );
+          }
         });
       }
 
