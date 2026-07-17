@@ -15,16 +15,16 @@ const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
-  adapter: vercel(),
+  adapter: vercel({
+    edgeMiddleware: true,
+  }),
   vite: {
     plugins: [tailwindcss()],
   },
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"],
-    routing: {
-      prefixDefaultLocale: false, // '/' = ES, '/en/' = EN
-    },
+    routing: "manual",
   },
   image: {
     remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
