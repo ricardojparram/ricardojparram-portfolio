@@ -14,13 +14,6 @@ export const onRequest = defineMiddleware(
             return next();
         }
 
-        // Check for manual override via query param (fixes browser 302 caching)
-        if (url.searchParams.get("lang") === "es") {
-            console.log("Found ?lang=es, setting cookie and skipping");
-            cookies.set("lang-redirected", "1", { path: "/", maxAge: 31536000 });
-            return next();
-        }
-
         // Respect user's explicit language choice (set by LanguageSwitcher)
         if (cookies.get("lang-redirected")?.value === "1") {
             console.log("Found cookie lang-redirected=1, skipping");
@@ -45,7 +38,13 @@ export const onRequest = defineMiddleware(
 
         if (!prefersSpanish) {
             console.log("No spanish found in Accept-Language, redirecting to /en/");
-            return redirect("/en/", 302);
+            return new Response(null, {
+                status: 302,
+                headers: {
+                    Location: "/en/",
+                    "Cache-Control": "no-cache, no-store, must-revalidate",
+                },
+            });
         }
 
         console.log("Spanish preferred, serving /");

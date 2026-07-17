@@ -188,7 +188,6 @@ body {
     opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: calc(var(--reveal-index, 0) * 100ms);
-  will-change: opacity, transform;
 }
 
 .js [data-reveal-group].is-revealed [data-reveal-item] {
