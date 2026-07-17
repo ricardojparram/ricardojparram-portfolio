@@ -18,7 +18,7 @@ const itemClass = compact
 
 <div class={containerClass}>
   <a
-    href="/"
+    href="/?lang=es"
     hreflang="es"
     data-lang-link
     aria-label="ES - Español"
@@ -51,8 +51,10 @@ const itemClass = compact
   const langLinks = document.querySelectorAll("[data-lang-link]");
   
   langLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
       document.cookie = "lang-redirected=1; path=/; max-age=31536000; SameSite=Lax";
+      window.location.href = link.href;
     });
   });
 </script>

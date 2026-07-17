@@ -10,6 +10,12 @@ export const onRequest = defineMiddleware(
         // Only redirect on the root path (ES default, prefixDefaultLocale: false)
         if (url.pathname !== "/") return next();
 
+        // Check for manual override via query param (fixes browser 302 caching)
+        if (url.searchParams.get("lang") === "es") {
+            cookies.set("lang-redirected", "1", { path: "/", maxAge: 31536000 });
+            return next();
+        }
+
         // Respect user's explicit language choice (set by LanguageSwitcher)
         if (cookies.get("lang-redirected")?.value === "1") return next();
 
