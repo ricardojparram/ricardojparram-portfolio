@@ -14,15 +14,13 @@ const itemClass = compact
   ? "px-2.5 h-6"
   : "px-3 h-7";
 
-const cookieScript =
-  "document.cookie='lang-redirected=1; path=/; max-age=31536000; SameSite=Lax'";
 ---
 
 <div class={containerClass}>
   <a
     href="/"
     hreflang="es"
-    onclick={cookieScript}
+    data-lang-link
     aria-label="ES - Español"
     class={`${itemClass} rounded-full text-xs font-bold uppercase tracking-wider transition-all inline-flex items-center justify-center ${
       currentLang === "es"
@@ -35,7 +33,7 @@ const cookieScript =
   <a
     href="/en/"
     hreflang="en"
-    onclick={cookieScript}
+    data-lang-link
     aria-label="EN - English"
     class={`${itemClass} rounded-full text-xs font-bold uppercase tracking-wider transition-all inline-flex items-center justify-center ${
       currentLang === "en"
@@ -46,3 +44,15 @@ const cookieScript =
     EN
   </a>
 </div>
+
+<script>
+  // Usa un script vanilla para asegurar que la cookie se setee correctamente
+  // antes de que el navegador navegue.
+  const langLinks = document.querySelectorAll("[data-lang-link]");
+  
+  langLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      document.cookie = "lang-redirected=1; path=/; max-age=31536000; SameSite=Lax";
+    });
+  });
+</script>
