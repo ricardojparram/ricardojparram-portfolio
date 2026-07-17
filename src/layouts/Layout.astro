@@ -65,30 +65,28 @@ const canonicalURL = new URL(Astro.url.pathname, "https://ricardojparram.vercel.
 
     <SpeedInsights />
 
-    <!-- Smooth scroll -->
+    <!-- Animations & Smooth scroll -->
     <script>
-      const startLenis = async () => {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        const { default: Lenis } = await import("lenis");
-        const lenis = new Lenis({ lerp: 0.08 });
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      import Lenis from "lenis";
 
-        function raf(time: number) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
+      gsap.registerPlugin(ScrollTrigger);
 
-        requestAnimationFrame(raf);
-      };
-
-      if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(() => {
-          void startLenis();
-        }, { timeout: 1200 });
-      } else {
-        setTimeout(() => {
-          void startLenis();
-        }, 1);
-      }
+      // Initialize Lenis for smooth scrolling
+      const lenis = new Lenis({ lerp: 0.08 });
+      
+      // Synchronize Lenis scrolling with GSAP's ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update);
+      
+      // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+      // This ensures GSAP and Lenis are perfectly synced
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      
+      // Turn off lag smoothing in GSAP to prevent jittering when using smooth scrolling
+      gsap.ticker.lagSmoothing(0);
 
       function setupScrollReveal() {
         const revealGroups = Array.from(
@@ -97,38 +95,36 @@ const canonicalURL = new URL(Astro.url.pathname, "https://ricardojparram.vercel.
 
         if (!revealGroups.length) return;
 
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          const items = document.querySelectorAll<HTMLElement>("[data-reveal-item]");
+          gsap.set(items, { autoAlpha: 1 });
+          return;
+        }
+
         revealGroups.forEach((group) => {
           const items = Array.from(
             group.querySelectorAll<HTMLElement>("[data-reveal-item]"),
           );
+          
+          if (!items.length) return;
 
-          items.forEach((item, index) => {
-            if (!item.style.getPropertyValue("--reveal-index")) {
-              item.style.setProperty("--reveal-index", String(index));
+          // GSAP handles FOUC (visibility: hidden) by using autoAlpha
+          gsap.fromTo(items, 
+            { autoAlpha: 0, y: 24 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              stagger: 0.1,
+              scrollTrigger: {
+                trigger: group,
+                start: "top 85%", 
+                once: true,
+              }
             }
-          });
+          );
         });
-
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          revealGroups.forEach((group) => group.classList.add("is-revealed"));
-          return;
-        }
-
-        const observer = new IntersectionObserver(
-          (entries, currentObserver) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-
-              entry.target.classList.add("is-revealed");
-              currentObserver.unobserve(entry.target);
-            });
-          },
-          {
-            threshold: 0.05,
-          },
-        );
-
-        revealGroups.forEach((group) => observer.observe(group));
       }
 
       setupScrollReveal();
