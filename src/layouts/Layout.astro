@@ -65,70 +65,58 @@ const canonicalURL = new URL(Astro.url.pathname, "https://ricardojparram.vercel.
 
     <SpeedInsights />
 
-    <!-- Smooth scroll -->
+    <!-- Animations & Smooth scroll -->
     <script>
-      const startLenis = async () => {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        const { default: Lenis } = await import("lenis");
-        const lenis = new Lenis({ lerp: 0.08 });
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      import Lenis from "lenis";
 
-        function raf(time: number) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
+      gsap.registerPlugin(ScrollTrigger);
 
-        requestAnimationFrame(raf);
-      };
-
-      if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(() => {
-          void startLenis();
-        }, { timeout: 1200 });
-      } else {
-        setTimeout(() => {
-          void startLenis();
-        }, 1);
-      }
+      // Initialize Lenis for smooth scrolling
+      const lenis = new Lenis({ lerp: 0.08 });
+      
+      // Synchronize Lenis scrolling with GSAP's ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update);
+      
+      // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+      // This ensures GSAP and Lenis are perfectly synced
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      
+      // Turn off lag smoothing in GSAP to prevent jittering when using smooth scrolling
+      gsap.ticker.lagSmoothing(0);
 
       function setupScrollReveal() {
-        const revealGroups = Array.from(
-          document.querySelectorAll<HTMLElement>("[data-reveal-group]"),
-        );
+        const items = document.querySelectorAll<HTMLElement>("[data-reveal-item]");
 
-        if (!revealGroups.length) return;
-
-        revealGroups.forEach((group) => {
-          const items = Array.from(
-            group.querySelectorAll<HTMLElement>("[data-reveal-item]"),
-          );
-
-          items.forEach((item, index) => {
-            if (!item.style.getPropertyValue("--reveal-index")) {
-              item.style.setProperty("--reveal-index", String(index));
-            }
-          });
-        });
+        if (!items.length) return;
 
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          revealGroups.forEach((group) => group.classList.add("is-revealed"));
+          gsap.set(items, { autoAlpha: 1 });
           return;
         }
 
-        const observer = new IntersectionObserver(
-          (entries, currentObserver) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
+        // Set initial state immediately to avoid FOUC or elements being visible before they cross the trigger
+        gsap.set(items, { autoAlpha: 0, y: 30 });
 
-              entry.target.classList.add("is-revealed");
-              currentObserver.unobserve(entry.target);
+        // ScrollTrigger.batch groups elements that enter the viewport at the same time
+        // This ensures items in a grid (like projects) stagger beautifully.
+        ScrollTrigger.batch(items, {
+          start: "top 95%", // Trigger slightly earlier (lower on screen) to reduce perceived delay
+          once: true,
+          onEnter: (batch) => {
+            gsap.to(batch, {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              stagger: 0.15,
+              overwrite: true
             });
-          },
-          {
-            threshold: 0.05,
-          },
-        );
-
-        revealGroups.forEach((group) => observer.observe(group));
+          }
+        });
       }
 
       setupScrollReveal();
